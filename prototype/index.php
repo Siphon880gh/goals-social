@@ -80,10 +80,14 @@
     <script src="https://unpkg.com/zangodb@latest/dist/zangodb.min.js"></script>
 
     <!-- JS from my app -->
-    <script src="assets/js/res.render.js "></script>
-    <script src="assets/js/routes-html.js "></script>
-    <script src="assets/js/routes-api.js "></script>
-    <script src="assets/js/app.js "></script>
+    <script src="assets/js/res.render.js"></script>
+    <script src="assets/js/routes-html.js"></script>
+    <script src="assets/js/routes-api.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Unit Testing -->
+    <l src="bower_components/qunit/qunit.js"></l>
+    <link rel="stylesheet" href="bower_components/qunit/qunit.css"></link>
 
 </body>
 
