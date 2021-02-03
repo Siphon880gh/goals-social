@@ -30,7 +30,7 @@ docs[0].password = hashedPassword; // Database will get hashed password instead
 users.insert(docs).then(() => {
     return users.find({
         username: { $eq: 'testUser' },
-    }).forEach(doc => console.log('doc:', doc));
+    }).forEach(doc => console.log('users/doc (password shown in prototype for debugging purposes):', doc));
 });
 
 // <MAJOR: Posts>

@@ -48,7 +48,7 @@
         <!-- Goal Social | etc -->
 
     </header>
-    <main class="container" data-main>
+    <main class="container mt-3" data-main>
         <section id="world" class="d-none" data-view data-route="/">
             <article></article>
             <template>

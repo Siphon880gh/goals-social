@@ -1,4 +1,3 @@
-<span class="page-title-dynamic d-none">{{pageTitle}}</span> <!-- Remove line when refactored into production code -->
 <div class="form-wrapper">
     <header class="form-header">
         Login
@@ -43,3 +42,6 @@ $(".login-form").on("submit", async(event)=>{
     }, 100);
 });
 </script>
+
+<!-- Remove line when refactored into production code: -->
+<script>$(".page-title").text("{{pageTitle}}");</script>

@@ -15,11 +15,4 @@ function parseHash(newHash, oldHash) {
 
     // trigger crossroads to match for URLs
     crossroads.parse(newHash);
-
-    // Update the page title
-    setTimeout(() => {
-        const $visibleView = $("[data-view]:not(.d-none");
-        const newPageTitle = $visibleView.find(".page-title-dynamic").text();
-        $(".page-title").text(newPageTitle);
-    }, 200);
 }

@@ -4,17 +4,19 @@ if (!signals) alert("Error Dependencies: Load signals before this routing js fil
 if (!window.res.render) alert("Error Dependencies: Load res.render.js before this routing js file")
 
 // Set your website's name
-global.CONSTANT_SITE_TITLE = "Goals Social";
+var CONSTANT_SITE_TITLE = "Goals Social";
 
 // Setup HTML routes
 router.addRoute('/').matched.add(async() => {
     var docs = await posts.find().filter({}).toArray();
     console.log("Route Context: ", { docs });
     var postsWrapper = {
-        posts: docs
-    }
-    postsWrapper.pageTitle = global.CONSTANT_SITE_TITLE;
-    postsWrapper.username = global.req.session.username;
+            posts: docs
+        }
+        // postsWrapper.pageTitle = global.CONSTANT_SITE_TITLE;
+    postsWrapper.pageTitle = CONSTANT_SITE_TITLE;
+    postsWrapper.username = req.session.username;
+    console.log(postsWrapper);
     res.render("#world", postsWrapper);
 });
 
