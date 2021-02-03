@@ -1,11 +1,11 @@
 <!--
     WARNING: Not meant for production. This is a prototype to help the developer divide html into templates, 
-    to come up with routes for the app's features, and to figure out the JS logic and CSS. Here Handlebars is
-    a frontend version that shares similar templating language to Express-Handlebars. Here ZangoDB is a 
+    to come up with routes for the app's features, and to figure out the JS logic and CSS. Here, Handlebars is
+    a frontend version that shares similar templating language to Express-Handlebars. Here, ZangoDB is a 
     MongoDB-like database that lets the developer create tables on the fly especially when the datatypes and 
     schemas are not planned ahead.
     
-    Production code is in /public.
+    Production code is in /public after running npm start on the root.
 -->
     <!-- Disable caching because we are prototyping -->
     <meta http-equiv="Pragma" content="no-cache">
@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hasher/1.2.0/hasher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crossroads/0.12.2/crossroads.min.js"></script>
 
-    <!-- Prototype visual cue  -->
+    <!-- Prototype message so user knows this is the prototype version, not the production version  -->
     <div class="prototype-php-engine"><?php echo "PHP Prototype engine running!" ?></div>
 
     <!-- bcrypt JS frontend version  -->
