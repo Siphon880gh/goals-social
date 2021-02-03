@@ -29,7 +29,3 @@ router.addRoute('signup').matched.add(() => {
     }
     res.render("#signup", genericData);
 });
-
-router.addRoute('logout').matched.add(() => {
-    alert("Prototype: Would be logging out.");
-});

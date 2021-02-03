@@ -32,7 +32,7 @@
                     <a class="d-none-off" href="login/" onclick="prototypeHooksLink(event);">Login</a>
                 </li>
                 <li>
-                    <a class="d-none-off" href="logout/" onclick="prototypeHooksLink(event);">Logout</a>
+                    <a class="d-none-off" href="api/logout/" onclick="prototypeHooksLink(event);">Logout</a>
                 </a>
                 </li>
             </ul>

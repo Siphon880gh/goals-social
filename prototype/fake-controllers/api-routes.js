@@ -42,3 +42,8 @@ router.addRoute('api-post/login').matched.add(async() => {
     window.req.session.user.username = username;
     hasher.setHash("/dashboard");
 });
+
+router.addRoute('api/logout').matched.add(async() => {
+    window.req.session.loggedIn = false;
+    hasher.setHash("/");
+});

@@ -14,8 +14,8 @@
             <input type="password" id="password-signup" />
             </div>
             <div>
-            <button class="standout" type="submit" onclick="alert('Prototype: Would signup');" data-route="/signup">Sign Up!</button>
-            <a href="javascript:void(0);" onclick="hasher.setHash('login/')" data-route="/login">Login instead</a>
+            <button class="standout" type="submit" disabled onclick="alert('Signup works on production code. No need to prototype.');" data-route="/signup">Sign Up!</button>
+            <a href="/login" onclick="prototypeHooksLink(event);" data-route="/login">Login instead</a>
             </div>
         </form>
     </div> <!-- form-body -->
