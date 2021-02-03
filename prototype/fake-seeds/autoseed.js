@@ -24,19 +24,7 @@ var hashedPassword = bcrypt.hashSync(myPlainPassword, salt); // Finally, generat
 docs[0].password = hashedPassword; // Database will get hashed password instead
 
 users.insert(docs).then(() => {
-    // debugger;
     return users.find({
         username: { $eq: 'testUser' },
     }).forEach(doc => console.log('doc:', doc));
 });
-
-// var myPlainPassword = "testUser2";
-// var hashedPassword = bcrypt.hashSync(myPlainPassword, salt);
-// var matchedHashToPlainPassword = bcrypt.compareSync(myPlainPassword, hashedPassword); // true
-// assert.true(matchedHashToPlainPassword, 'Hashed password should be associated with plain password');
-
-// await users.insert(docs);
-
-// var docs = await people.find().filter({ name: "Frank" }).toArray();
-// console.log("Context: ", { docs });
-// assert.equal(docs.length, 1, 'Querying database with filter MongoDB style');
