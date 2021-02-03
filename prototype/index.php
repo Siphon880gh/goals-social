@@ -32,10 +32,10 @@
     <link rel="stylesheet" href="bower_components/qunit/qunit/qunit.css"></link>
 
     <!-- Unit Test Suites autoloaded -->
-    <?php include("./fake-tests/autoload.php"); ?>
+    <?php include("./fake-tests/autotest.php"); ?>
 
     <!-- Seeds autoloaded -->
-    <script src="./fake-seeds/autoload.js"></script>
+    <script src="./fake-seeds/autoseed.js"></script>
 
     <!-- Mimick loading main layout like in Express Handlebars -->
     <?php include("./fake-views/layouts/main.php"); ?>
@@ -45,4 +45,5 @@
 
     <!-- Mimick HTML and API controllers -->
     <script src="fake-controllers/html-routes.js"></script>
-    <script src="fake-controllers/api/index.js"></script>
+    <script src="fake-controllers/api-routes.js"></script>
+    <script src="fake-controllers/index-end.js"></script>

@@ -41,7 +41,7 @@ QUnit.module('Testing Zango DB', async function(assert) {
         return beforeEach().then(async function(data) {
             var people = data; // new collection
             var docs = await people.find().filter({ name: "Frank" }).toArray();
-            console.log("Context: ", { docs });
+            console.log("Test Context: ", { docs });
             assert.equal(docs.length, 1, 'Querying database with filter MongoDB style');
 
             done();

@@ -14,9 +14,23 @@
                 <input type="password" id="password-login" />
             </div>
             <div>
-                <button class="standout" type="submit" onclick="alert('Prototype: Would login');" data-route="/login">Login</button>
-                <a href="javascript:void(0);" onclick="hasher.setHash('signup/')" data-route="/signup">Sign up instead</a>
+                <button class="standout" type="submit" data-route="/login">Login</button>
+                <a href="signup/" onclick="prototypeHooksLink(event);" data-route="/signup">Sign up instead</a>
             </div>
             </form>
     </div> <!-- form-body -->
 </div> <!-- form-wrapper -->
+
+<script>
+$(".login-form").on("submit", async(event)=>{
+    event.preventDefault();
+    let username = $("#username-login").val();
+    let password = $("#password-login").val();
+
+    window.req = {};
+    window.req.body = {};
+    window.req.body.username = username;
+    window.req.body.password = password;
+    hasher.setHash("api-post/login")
+});
+</script>

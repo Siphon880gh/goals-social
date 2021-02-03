@@ -50,3 +50,8 @@ function prototypeHooksLink(event) {
     var link = that.getAttribute('href');
     hasher.setHash(link);
 }
+
+/**
+ * Crossroads JS and router will be interchangeable
+ */
+window.router = crossroads;
