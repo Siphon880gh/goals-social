@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS goal_social_db;
+DROP DATABASE IF EXISTS goals_social_db;
 
-CREATE DATABASE goal_social_db;
+CREATE DATABASE goals_social_db;
