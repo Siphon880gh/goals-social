@@ -14,7 +14,7 @@
             <input type="password" id="password-signup" />
             </div>
             <div>
-            <button class="standout" type="submit" disabled onclick="alert('Signup works on production code. No need to prototype.');" data-route="/signup">Sign Up!</button>
+            <button class="standout" type="submit" onclick="alert('No need to prototype signup because it works in production code.');" data-route="/signup">Sign Up!</button>
             <a href="/login" onclick="prototypeHooksLink(event);" data-route="/login">Login instead</a>
             </div>
         </form>

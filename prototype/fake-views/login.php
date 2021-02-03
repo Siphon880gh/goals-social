@@ -21,6 +21,9 @@
     </div> <!-- form-body -->
 </div> <!-- form-wrapper -->
 
+<!-- Remove in production code -->
+<div class="mt-2"><strong>Reminder: </strong>You can login with username and password: testUser/testUser. This was added at autoseed.js</div>
+
 <script>
 $(".login-form").on("submit", async(event)=>{
     event.preventDefault();
