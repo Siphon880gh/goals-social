@@ -27,10 +27,16 @@ $(".login-form").on("submit", async(event)=>{
     let username = $("#username-login").val();
     let password = $("#password-login").val();
 
-    window.req = {};
-    window.req.body = {};
+    // Pass login data to api post route
     window.req.body.username = username;
     window.req.body.password = password;
-    hasher.setHash("api-post/login")
+    hasher.setHash("api-post/login");
+    
+    // Mimick request to response delay
+    setTimeout(()=>{
+        if(!window.req.session.loggedIn) {
+            alert("Wrong username or password");
+        }
+    }, 100);
 });
 </script>

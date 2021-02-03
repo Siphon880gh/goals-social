@@ -7,6 +7,10 @@
     
     Production code is in /public.
 -->
+    <!-- Disable caching because we are prototyping -->
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+
     <!-- Handlebars JS frontend version -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 
@@ -45,5 +49,5 @@
 
     <!-- Mimick HTML and API controllers -->
     <script src="fake-controllers/html-routes.js"></script>
-    <script src="fake-controllers/api-routes.js"></script>
+    <script src="fake-controllers/api-routes.js?v=2"></script>
     <script src="fake-controllers/index-end.js"></script>

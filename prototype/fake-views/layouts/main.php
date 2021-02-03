@@ -33,6 +33,7 @@
                 </li>
                 <li>
                     <a class="d-none-off" href="logout/" onclick="prototypeHooksLink(event);">Logout</a>
+                </a>
                 </li>
             </ul>
         </nav>
@@ -46,6 +47,12 @@
             <article></article>
             <template>
                     <?php include("fake-views/login.php"); ?>
+            </template>
+        </section>
+        <section id="dashboard" class="d-none" data-view data-route="/signup">
+            <article></article>
+            <template>
+                    <?php include("fake-views/dashboard.php"); ?>
             </template>
         </section>
         <section id="signup" class="d-none" data-view data-route="/signup">

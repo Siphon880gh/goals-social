@@ -15,6 +15,14 @@ router.addRoute('login').matched.add(() => {
     res.render("#login", genericData);
 });
 
+router.addRoute('dashboard').matched.add(() => {
+    var genericData = {
+        pageTitle: "Your Details",
+        username: window.req.body.username
+    }
+    res.render("#dashboard", genericData);
+});
+
 router.addRoute('signup').matched.add(() => {
     var genericData = {
         pageTitle: "Goals Social"

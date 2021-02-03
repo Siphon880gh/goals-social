@@ -9,14 +9,15 @@ crossroads.bypassed.add(function(request) {
     debugger;
 });
 
-// parseHash is an handler for on history state onready and onchange
+// For Hashers JS which detects and sets URL changes without refreshing the page,
+// this is an on history state onready and onchange handler
 function parseHash(newHash, oldHash) {
-    // crossroads parse triggers crossroads matched.add
+
+    // trigger crossroads to match for URLs
     crossroads.parse(newHash);
 
     // Update the page title
     setTimeout(() => {
-
         const $visibleView = $("[data-view]:not(.d-none");
         const newPageTitle = $visibleView.find(".page-title-dynamic").text();
         $(".page-title").text(newPageTitle);
