@@ -3,6 +3,9 @@ if (!Handlebars) alert("Error Dependencies: Load Handlebars before this routing 
 if (!signals) alert("Error Dependencies: Load signals before this routing js file")
 if (!window.res.render) alert("Error Dependencies: Load res.render.js before this routing js file")
 
+// Set your website's name
+global.CONSTANT_SITE_TITLE = "Goals Social";
+
 // Setup API routes
 router.addRoute('api-post/login').matched.add(async() => {
     // Any user is logged out

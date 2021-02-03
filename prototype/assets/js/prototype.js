@@ -39,7 +39,6 @@ window.res.render = (querySelector, data, helpersArr, partialsArr) => {
     $(querySelector).removeClass("d-none");
 }
 
-
 /**
  * 
  * Prototype hooks to links
@@ -58,6 +57,11 @@ function prototypeHooksLink(event) {
 }
 
 /**
- * Crossroads JS and router will be interchangeable
+ * Setup browser JS and node JS interoperability
  */
+
+// Crossroads JS and router will be interchangeable
 window.router = crossroads;
+
+// Node JS uses global, browser uses window
+var global = window;

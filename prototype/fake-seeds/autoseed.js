@@ -6,8 +6,12 @@
  * MongoDB ReadMe: https://erikolson186.github.io/zangodb
  */
 new zango.Db('goals_social_db').drop(); // Force Sync
-var db = new zango.Db('goals_social_db', { users: ['_id'] });
+var db = new zango.Db('goals_social_db', {
+    users: ['_id'],
+    posts: ['_id']
+});
 
+// <MAJOR: Users>
 // Create users.testUser with password testUser
 window.users = db.collection('users');
 
@@ -28,3 +32,19 @@ users.insert(docs).then(() => {
         username: { $eq: 'testUser' },
     }).forEach(doc => console.log('doc:', doc));
 });
+
+// <MAJOR: Posts>
+window.posts = db.collection('posts');
+
+var docs = [{
+    user_id: 1,
+    content: "blah"
+}, {
+    user_id: 1,
+    content: "blah blah"
+}, {
+    user_id: 1,
+    content: "blah blah blah"
+}];
+
+posts.insert(docs).then(() => {});
