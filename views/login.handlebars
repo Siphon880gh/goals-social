@@ -1,0 +1,49 @@
+<div class="form-wrapper">
+    <header class="form-header">
+        Login
+    </header>
+    <div class="form-body">
+        <form class="form-login">
+            <div class="input-group">
+                <label for="username-login">Username:</label>
+                <input type="text" id="username-login" />
+            </div>
+            <div class="input-group">
+                <label for="password-login">Password:</label>
+                <input type="password" id="password-login" />
+            </div>
+            <div>
+                <button class="standout" type="submit" data-route="/login">Login</button>
+                <a href="/signup">Sign up instead</a>
+            </div>
+            </form>
+    </div> <!-- form-body -->
+</div> <!-- form-wrapper -->
+
+<script>
+$(".form-login").on("submit", async(event)=>{
+    event.preventDefault();
+    let username = $("#username-login").val();
+    let password = $("#password-login").val();
+
+    if (username && password) {
+        $.post("/api/login", {username, password}).then(data=>{
+
+            // If login successful, redirect to homepage or the activity the user was logging in for
+            // The activity user was logging in for is stored as a URL query ?callback=/path/to/prev/resource
+            // document.location.href must be used instead or the URL query will persist through future paths
+            if(data.loggedIn) {
+                let p = new URLSearchParams(document.location.search);
+                let hasCallback = p.get("callback")
+                if(hasCallback) {
+                    let callback = p.get("callback");
+                    document.location.href = callback;
+                } else
+                    document.location.pathname = "/";
+            } else {
+                alert("Error: Wrong username or password");
+            }
+        });
+    }
+});
+</script>
