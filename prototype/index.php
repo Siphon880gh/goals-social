@@ -16,10 +16,10 @@
     <!-- CSS from my app -->
     <link rel="stylesheet" href="assets/css/index.css">
 
-    <!-- JS vendors: Handlebars JS for frontend templating -->
+    <!-- JS vendors: Handlebars JS on the frontend for prototyping templates -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 
-    <!-- JS vendors: Crossroads JS for frontend routes. Dependency: Signal, Hasher -->
+    <!-- JS vendors: Crossroads JS on the front frontend for prototyping routes. Dependency: Signal, Hasher -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-signals/1.0.0/js-signals.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hasher/1.2.0/hasher.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crossroads/0.12.2/crossroads.min.js"></script>
@@ -62,6 +62,11 @@
                     <?php include("assets/php/views/signup.php"); ?>
             </template>
         </section>
+    
+        <!-- QUnit -->
+        <!-- <div id="qunit"></div>
+        <div id="qunit-fixture"></div> -->
+
     </main>
     <!-- container -->
     <div class="prototype-php-engine"><?php echo "PHP Prototype engine running!" ?></div>
@@ -75,19 +80,29 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css "></link>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js "></script>
 
-    <!-- MongoDB like database -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"></script>
-    <script src="https://unpkg.com/zangodb@latest/dist/zangodb.min.js"></script>
-
     <!-- JS from my app -->
     <script src="assets/js/res.render.js"></script>
     <script src="assets/js/routes-html.js"></script>
     <script src="assets/js/routes-api.js"></script>
     <script src="assets/js/app.js"></script>
 
-    <!-- Unit Testing -->
-    <l src="bower_components/qunit/qunit.js"></l>
-    <link rel="stylesheet" href="bower_components/qunit/qunit.css"></link>
+    <!-- bcrypt on the frontend for prototyping databases -->
+    <script src="bower_components/bcryptjs/dist/bcrypt.min.js"></script>
+
+    <!-- MongoDB like database on the frontend for prototyping databases -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"></script>
+    <script src="https://unpkg.com/zangodb@latest/dist/zangodb.min.js"></script>
+
+    <!-- Unit Testing with QUnit -->
+    <!-- README: https://api.qunitjs.com/callbacks/QUnit.log/ -->
+    <!-- README: https://api.qunitjs.com/assert/equal/ -->
+    <script src="bower_components/qunit/qunit/qunit.js"></script>
+    <link rel="stylesheet" href="bower_components/qunit/qunit/qunit.css"></link>
+
+    <?php include("./tests.php"); ?>
+
+    <!-- Automatically seed for the prototype -->
+    <script src="autoseeds/index.js"></script>
 
 </body>
 
