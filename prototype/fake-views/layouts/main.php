@@ -43,6 +43,12 @@
 
     </header>
     <main class="container" data-main>
+        <section id="world" class="d-none" data-view data-route="/">
+            <article></article>
+            <template>
+                    <?php include("fake-views/world.php"); ?>
+            </template>
+        </section>
         <section id="login" class="d-none" data-view data-route="/login, POST">
             <article></article>
             <template>

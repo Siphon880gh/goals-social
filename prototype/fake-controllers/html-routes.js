@@ -5,7 +5,10 @@ if (!window.res.render) alert("Error Dependencies: Load res.render.js before thi
 
 // Setup HTML routes
 router.addRoute('/').matched.add(() => {
-    hasher.setHash('login');
+    var genericData = {
+        pageTitle: "Goals Social"
+    }
+    res.render("#world", genericData);
 });
 
 router.addRoute('login').matched.add(() => {
