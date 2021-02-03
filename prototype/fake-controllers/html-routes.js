@@ -26,6 +26,12 @@ router.addRoute('login').matched.add(() => {
 });
 
 router.addRoute('dashboard').matched.add(() => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        hasher.setHash("/login");
+        return;
+    }
+
     var genericData = {
         pageTitle: "Your Details",
         username: req.body.username

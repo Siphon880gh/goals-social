@@ -29,6 +29,12 @@
         <nav>
             <ul>
                 <li>
+                    <a class="d-none-off" href="/" onclick="prototypeHooksLink(event);">World</a>
+                </li>
+                <li>
+                    <a class="d-none-off" href="dashboard/" onclick="prototypeHooksLink(event);">Dashboard</a>
+                </li>
+                <li>
                     <a class="d-none-off" href="login/" onclick="prototypeHooksLink(event);">Login</a>
                 </li>
                 <li>
