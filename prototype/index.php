@@ -53,11 +53,13 @@
         <section id="login" class="d-none" data-view data-route="/login, POST">
             <article></article>
             <template>
+                    <?php include("assets/php/views/login.php"); ?>
             </template>
         </section>
         <section id="signup" class="d-none" data-view data-route="/signup">
             <article></article>
             <template>
+                    <?php include("assets/php/views/signup.php"); ?>
             </template>
         </section>
     </main>

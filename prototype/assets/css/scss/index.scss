@@ -87,28 +87,15 @@ button.standout:hover {
     padding-right: 15px;
     background-color: var(--crunch);
     nav {
-        ul {
-            padding: 0;
-            margin: 10px 0;
-            li:first-child {
-                color: red;
-            }
-            li {
-                display: inline-block;
-                margin-right: 60px;
-                text-align: center;
-                list-style-type: none;
-                a,
-                a:visited {
-                    color: var(--soften);
-                    text-decoration: none;
-                    transition: color 500ms;
-                }
-                a:active,
-                a:hover {
-                    color: var(--themelight);
-                }
-            }
+        a,
+        a:visited {
+            color: var(--soften);
+            text-decoration: none;
+            transition: color 500ms;
+        }
+        a:active,
+        a:hover {
+            color: var(--themelight);
         }
     }
     .page-title {
