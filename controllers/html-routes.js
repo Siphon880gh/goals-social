@@ -27,7 +27,12 @@ router.get('/posts/dashboard', (req, res) => {
 // HTML routes
 router.get('/', async(req, res) => {
     // TODO
-    res.render("blank");
+
+    let dataStraightThrough = {};
+    dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
+
+    res.render("homepage", dataStraightThrough);
 });
 
 router.get('/login', (req, res) => {
@@ -39,7 +44,7 @@ router.get('/login', (req, res) => {
 
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
-    dataStraightThrough.pageTitle = req.session && req.session.user ? req.session.user.username : null;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
 
     res.render("login", dataStraightThrough);
 });
@@ -47,7 +52,7 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
-    dataStraightThrough.pageTitle = req.session && req.session.user ? req.session.user.username : null;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
 
     res.render("signup", dataStraightThrough);
 });

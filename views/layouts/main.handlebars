@@ -37,10 +37,11 @@
         <nav>
             <ul>
                 <li>
-                    <a class="d-none-off" href="javascript:void(0);" onclick="hasher.setHash('login/')">Login</a>
+                    <a class="d-none-off" href="/login">Login</a>
                 </li>
                 <li>
-                    <a class="d-none-off" href="javascript:void(0);" onclick="hasher.setHash('logout/')">Logout</a>
+                    <a class="d-none-off" href="/logout">Logout
+                    {{#if username}} (<i>{{username}}</i>){{/if}}</a>
                 </li>
             </ul>
         </nav>

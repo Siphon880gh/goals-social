@@ -29,7 +29,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
-    secret: '1db275a51d9eebde91409',
+    secret: '1db275a51d9eebde91409b',
     cookie: {},
     resave: false,
     saveUninitialized: true,
@@ -60,6 +60,6 @@ sequelizeConnection.sync({ force: false }).then(() => {
     let port = process.env.PORT || 3001;
     app.listen(port, () => {
         console.log(`Server listening at ${port}`);
-        console.log(`If on localhost, visit: http://localhost:3001/login`);
+        console.log(`If on localhost, visit: http://localhost:3001`);
     });
 });
