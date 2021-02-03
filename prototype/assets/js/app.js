@@ -8,3 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.info("\nShould you want to show all webpages at once, click thru all possible renderings, then run: " + `$("[data-view]").removeClass("d-none");`)
 });
+
+$(() => {
+    setTimeout(() => {
+        $(".prototype-php-engine").fadeOut(3000);
+    }, 2000);
+});
