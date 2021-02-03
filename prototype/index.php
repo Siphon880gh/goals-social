@@ -75,6 +75,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css "></link>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js "></script>
 
+    <!-- MongoDB like database -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"></script>
+    <script src="https://unpkg.com/zangodb@latest/dist/zangodb.min.js"></script>
+
     <!-- JS from my app -->
     <script src="assets/js/res.render.js "></script>
     <script src="assets/js/routes-html.js "></script>
