@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatroom</title>
+    <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+    <script type='text/javascript' src="assets/js/chatroom.js"></script>
+</head>
+<body>
+    {{#if username}}
+    <div class="text-area"></div>
+    <form class="input-area" onsubmit="onSubmitForm(); return false;">
+      <div class="input name" style="display: none;">{{username}}</div>
+      <textarea class="input content" placeholder="Message.." cols='100' rows='1'></textarea>
+      <input type="submit" class="input button" value="Send">
+    </form>
+    {{/if}}
+</body>
+</html>
