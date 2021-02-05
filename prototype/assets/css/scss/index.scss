@@ -50,6 +50,25 @@ a {
 }
 
 
+/* Styling classes */
+
+.bordered {
+    border: 1px solid black;
+}
+
+.bordered-alt {
+    border: 1px solid gray;
+}
+
+.text-xs {
+    font-size: .5rem;
+}
+
+.text-right {
+    text-align: right;
+}
+
+
 /* Layout */
 
 body {
@@ -161,12 +180,4 @@ button.standout:hover {
     z-index: 9999;
     border: 1px solid rgba(230, 123, 30, .25);
     border-radius: 10px;
-}
-
-.bordered {
-    border: 1px solid black;
-}
-
-.bordered-alt {
-    border: 1px solid gray;
 }

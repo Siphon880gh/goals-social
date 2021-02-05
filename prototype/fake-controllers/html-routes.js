@@ -20,15 +20,15 @@ router.addRoute('/').matched.add(async() => {
         doc = mergedDoc;
 
         // Modify Row
-        appendDoc.post_username = appendDoc.username;
-        delete appendDoc.username;
+        doc.post_username = doc.username;
+        delete doc.username;
         delete password;
 
         docs[i] = doc;
     };
 
-    console.log({ docs });
-    debugger;
+    // console.log({ docs });
+    // debugger;
 
     console.log("Route Context: ", { docs });
     var postsWrapper = {

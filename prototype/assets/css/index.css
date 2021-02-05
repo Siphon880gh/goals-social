@@ -40,6 +40,23 @@ a {
     margin-top: 40px;
   }
 }
+/* Styling classes */
+.bordered {
+  border: 1px solid black;
+}
+
+.bordered-alt {
+  border: 1px solid gray;
+}
+
+.text-xs {
+  font-size: .5rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
 /* Layout */
 body {
   background-color: var(--soften);
@@ -142,12 +159,4 @@ button.standout:hover {
   z-index: 9999;
   border: 1px solid rgba(230, 123, 30, 0.25);
   border-radius: 10px;
-}
-
-.bordered {
-  border: 1px solid black;
-}
-
-.bordered-alt {
-  border: 1px solid gray;
 }
