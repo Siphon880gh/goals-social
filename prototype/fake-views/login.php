@@ -21,7 +21,7 @@
 </div> <!-- form-wrapper -->
 
 <!-- Remove in production code -->
-<div class="mt-2"><strong>Reminder: </strong>You can login with username and password: testUser/testUser. This was added at autoseed.js</div>
+<div class="mt-2"><strong>Reminder: </strong>You can login with username and password: <a href="javascript:void(0)" onclick="useSampleLogin()">testUser/testUser</a>. This was added at autoseed.js</div>
 
 <script>
 $(".login-form").on("submit", async(event)=>{
@@ -43,5 +43,11 @@ $(".login-form").on("submit", async(event)=>{
 });
 </script>
 
-<!-- Remove line when refactored into production code: -->
+<!-- Remove when refactored into production code: -->
 <script>$(".page-title").text("{{pageTitle}}");</script>
+<script>
+    function useSampleLogin() {
+        $("#username-login").val("testUser");
+        $("#password-login").val("testUser");
+    }
+</script>
