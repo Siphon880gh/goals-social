@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Prototype Only - Tech News Blog</title>
+    <title>Prototype Only - Goals Social</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="expires" content="0">
@@ -36,17 +36,25 @@
     <header class="site-header">
         <nav>
             <ul>
+            {{#if username}}
                 <li>
-                    <a class="d-none-off" href="/login">Login</a>
+                    <a class="d-none-off" href="/chatroom">Chatroom
                 </li>
                 <li>
                     <a class="d-none-off" href="/logout">Logout
-                    {{#if username}} (<i>{{username}}</i>){{/if}}</a>
+                    (<i>{{username}}</i>)</a>
                 </li>
+            {{else}}
+                <li>
+                    <a class="d-none-off" href="/login">Login</a>
+                </li>
+            {{/if}}
             </ul>
         </nav>
-
+        
+        <a href='/'>
         <h1 class="page-title">{{pageTitle}}</h1>
+        </a>
         <!-- Goal Social | etc -->
 
     </header>

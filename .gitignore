@@ -8,3 +8,4 @@ node_modules/
 *.css.map
 out/
 *.env
+bower_components/

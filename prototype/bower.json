@@ -1,0 +1,23 @@
+{
+  "name": "goal-social-prototype",
+  "description": "This is a prototype to figure out how to divide the HTML into templates, etc. Uses MAMP server localhost:8888/...",
+  "main": "index.js",
+  "authors": [
+    "Weng Fei Fung <weffung@ucdavis.edu>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Siphon880gh/project-2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "qunit": "^2.14.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  }
+}
