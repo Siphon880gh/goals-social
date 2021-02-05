@@ -36,17 +36,25 @@
     <header class="site-header">
         <nav>
             <ul>
+            {{#if username}}
                 <li>
-                    <a class="d-none-off" href="/login">Login</a>
+                    <a class="d-none-off" href="/chatroom">Chatroom
                 </li>
                 <li>
                     <a class="d-none-off" href="/logout">Logout
-                    {{#if username}} (<i>{{username}}</i>){{/if}}</a>
+                    (<i>{{username}}</i>)</a>
                 </li>
+            {{else}}
+                <li>
+                    <a class="d-none-off" href="/login">Login</a>
+                </li>
+            {{/if}}
             </ul>
         </nav>
-
+        
+        <a href='/'>
         <h1 class="page-title">{{pageTitle}}</h1>
+        </a>
         <!-- Goal Social | etc -->
 
     </header>

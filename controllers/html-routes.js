@@ -31,9 +31,24 @@ router.get('/', async(req, res) => {
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
     dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
-
+    if (dataStraightThrough.username) {
     res.render("homepage", dataStraightThrough);
+    } else {
+        res.redirect('/login')
+    }
 });
+
+//Chatroom route
+router.get('/chatroom', (req, res) => {
+    let dataStraightThrough = {};
+    dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
+    if (dataStraightThrough.username) {
+    res.render('chatroom',dataStraightThrough);
+    } else {
+        res.redirect('/login')
+    }
+  });
 
 router.get('/login', (req, res) => {
     // If already logged in, then homepage
