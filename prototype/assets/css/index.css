@@ -135,7 +135,7 @@ button.standout:hover {
 .prototype-php-engine {
   display: block;
   padding: 5px;
-  position: absolute;
+  position: fixed;
   right: 5px;
   bottom: 5px;
   background-color: rgba(255, 224, 51, 0.5);
