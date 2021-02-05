@@ -15,6 +15,7 @@
 
     <!-- CSS from my app -->
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/index-override.css">
 
     <!-- JS vendors: Moment JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -74,6 +75,12 @@
             <article></article>
             <template>
                     <?php include("fake-views/dashboard.php"); ?>
+            </template>
+        </section>
+        <section id="profile" class="d-none" data-view data-route="/signup">
+            <article></article>
+            <template>
+                    <?php include("fake-views/profile.php"); ?>
             </template>
         </section>
         <section id="edit-profile" class="d-none" data-view data-route="/signup">
