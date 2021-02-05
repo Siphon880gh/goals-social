@@ -2,6 +2,7 @@ const Chatroom = require('../../models/Chatroom');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
+    
     Chatroom.findAll({})
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {

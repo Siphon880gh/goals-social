@@ -1,6 +1,6 @@
 let drone = new ScaleDrone('msKNYliGbSuotvDl');
 
-let addDiscussion = (username, message) => {
+let addDiscussionToDatabase = (username, message) => {
   console.log(username, message)
  const chatroom = {
    username, message
@@ -19,11 +19,39 @@ let addDiscussion = (username, message) => {
   .then (res => {
     console.log(res)
   })
-}
+};
+
+let getRecentChat = () => {
+  fetch('/api/chatroom', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    if(response.ok) {
+      return response.json();
+    }
+  })
+  .then(data => {
+    console.log(data)
+    
+
+    for (let i = 0; i < data.length; i++) {
+    let div = document.createElement('div');
+    div.innerHTML = '<b>' + data[i].username + '</b>: </br>' + data[i].message;
+    div.classList.add('message');
+    document.querySelector('.text-area').appendChild(div);
+    }
+
+  })
+};
+
 drone.on('open', (error) =>  {
   if (error) return console.error(error);
 
   let room = drone.subscribe('general-chat');
+  getRecentChat();
 
   room.on('open', function (error) {
     if (error) return console.error(error);
@@ -39,7 +67,7 @@ function onSubmitForm(event) {
   let strippedString = contentEl.value.replace(/(<([^>]+)>)/gi, "");
   strippedString = strippedString.replace(/(\r\n|\n|\r)/g,"<br />");
   if (nameEl.textContent && strippedString) {
-    addDiscussion(nameEl.textContent, strippedString);
+    addDiscussionToDatabase(nameEl.textContent, strippedString);
     sendMessageToScaleDrone(nameEl.textContent, strippedString);
     contentEl.value = '';
   }
