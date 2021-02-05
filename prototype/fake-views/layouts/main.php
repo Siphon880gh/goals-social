@@ -32,6 +32,9 @@
                     <a class="d-none-off" href="/" onclick="prototypeHooksLink(event);">World</a>
                 </li>
                 <li>
+                    <a class="d-none-off" href="chatroom" onclick="prototypeHooksLink(event);">Chatroom</a>
+                </li>
+                <li>
                     <a class="d-none-off" href="dashboard/" onclick="prototypeHooksLink(event);">Dashboard</a>
                 </li>
                 <li>
@@ -40,7 +43,7 @@
                 <li>
                     <a class="d-none-off" href="api/logout/" onclick="prototypeHooksLink(event);">Logout</a>
                 </a>
-                </li>
+                </li>            
             </ul>
         </nav>
 
@@ -61,10 +64,28 @@
                     <?php include("fake-views/login.php"); ?>
             </template>
         </section>
+        <section id="chatroom" class="d-none" data-view data-route="/signup">
+            <article></article>
+            <template>
+                    <?php include("fake-views/chatroom.php"); ?>
+            </template>
+        </section>
         <section id="dashboard" class="d-none" data-view data-route="/signup">
             <article></article>
             <template>
                     <?php include("fake-views/dashboard.php"); ?>
+            </template>
+        </section>
+        <section id="edit-profile" class="d-none" data-view data-route="/signup">
+            <article></article>
+            <template>
+                    <?php include("fake-views/edit-profile.php"); ?>
+            </template>
+        </section>
+        <section id="goal-planner" class="d-none" data-view data-route="/signup">
+            <article></article>
+            <template>
+                    <?php include("fake-views/goal-planner.php"); ?>
             </template>
         </section>
         <section id="signup" class="d-none" data-view data-route="/signup">
