@@ -1,5 +1,25 @@
 let drone = new ScaleDrone('msKNYliGbSuotvDl');
 
+let addDiscussion = (username, message) => {
+  console.log(username, message)
+ const chatroom = {
+   username, message
+ }
+
+  fetch('/api/chatroom', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(chatroom)
+  })
+  .then (res => {
+    return res.json()
+  })
+  .then (res => {
+    console.log(res)
+  })
+}
 drone.on('open', (error) =>  {
   if (error) return console.error(error);
 
@@ -19,7 +39,7 @@ function onSubmitForm(event) {
   let strippedString = contentEl.value.replace(/(<([^>]+)>)/gi, "");
   strippedString = strippedString.replace(/(\r\n|\n|\r)/g,"<br />");
   if (nameEl.textContent && strippedString) {
-    console.log(strippedString);
+    addDiscussion(nameEl.textContent, strippedString);
     sendMessageToScaleDrone(nameEl.textContent, strippedString);
     contentEl.value = '';
   }
