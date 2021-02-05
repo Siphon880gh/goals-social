@@ -143,3 +143,11 @@ button.standout:hover {
   border: 1px solid rgba(230, 123, 30, 0.25);
   border-radius: 10px;
 }
+
+.bordered {
+  border: 1px solid black;
+}
+
+.bordered-alt {
+  border: 1px solid gray;
+}
