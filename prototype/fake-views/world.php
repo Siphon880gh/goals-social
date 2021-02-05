@@ -4,6 +4,7 @@
 <div class="bordered mb-2">
     <div class="bordered-alt">Post id: {{_id}}</div>
     <div class="bordered-alt">Post owner id: {{user_id}}</div>
+    <div class="bordered-alt">Post username: {{post_username}}</div>
     <div class="bordered-alt">Content: {{content}}</div>
 </div>
 {{/each}}

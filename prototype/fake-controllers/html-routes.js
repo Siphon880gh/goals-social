@@ -7,8 +7,29 @@ if (!window.res.render) alert("Error Dependencies: Load res.render.js before thi
 var CONSTANT_SITE_TITLE = "Goals Social";
 
 // Setup HTML routes
+
+// World posts
 router.addRoute('/').matched.add(async() => {
-    var docs = await posts.find().filter({}).toArray();
+    var docs = await posts.find().toArray();
+
+    for (var i = 0; i < docs.length; i++) {
+        var doc = docs[i];
+        // Joins
+        var appendDoc = await include(doc.user_id, "_id", users);
+        var mergedDoc = {...doc, ...appendDoc };
+        doc = mergedDoc;
+
+        // Modify Row
+        appendDoc.post_username = appendDoc.username;
+        delete appendDoc.username;
+        delete password;
+
+        docs[i] = doc;
+    };
+
+    console.log({ docs });
+    debugger;
+
     console.log("Route Context: ", { docs });
     var postsWrapper = {
             posts: docs

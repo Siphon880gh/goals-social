@@ -57,6 +57,23 @@ function prototypeHooksLink(event) {
 }
 
 /**
+ * 
+ * ZangoDB does not do joins aka $lookup like MongoDB does
+ * Here's an implementation that will. You must exclude or rename fields
+ * afterwards
+ */
+async function include(lookupValue, otherColumn, otherTable) {
+
+    // Get include row
+    var appendDoc = await users.findOne({
+        "_id": lookupValue,
+    });
+    console.log({ appendDoc })
+
+    return appendDoc;
+}
+
+/**
  * Setup browser JS and node JS interoperability
  */
 
