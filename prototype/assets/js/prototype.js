@@ -41,6 +41,8 @@ window.res.render = (querySelector, data, helpersArr, partialsArr) => {
 
 /**
  * 
+ * @function prototypeHooksLink
+ * 
  * Prototype hooks to links
  * 
  * On frontend, we fake routes by taking over the default behavior of clicking a link
