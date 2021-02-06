@@ -26,3 +26,15 @@ function getClosestDataAttribute($here, datasetName) {
     debugger;
     return datasetValue;
 }
+
+/**
+ * 
+ * @function prototypeHooksLink
+ * 
+ * Obsolete "Prototype" no longer hooks to links
+ * 
+ * When copying code over from Prototype to Production, make onclick="prototypeHooksLink(event)"
+ * an inactive function, so don't have to refactor every single link
+ * 
+ */
+function prototypeHooksLink(event) {}
