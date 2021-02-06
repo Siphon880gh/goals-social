@@ -31,7 +31,7 @@ router.addRoute('/').matched.add(async() => {
         name: "date",
         fxn: function(options) {
             const sqlDate = options;
-            const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+            const humanDate = moment(sqlDate).format("MM/DD/YY")
             return humanDate;
         }
     }]
