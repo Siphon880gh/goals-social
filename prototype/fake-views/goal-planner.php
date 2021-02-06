@@ -51,58 +51,32 @@
 
       <div class="item item2">
         <p><span><i class="fa fa-star"></i> Goal:</span></p>
-        <p class="text" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter a goal."></p>
+        <p class="text" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter a goal.">{{goal}}</p>
       </div>
       <div class="grid2">
         <div class="item item4">
           <p><span><i class="fa fa-star"></i> Milestones:</span></p>
           <p class="help">(what you need to do)</p>
-          <!-- <p class="text" data-placeholder="You can edit this! Enter specific subgoals"> -->
+          <!-- <p class="text" data-placeholder="You can edit this! Enter specific subgoals"></p> -->
           <div class="milestones">
-
+            {{#each milestones}}
             <div class="milestone">
-              <input class="milestone" type="text"/>
+              <input class="milestone" type="text" value="{{milestone}}" placeholder="Enter a milestone" />
               <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
               <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
             </div>
+            {{/each}}
           </div>
           <button class="milestone-add btn btn-primary"><i class="fa fa-plus"></i> Add new milestone! </button>
-          </p>
-          <script>
-          function doneMilestone($here) {
-            var $milestone = $here.closest(".milestone");
-            // var whichIndex = $milestone.index();
-            // $milestone.addAttribute("disabled");
-            debugger;
-            $milestone.find("input, button").attr("disabled", true);
-            
-          }
-          function deleteMilestone($here) {
-            var $milestone = $here.closest(".milestone");
-            var whichIndex = $milestone.index();
-            $milestone.remove();
-            $(".milestone-detail").eq(whichIndex).remove();
-          }
-          $(".milestone-add").on("click", ()=>{
-            $(".milestones").append(`
-            <div class="milestone">
-              <input class="milestone" type="text"/>
-              <button class="milestone-delete btn btn-success float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-check"></i></button>
-              <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
-            </div>
-            `);
-
-            $(".milestone-details").append(`
-              <input class="milestone-detail" type="text"/>
-            `)
-          })
-          </script>
+          
         </div>
         <div class="item item3">
           <p><span>Strategy:</span></p>
-          <p class="help">(what you need to do)</p>
+          <p class="help">(how you do it)</p>
           <div class="milestone-details">
-            <input class="milestone-detail" type="text"/>
+            {{#each milestones}}
+              <input class="milestone-detail" type="text"/>
+            {{/each}}
             <!-- <p class="text milestone-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter more details"></p> -->
           </div>
         </div>
@@ -129,6 +103,36 @@
   </div>
 
 <link rel="stylesheet" href="assets/css/goal-planner.css">
+
+
+<script>
+function doneMilestone($here) {
+  var $milestone = $here.closest(".milestone");
+  var whichIndex = $milestone.index();
+  $milestone.find("input, button").attr("disabled", true);
+  $(".milestone-detail").eq(whichIndex).attr("disabled", true);
+  
+}
+function deleteMilestone($here) {
+  var $milestone = $here.closest(".milestone");
+  var whichIndex = $milestone.index();
+  $milestone.remove();
+  $(".milestone-detail").eq(whichIndex).remove();
+}
+$(".milestone-add").on("click", ()=>{
+  $(".milestones").append(`
+  <div class="milestone">
+    <input class="milestone" type="text"/>
+    <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
+    <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
+  </div>
+  `);
+
+  $(".milestone-details").append(`
+    <input class="milestone-detail" type="text"/>
+  `)
+})
+</script>
 
 <!-- Remove line when refactored into production code: -->
 <script>$(".page-title").text("{{pageTitle}}");</script>
