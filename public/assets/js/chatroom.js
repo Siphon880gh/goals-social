@@ -89,7 +89,8 @@ let getRecentChat = () => {
     div.classList.add('message');
     document.querySelector('.text-area').appendChild(div);
     }
-
+    document.querySelector('#loading-text-area').setAttribute('style', 'display: none;')
+    document.querySelector('.input-area').setAttribute('style', 'display: block;')
   })
 };
 
