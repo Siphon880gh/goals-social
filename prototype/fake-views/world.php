@@ -4,6 +4,10 @@
     height: 80px;
     border-radius:50%; /* Round avatar */
 }
+.comment-wrapper .avatar {
+    width: 60px;
+    height: 60px;
+}
 .post:first-child {
     margin-top:20px;
 }
@@ -14,27 +18,30 @@
 }
 .post_user_info {
     float: right;
-    padding: 10px;
 }
 .goal {
 
 }
-.goal label::before {
-    content: "Goal:\00a0";
-    font-weight: 600;
-}
 .detail {
     font-weight: 200;
-}
-.detail label::before {
-    content: "Detail:\00a0";
-    font-weight: 300;
 }
 .dates::before {
     content: "Duration:\00a0"
 }
 .post-owner {
     text-align: center;
+}
+.milestone-wrapper {
+    width: 75%;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 1px solid gray;
+}
+.comment-wrapper {
+    width: 75%;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 1px solid gray;
 }
 .clear-fix {
     clear: both;
@@ -47,12 +54,12 @@
 {{#each posts}}
 <div class="post" data-post-id={{_id}} data-owner-id={{user_id}}>
     <div class="">
-        <figure class="post_user_info">
+        <figure class="post_user_info p-2">
             <img class="avatar" src="assets/img/users-default-avatars/{{avatar}}.png"></img>
             <figcaption class="post-owner">{{post_username}}</figcaption>
         </figure>
-        <div class="goal"><label></label><span>{{goal}}</span></div>
-        <div class="detail"><label></label><span>{{detail}}</span></div>
+        <div class="goal"><label>Goal: </label><span>{{goal}}</span></div>
+        <div class="detail"><label>Detail: </label><span>{{detail}}</span></div>
 
         <div class="dates mt-3">
             <span class="start">{{date start}}</span> - <span class="end">{{date end}}</span>
@@ -73,22 +80,28 @@
         </ul>
         <div class="tab-content js-b">
             <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
-                {{#with milestones}}
-                    <div>
+                <div class="milestones-wrapper">
+                {{#each milestones}}
+                    <div class="milestone-wrapper mt-2 mb-2 p-1" data-milestone-id={{milestone_id}}>
                         <div><labe>Milestone: </labe><span>{{milestone}}</span></div>
                         <div><labe>Detail: </labe><span>{{detail}}</span></div>
-                        <div><label>data-post-id: </label><span>{{post_id}}</span></div>
                     </div>
-                {{/with}}
+                {{/each}}
+                </div>
             </div>
             <div class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">
-                {{#with comments}}
-                <div>
-                    <div><label>Comment: </label><span>{{comment}}</span></div>
-                    <div><label>data-post-id: </label><span>{{post_id}}</span></div>
-                    <div><label>data-user-id: </label><span>{{user_id}}</span></div>
+                <div class="comments-wrapper">
+                {{#each comments}}
+                <div class="comment-wrapper mt-2 mb-2 p-1" data-comment-id={{comment_id}} data-post-id={{post_id}} data-user-id={{user_id}}>
+                    <figure class="post_user_info p-2">
+                        <img class="avatar" src="assets/img/users-default-avatars/{{avatar}}.png"></img>
+                        <figcaption class="post-owner">{{username}}</figcaption>
+                    </figure>
+                    <label>Comment: </label><span>{{comment}}</span>
+                    <div class="clear-fix"></div>
                 </div>
-                {{/with}}
+                {{/each}}
+                </div>
             </div>
         </div>
     </div> <!-- Tabs and their contents -->
