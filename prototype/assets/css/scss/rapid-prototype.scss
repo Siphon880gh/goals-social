@@ -1,3 +1,10 @@
+/**
+ * Purpose of this file is to allow rapid styling of the prototype using Compass/sass. Compass converts the scss to css.
+ * This scss allows for nesting blocks, so is faster to experiment with styles.
+ *
+ */
+
+
 /* Reset CSS */
 
  :root {
@@ -47,6 +54,25 @@ a {
         width: 60% !important;
         margin-top: 40px;
     }
+}
+
+
+/* Styling classes */
+
+.bordered {
+    border: 1px solid black;
+}
+
+.bordered-alt {
+    border: 1px solid gray;
+}
+
+.text-xs {
+    font-size: .5rem;
+}
+
+.text-right {
+    text-align: right;
 }
 
 
@@ -154,7 +180,7 @@ button.standout:hover {
 .prototype-php-engine {
     display: block;
     padding: 5px;
-    position: absolute;
+    position: fixed;
     right: 5px;
     bottom: 5px;
     background-color: rgba(255, 224, 51, .5);
