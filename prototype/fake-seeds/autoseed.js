@@ -9,11 +9,12 @@ autoseed:
     new zango.Db('goals_social_db').drop(); // Force Sync
 var db = new zango.Db('goals_social_db', {
     users: ['_id'],
-    posts: ['_id']
+    posts: ['_id'],
+    comments: ['_id'],
+    milestones: ['_id']
 });
 
-// <MAJOR: Users>
-// Create users.testUser with password testUser
+/***    Users   ****/
 window.users = db.collection('users');
 
 var udocs = [{
@@ -43,7 +44,7 @@ users.insert(udocs).then(() => {
     }).forEach(doc => console.log('users/doc (password shown in prototype for debugging purposes):', doc));
 });
 
-// <MAJOR: Posts>
+/***    Posts   ****/
 window.posts = db.collection('posts');
 
 /**
@@ -88,3 +89,27 @@ var pdocs = [{
 }];
 
 posts.insert(pdocs).then(() => {});
+
+
+/***    Comments   ****/
+window.comments = db.collection('comments');
+var cdocs = [{
+    post_id: 1,
+    user_id: 2,
+    comment: "Hello"
+}, {
+    post_id: 1,
+    user_id: 2,
+    comment: "Hello hello"
+}];
+comments.insert(cdocs).then(() => {});
+
+
+/***    Milestones   ****/
+window.milestones = db.collection('milestones');
+var mdocs = [{
+    post_id: 1,
+    milestone: "Log daily on MyFitnessPal",
+    detail: "Make the app available on your phone's first screen"
+}];
+milestones.insert(mdocs).then(() => {});

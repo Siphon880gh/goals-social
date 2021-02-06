@@ -72,8 +72,24 @@
             </li>
         </ul>
         <div class="tab-content js-b">
-            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">Milestones go here</div>
-            <div class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">Comments go here</div>
+            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                {{#with milestones}}
+                    <div>
+                        <div><labe>Milestone: </labe><span>{{milestone}}</span></div>
+                        <div><labe>Detail: </labe><span>{{detail}}</span></div>
+                        <div><label>data-post-id: </label><span>{{post_id}}</span></div>
+                    </div>
+                {{/with}}
+            </div>
+            <div class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">
+                {{#with comments}}
+                <div>
+                    <div><label>Comment: </label><span>{{comment}}</span></div>
+                    <div><label>data-post-id: </label><span>{{post_id}}</span></div>
+                    <div><label>data-user-id: </label><span>{{user_id}}</span></div>
+                </div>
+                {{/with}}
+            </div>
         </div>
     </div> <!-- Tabs and their contents -->
     
