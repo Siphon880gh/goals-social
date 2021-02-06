@@ -4,6 +4,10 @@
     height: 80px;
     border-radius:50%; /* Round avatar */
 }
+.comment-wrapper .avatar {
+    width: 60px;
+    height: 60px;
+}
 .post:first-child {
     margin-top:20px;
 }
