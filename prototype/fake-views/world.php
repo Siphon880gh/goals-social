@@ -89,7 +89,12 @@
                 <div class="comments-wrapper">
                 {{#each comments}}
                 <div class="comment-wrapper mt-2 mb-2 p-1" data-comment-id={{comment_id}} data-post-id={{post_id}} data-user-id={{user_id}}>
-                    <div><label>Comment: </label><span>{{comment}}</span></div>
+                    <figure class="post_user_info p-2">
+                        <img class="avatar" src="assets/img/users-default-avatars/{{avatar}}.png"></img>
+                        <figcaption class="post-owner">{{username}}</figcaption>
+                    </figure>
+                    <label>Comment: </label><span>{{comment}}</span>
+                    <div class="clear-fix"></div>
                 </div>
                 {{/each}}
                 </div>

@@ -1,12 +1,12 @@
-autoseed:
-    /**
-     * The MongoDB tables are:
-     *  - users
-     * 
-     * 
-     * MongoDB ReadMe: https://erikolson186.github.io/zangodb
-     */
-    new zango.Db('goals_social_db').drop(); // Force Sync
+/**
+ * The MongoDB tables are:
+ *  - users
+ * 
+ * 
+ * MongoDB ReadMe: https://erikolson186.github.io/zangodb
+ */
+
+new zango.Db('goals_social_db').drop(); // Force Sync
 var db = new zango.Db('goals_social_db', {
     users: ['_id'],
     posts: ['_id'],

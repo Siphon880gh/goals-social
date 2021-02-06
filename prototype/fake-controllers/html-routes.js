@@ -37,13 +37,14 @@ router.addRoute('/').matched.add(async() => {
         delete password;
 
         // Join as array (params A, B)
-        // A=Milestones, B=includeA_assoc_B
+        // A=Milestones, B=Posts
         var milestonesData = await includeA_assoc_B({
             foreignKeyFromA: post._id,
             foreignTableB: milestones,
             foreignTarget: "post_id",
             renameId: "milestone_id"
         });
+        // A=Comments, B=Posts
         var commentsData = await includeA_assoc_B({
             foreignKeyFromA: post._id,
             foreignTableB: comments,
@@ -53,7 +54,33 @@ router.addRoute('/').matched.add(async() => {
 
         // Modify Row
         doc.milestones = milestonesData;
+
+        // Each comments will have avatar and username of comment owner
+        for (var j = 0; j < commentsData.length; j++) {
+            var comment = commentsData[j];
+            console.log({ "commentUserId": comment.user_id })
+
+            // Join and unwind (params A, B)
+            // A=Comment ID, B=Users
+            var commentUserInfo = await includeA_assoc_B({
+                foreignKeyFromA: comment.user_id,
+                foreignTableB: users,
+                foreignTarget: "_id"
+            });
+            commentUserInfo = commentUserInfo[0];
+            comment.username = commentUserInfo.username;
+            comment.avatar = commentUserInfo.avatar;
+
+            // Mock
+            // comment.username = "Fake username";
+            // comment.avatar = "Fake avatar";
+
+            commentsData[j] = comment;
+        };
+
         doc.comments = commentsData;
+
+
         // debugger;
 
         docs[i] = doc;
