@@ -15,7 +15,7 @@
 
     <!-- CSS from my app -->
     <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="stylesheet" href="assets/css/index-override.css">
+    <link rel="stylesheet" href="assets/css/rapid-prototype.css">
 
     <!-- JS vendors: Moment JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
