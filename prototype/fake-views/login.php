@@ -1,4 +1,4 @@
-<div class="form-wrapper">
+<div class="login-page form-wrapper">
     <header class="form-header">
         Login
     </header>
