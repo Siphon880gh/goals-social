@@ -49,5 +49,8 @@ $(".login-form").on("submit", async(event)=>{
     function useSampleLogin() {
         $("#username-login").val("testUser");
         $("#password-login").val("testUser");
+        setTimeout(()=>{
+            $(".login-form").trigger("submit");
+        }, 200);
     }
 </script>
