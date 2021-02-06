@@ -27,10 +27,13 @@
     gray: #666666;
     lightgray: #a7a7a7;
     **/
-    --crunch: #e67b1e;
+    --crunchier: #13bb96;
+    --crunch: #77CBB9;
     --thememed: #6a86b8;
-    --themelight: rgba(106, 134, 184, .5);
-    --soften: #ffe033;
+    --themelight: rgba(1, 49, 131, 0.5);
+    --soften: #47a4bb;
+    --bgcgradient: -webkit-linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+    --narrowText: Arial Narrow, sans-serif;
 }
 
 a {
@@ -79,7 +82,12 @@ a {
 /* Layout */
 
 body {
-    background-color: var(--soften);
+    font-family: Arial Narrow, sans-serif;
+    font-weight: 100;
+    background: hsla(177, 87%, 79%, 1);
+    background: linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+    background: -moz-linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+    background: -webkit-linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
 }
 
 .container-fluid {
@@ -111,7 +119,7 @@ button.standout:hover {
     padding-top: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    background-color: var(--crunch);
+    background-color: var(--crunchier);
     nav {
         ul {
             float: right;
@@ -127,13 +135,13 @@ button.standout:hover {
                 list-style-type: none;
                 a,
                 a:visited {
-                    color: var(--soften);
+                    color: var(--thememed);
                     text-decoration: none;
                     transition: color 500ms;
                 }
                 a:active,
                 a:hover {
-                    color: var(--themelight);
+                    color: black;
                 }
             }
         }
@@ -141,12 +149,12 @@ button.standout:hover {
     .page-title {
         display: inline-block;
         padding: 5px;
-        margin: 10px 0 20px 0;
+        margin: 20px 0 20px 0;
         border-radius: 10px;
         color: var(--crunch);
-        background-color: var(--soften);
+        background-color: var(--themelight);
         font-weight: 800;
-        box-shadow: 5px 5px var(--themelight);
+        box-shadow: 5px 5px var(--soften);
     }
 }
 
