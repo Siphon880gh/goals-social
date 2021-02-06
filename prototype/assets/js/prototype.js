@@ -59,21 +59,36 @@ function prototypeHooksLink(event) {
 /**
  * 
  * ZangoDB does not do joins aka $lookup like MongoDB does
- * Here's an implementation that will and then unwinds or flattens
- * the values into the database row. You must exclude or rename fields
- * afterwards
+ * Here's are implementations
  */
-async function includeUnwind(lookupValue, otherColumn, otherTable) {
+async function includeBownsA(A_lookupValue, B_table) {
 
     // Get include row
-    var appendDoc = await otherTable.findOne({
-        "_id": lookupValue,
+    var appendDoc = await B_table.findOne({
+        "_id": A_lookupValue,
     });
     console.log({ appendDoc })
 
     return appendDoc;
 }
 
+async function includeAownsB(A_lookupValue, B_table) {
+
+    // Get include row
+    var docs = await milestones.find({
+        "_id": A_lookupValue,
+    }).toArray();
+    console.log({ docs })
+
+    // Mock:
+    // var docs = [{
+    //     milestone: "m",
+    //     detail: "md",
+    //     post_id: 1
+    // }]
+
+    return docs;
+}
 /**
  * Setup browser JS and node JS interoperability
  */
