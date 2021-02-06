@@ -94,7 +94,7 @@ router.addRoute('/').matched.add(async() => {
             const humanDate = moment(sqlDate).format("MM/DD/YY")
             return humanDate;
         }
-    }]
+    }];
 
     // console.log({ docs });
     // debugger;
@@ -159,18 +159,48 @@ router.addRoute('edit-profile').matched.add(() => {
     res.render("#edit-profile", genericData);
 });
 
-router.addRoute('goal-planner').matched.add(() => {
+router.addRoute('goal-planner').matched.add(async() => {
     // User must be logged in to view personal dashboard
     if (!req.session.loggedIn) {
         hasher.setHash("/login");
         return;
     }
 
-    var genericData = {
-        pageTitle: "Goal Planner",
-        username: req.body.username
+    // console.assert(req.session.loggedIn === 1);
+    // console.assert(req.session.user.userId === 1);
+
+    var pdocs = await posts.find({ user_id: req.session.user.userId }).toArray();
+
+    // Joining each post with milestones
+    for (var i = 0; i < pdocs.length; i++) {
+        var post = pdocs[i];
+        var postId = post._id;
+
+        // Join as array (params A, B)
+        // A=Milestones, B=Posts
+        var milestonesData = await includeA_assoc_B({
+            foreignKeyFromA: postId,
+            foreignTableB: milestones,
+            foreignTarget: "post_id",
+            renameId: "milestone_id"
+        });
+        post.milestones = milestonesData;
+        pdocs[i] = post;
+        if (i === 0) {
+            console.assert(post.milestones.length == 2, post.milestones);
+        }
     }
-    res.render("#goal-planner", genericData);
+
+
+    // console.assert(pdocs.length === 4, pdocs.length)
+    pdocs.push({}); // there's always a blank goal at the end to add
+
+    var postsWrapper = {
+        pageTitle: "Goal Planner",
+        username: req.body.username,
+        posts: pdocs
+    }
+    res.render("#goal-planner", postsWrapper);
 });
 
 router.addRoute('profile').matched.add(() => {
