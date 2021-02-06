@@ -27,8 +27,10 @@
 .milestone button {
   width: 40px;
   height: 30px;
-  margin-left: 5px;
   margin-right: 5px;
+}
+.milestone button:nth-child(2) {
+  margin-left: 5px;
 }
 .milestone-add {
   display: block;
@@ -60,12 +62,21 @@
 
             <div class="milestone">
               <input class="milestone" type="text"/>
+              <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
               <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
             </div>
           </div>
           <button class="milestone-add btn btn-primary"><i class="fa fa-plus"></i> Add new milestone! </button>
           </p>
           <script>
+          function doneMilestone($here) {
+            var $milestone = $here.closest(".milestone");
+            // var whichIndex = $milestone.index();
+            // $milestone.addAttribute("disabled");
+            debugger;
+            $milestone.find("input, button").attr("disabled", true);
+            
+          }
           function deleteMilestone($here) {
             var $milestone = $here.closest(".milestone");
             var whichIndex = $milestone.index();
@@ -76,6 +87,7 @@
             $(".milestones").append(`
             <div class="milestone">
               <input class="milestone" type="text"/>
+              <button class="milestone-delete btn btn-success float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-check"></i></button>
               <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
             </div>
             `);

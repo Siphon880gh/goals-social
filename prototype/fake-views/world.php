@@ -37,6 +37,15 @@
     margin: 0 auto;
     border: 1px solid gray;
 }
+.milestone-wrapper.done {
+    color: gray;
+}
+.milestone-wrapper:not(.done) .fa.fa-check {
+    display: none;
+}
+.milestone-wrapper.done .fa.fa-check {
+    margin-right: 5px;
+}
 .comment-wrapper {
     width: 75%;
     border-radius: 5px;
@@ -82,9 +91,9 @@
             <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                 <div class="milestones-wrapper">
                 {{#each milestones}}
-                    <div class="milestone-wrapper mt-2 mb-2 p-1" data-milestone-id={{milestone_id}}>
-                        <div><labe>Milestone: </labe><span>{{milestone}}</span></div>
-                        <div><labe>Detail: </labe><span>{{detail}}</span></div>
+                    <div class="milestone-wrapper mt-2 mb-2 p-1 {{#if done}}done{{/if}}" data-milestone-id={{milestone_id}}>
+                        <div><i class="fa fa-check"></i><label>Milestone: </labe><span>{{milestone}}</span></div>
+                        <div><label>Detail: </labe><span>{{detail}}</span></div>
                     </div>
                 {{/each}}
                 </div>
