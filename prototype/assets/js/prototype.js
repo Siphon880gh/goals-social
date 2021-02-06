@@ -66,7 +66,7 @@ function prototypeHooksLink(event) {
 async function includeUnwind(lookupValue, otherColumn, otherTable) {
 
     // Get include row
-    var appendDoc = await users.findOne({
+    var appendDoc = await otherTable.findOne({
         "_id": lookupValue,
     });
     console.log({ appendDoc })
