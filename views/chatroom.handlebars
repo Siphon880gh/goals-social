@@ -13,7 +13,7 @@
     <div id="loading-text-area">...Loading Chatroom</div>
     <form class="input-area" onsubmit="onSubmitForm(); return false;" style="display: none;">
       <div class="input name" style="display: none;">{{username}}</div>
-      <textarea class="input content" placeholder="Message.." cols='100' rows='1'></textarea>
+      <textarea class="input content" placeholder="Message.." cols='100' style="resize: none; height: 65px;"></textarea>
       <input type="submit" class="input button" value="Send">
     </form>
     {{/if}}
