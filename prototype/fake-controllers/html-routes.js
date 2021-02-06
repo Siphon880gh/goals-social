@@ -14,25 +14,46 @@ router.addRoute('/').matched.add(async() => {
 
     for (var i = 0; i < docs.length; i++) {
         var doc = docs[i];
+        var post = doc;
         // Join and unwind (params A, B)
-        // B=Users, A=Posts, user_id FK at Posts
-        var appendDoc = await includeBownsA(doc.user_id, users);
-        delete appendDoc._id;
-        var mergedDoc = {...doc, ...appendDoc };
-        doc = mergedDoc;
+        // A=Posts, B=Users
+        var appendDoc = await includeA_assoc_B({
+            foreignKeyFromA: post.user_id,
+            foreignTableB: users,
+            foreignTarget: "_id"
+        });
+
+        // Then unwind
+        if (appendDoc.length) {
+            appendDoc = appendDoc[0];
+            delete appendDoc._id;
+            var mergedDoc = {...doc, ...appendDoc };
+            doc = mergedDoc;
+        }
 
         // Modify Row
         doc.post_username = doc.username;
-        delete appendDoc._id;
         delete doc.username;
         delete password;
 
         // Join as array (params A, B)
-        // B=Milestones, A=Posts, post_id FK at Milestones
-        var milestonesData = await includeAownsB(doc._id, milestones);
+        // A=Milestones, B=includeA_assoc_B
+        var milestonesData = await includeA_assoc_B({
+            foreignKeyFromA: post._id,
+            foreignTableB: milestones,
+            foreignTarget: "post_id",
+            renameId: "milestone_id"
+        });
+        var commentsData = await includeA_assoc_B({
+            foreignKeyFromA: post._id,
+            foreignTableB: comments,
+            foreignTarget: "post_id",
+            renameId: "comment_id"
+        });
 
         // Modify Row
         doc.milestones = milestonesData;
+        doc.comments = commentsData;
         // debugger;
 
         docs[i] = doc;

@@ -94,13 +94,13 @@ posts.insert(pdocs).then(() => {});
 /***    Comments   ****/
 window.comments = db.collection('comments');
 var cdocs = [{
-    post_id: 1,
+    post_id: 2,
     user_id: 2,
-    comment: "Hello"
+    comment: "Comment on post 2"
 }, {
-    post_id: 1,
+    post_id: 2,
     user_id: 2,
-    comment: "Hello hello"
+    comment: "Comment again on post 2"
 }];
 comments.insert(cdocs).then(() => {});
 
@@ -109,7 +109,11 @@ comments.insert(cdocs).then(() => {});
 window.milestones = db.collection('milestones');
 var mdocs = [{
     post_id: 1,
-    milestone: "Log daily on MyFitnessPal",
+    milestone: "Log daily on MyFitnessPal (Milestone on post 1)",
     detail: "Make the app available on your phone's first screen"
+}, {
+    post_id: 1,
+    milestone: "Check weight every Sunday (Milestone again on post 1)",
+    detail: "Remember when testing new diets, may take 2 weeks before seeing weight changes."
 }];
 milestones.insert(mdocs).then(() => {});

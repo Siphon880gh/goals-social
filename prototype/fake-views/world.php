@@ -33,6 +33,12 @@
     margin: 0 auto;
     border: 1px solid gray;
 }
+.comment-wrapper {
+    width: 75%;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 1px solid gray;
+}
 .clear-fix {
     clear: both;
 }
@@ -72,7 +78,7 @@
             <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
                 <div class="milestones-wrapper">
                 {{#each milestones}}
-                    <div class="milestone-wrapper mt-2 mb-2 p-1" data-post-id={{post_id}}>
+                    <div class="milestone-wrapper mt-2 mb-2 p-1" data-milestone-id={{milestone_id}}>
                         <div><labe>Milestone: </labe><span>{{milestone}}</span></div>
                         <div><labe>Detail: </labe><span>{{detail}}</span></div>
                     </div>
@@ -80,13 +86,13 @@
                 </div>
             </div>
             <div class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">
-                {{#with comments}}
-                <div>
+                <div class="comments-wrapper">
+                {{#each comments}}
+                <div class="comment-wrapper mt-2 mb-2 p-1" data-comment-id={{comment_id}} data-post-id={{post_id}} data-user-id={{user_id}}>
                     <div><label>Comment: </label><span>{{comment}}</span></div>
-                    <div><label>data-post-id: </label><span>{{post_id}}</span></div>
-                    <div><label>data-user-id: </label><span>{{user_id}}</span></div>
                 </div>
-                {{/with}}
+                {{/each}}
+                </div>
             </div>
         </div>
     </div> <!-- Tabs and their contents -->

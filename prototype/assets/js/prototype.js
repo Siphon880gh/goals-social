@@ -61,34 +61,32 @@ function prototypeHooksLink(event) {
  * ZangoDB does not do joins aka $lookup like MongoDB does
  * Here's are implementations
  */
-async function includeBownsA(A_lookupValue, B_table) {
+async function includeA_assoc_B(context) {
+    var {
+        foreignKeyFromA,
+        foreignTableB,
+        foreignTarget,
+        renameId
+    } = context;
 
     // Get include row
-    var appendDoc = await B_table.findOne({
-        "_id": A_lookupValue,
-    });
-    console.log({ appendDoc })
+    var lookup = {};
+    lookup[foreignTarget] = foreignKeyFromA;
+    // May return 1 or more objects in an array
+    var appendDocs = await foreignTableB.find(lookup).toArray();
 
-    return appendDoc;
+    if (renameId) {
+        appendDocs.forEach(appendDoc => {
+            appendDoc[renameId] = appendDoc._id;
+            delete appendDoc._id;
+        });
+    }
+
+    console.log({ appendDocs })
+
+    return appendDocs;
 }
 
-async function includeAownsB(A_lookupValue, B_table) {
-
-    // Get include row
-    var docs = await milestones.find({
-        "_id": A_lookupValue,
-    }).toArray();
-    console.log({ docs })
-
-    // Mock:
-    // var docs = [{
-    //     milestone: "m",
-    //     detail: "md",
-    //     post_id: 1
-    // }]
-
-    return docs;
-}
 /**
  * Setup browser JS and node JS interoperability
  */
