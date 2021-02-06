@@ -1,5 +1,49 @@
 let drone = new ScaleDrone('msKNYliGbSuotvDl');
 
+//delete message from chatroom table
+let deleteMessage = (id) => {
+  const idObject = { id }
+  fetch('/api/chatroom', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(idObject)
+  })
+  .then (res => {
+    return res.json()
+  })
+  .then (res => {
+    console.log(res)
+  })
+}
+
+//Before post check length and then delete message if table length > 50
+let checkDatabaseLengthAndUpdate = () => {
+  fetch('/api/chatroom', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    if(response.ok) {
+      return response.json();
+    }
+  })
+  .then(data => {
+    //Add username and message object to array with addDiscussionToDatabase();
+
+    //check if there are 50+ posts
+    while (data.length > 50) {
+      deleteMessage(data[0].id)
+      data.shift();
+      console.log('UPDATED')
+    }
+    //while there are 50+ posts use shift() method to remove first index of array.
+  })
+}
+
 let addDiscussionToDatabase = (username, message) => {
   console.log(username, message)
  const chatroom = {
@@ -20,6 +64,8 @@ let addDiscussionToDatabase = (username, message) => {
     console.log(res)
   })
 };
+
+
 
 let getRecentChat = () => {
   fetch('/api/chatroom', {
@@ -51,6 +97,7 @@ drone.on('open', (error) =>  {
   if (error) return console.error(error);
 
   let room = drone.subscribe('general-chat');
+  //populate page with most recent 50 messages on start up
   getRecentChat();
 
   room.on('open', function (error) {
@@ -67,7 +114,10 @@ function onSubmitForm(event) {
   let strippedString = contentEl.value.replace(/(<([^>]+)>)/gi, "");
   strippedString = strippedString.replace(/(\r\n|\n|\r)/g,"<br />");
   if (nameEl.textContent && strippedString) {
+    //update chat table
     addDiscussionToDatabase(nameEl.textContent, strippedString);
+    //check if chat table is > 50 and if it is delete the oldest post
+    checkDatabaseLengthAndUpdate();
     sendMessageToScaleDrone(nameEl.textContent, strippedString);
     contentEl.value = '';
   }

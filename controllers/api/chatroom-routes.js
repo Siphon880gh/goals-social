@@ -24,4 +24,23 @@ router.post('/', (req, res) => {
     });
 });
 
+router.delete('/', (req, res) => {
+    Chatroom.destroy({
+        where: {
+            id: req.body.id
+        }
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'The id was invalid check its value.' })
+            return;
+        }
+        res.json(dbUserData)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 module.exports = router;
