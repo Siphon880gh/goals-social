@@ -1,3 +1,5 @@
+let scrollBottom = () => {document.querySelector('.text-area').scrollTo(0, 99999);}
+
 let drone = new ScaleDrone('msKNYliGbSuotvDl');
 
 //delete message from chatroom table
@@ -90,7 +92,9 @@ let getRecentChat = () => {
     document.querySelector('.text-area').appendChild(div);
     }
     document.querySelector('#loading-text-area').setAttribute('style', 'display: none;')
-    document.querySelector('.input-area').setAttribute('style', 'display: block;')
+    document.querySelector('.input-area').setAttribute('style', 'display: flex;')
+    document.querySelector('.text-area').setAttribute('style', 'display: block;')
+    scrollBottom();
   })
 };
 
@@ -139,4 +143,5 @@ function addMessageToScreen(message) {
   div.innerHTML = '<b>' + message.name + '</b>: </br>' + message.content;
   div.classList.add('message');
   document.querySelector('.text-area').appendChild(div);
+  scrollBottom();
 }

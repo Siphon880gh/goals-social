@@ -1,0 +1,24 @@
+.input-area{
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+}
+
+.text-area {
+    margin-top: 10px;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    max-height: 600px;
+    background-color: white;
+    display: none;
+}
+
+textarea{
+    width: 70%;
+}
+
+#chat-button{
+    width: 30%;
+    height: 100%;
+    margin-left: 10px
+}
