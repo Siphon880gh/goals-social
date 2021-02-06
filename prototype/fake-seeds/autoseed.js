@@ -116,6 +116,6 @@ var mdocs = [{
     post_id: 1,
     milestone: "Check weight every Sunday (Milestone again on post 1)",
     detail: "Remember when testing new diets, may take 2 weeks before seeing weight changes.",
-    done: 0
+    done: 1
 }];
 milestones.insert(mdocs).then(() => {});

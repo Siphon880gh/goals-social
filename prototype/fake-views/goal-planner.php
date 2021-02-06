@@ -90,13 +90,13 @@
             <p class="help">(what you need to do)</p>
             <!-- <p class="text" data-placeholder="You can edit this! Enter specific subgoals"></p> -->
             <div class="milestones">
-              {{#with milestones}}
+              {{#each milestones}}
               <div class="milestone">
                 <input class="milestone" type="text" value="{{milestone}}" placeholder="Enter a milestone" />
                 <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
                 <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
               </div>
-              {{/with}}
+              {{/each}}
             </div>
             <button class="milestone-add btn btn-primary"><i class="fa fa-plus"></i> Add new milestone! </button>
             
@@ -105,9 +105,9 @@
             <p><span>Strategy:</span></p>
             <p class="help">(how you do it)</p>
             <div class="milestone-details">
-              {{#with milestones}}
+              {{#each milestones}}
                 <input class="milestone-detail" type="text"/>
-              {{/with}}
+              {{/each}}
               <!-- <p class="text milestone-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter more details"></p> -->
             </div>
           </div>
@@ -189,8 +189,10 @@ function deleteMilestone($here) {
   $milestone.remove();
   $(".milestone-detail").eq(whichIndex).remove();
 }
-$(".milestone-add").on("click", ()=>{
-  $(".milestones").append(`
+$(".milestone-add").on("click", (event)=>{
+  var $here = $(event.target);
+  var $milestones = $here.prev(".milestones");
+  $milestones.append(`
   <div class="milestone">
     <input class="milestone" type="text"/>
     <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
@@ -198,7 +200,9 @@ $(".milestone-add").on("click", ()=>{
   </div>
   `);
 
-  $(".milestone-details").append(`
+  var $ancestor = $milestones.closest(".carousel-item");
+
+  $ancestor.find(".milestone-details").append(`
     <input class="milestone-detail" type="text"/>
   `)
 })
