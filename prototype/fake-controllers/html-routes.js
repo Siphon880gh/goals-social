@@ -15,7 +15,7 @@ router.addRoute('/').matched.add(async() => {
     for (var i = 0; i < docs.length; i++) {
         var doc = docs[i];
         // Joins
-        var appendDoc = await include(doc.user_id, "_id", users);
+        var appendDoc = await includeUnwind(doc.user_id, "_id", users);
         var mergedDoc = {...doc, ...appendDoc };
         doc = mergedDoc;
 
