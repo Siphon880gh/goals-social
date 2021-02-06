@@ -16,26 +16,52 @@
     float: right;
     padding: 10px;
 }
-.content {
-    float: left;
+.goal {
+
+}
+.goal label::before {
+    content: "Goal:\00a0";
+    font-weight: 600;
+}
+.detail {
+    font-weight: 200;
+}
+.detail label::before {
+    content: "Detail:\00a0";
+    font-weight: 300;
+}
+.dates::before {
+    content: "Duration:\00a0"
+}
+.post-owner {
+    text-align: center;
 }
 .clear-fix {
     clear: both;
 }
 </style>
 
-<div class="mb-3 posts">World View. All Public posts, goals, milestones, and comments are here.
+<div class="mb-3 posts">
+<!-- World View. All Public posts, goals, milestones, and comments are here. -->
 
 {{#each posts}}
-<div class="post">
+<div class="post" data-post-id={{_id}} data-owner-id={{user_id}}>
     <div class="">
         <figure class="post_user_info">
             <img class="avatar" src="assets/img/users-default-avatars/{{avatar}}.png"></img>
-            <figcaption>{{post_username}}</figcaption>
+            <figcaption class="post-owner">{{post_username}}</figcaption>
         </figure>
-        <span class="content">{{content}}</span>
+        <div class="goal"><label></label><span>{{goal}}</span></div>
+        <div class="detail"><label></label><span>{{detail}}</span></div>
+
+        <div class="dates mt-3">
+            <span class="start">{{date start}}</span> - <span class="end">{{date end}}</span>
+        </div>
         <div class="clear-fix"></div>
     </div>
+    <!-- <div>
+        <button onclick="getClosestDataAttribute($(event.target), 'post-id');">Test data attributes</button>
+    </div> -->
     <div class="">
         <ul class="nav nav-tabs js-a" id="myTab" role="tablist">
             <li class="nav-item">
@@ -50,7 +76,6 @@
             <div class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab">Comments go here</div>
         </div>
     </div> <!-- Tabs and their contents -->
-    <div class="pt-4 text-xs text-right">Note: The div should store this information: <code>data-post-id={{_id}}</code> and <code>data-owner-id={{user_id}}</code></div>
     
 </div> <!-- post -->
 {{/each}}

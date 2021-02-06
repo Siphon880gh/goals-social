@@ -22,6 +22,11 @@
     <!-- Prototype message so user knows this is the prototype version, not the production version  -->
     <div class="prototype-php-engine"><?php echo "PHP Prototype engine running!" ?></div>
 
+    <!-- JS vendors: Moment JS -->
+    <!-- Autoseed needs Moment JS to create the dates -->
+    <!-- Do not remove Moment JS from main.php because in production code this file index.php is not included -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <!-- bcrypt JS frontend version  -->
     <script src="bower_components/bcryptjs/dist/bcrypt.min.js"></script>
 

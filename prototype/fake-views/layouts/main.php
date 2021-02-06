@@ -119,6 +119,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css "></link>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js "></script>
 
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+
 </body>
 
 </html>

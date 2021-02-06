@@ -27,6 +27,15 @@ router.addRoute('/').matched.add(async() => {
         docs[i] = doc;
     };
 
+    const helpersArr = [{
+        name: "date",
+        fxn: function(options) {
+            const sqlDate = options;
+            const humanDate = moment(sqlDate).format("MM/DD/YYYY")
+            return humanDate;
+        }
+    }]
+
     // console.log({ docs });
     // debugger;
 
@@ -38,7 +47,7 @@ router.addRoute('/').matched.add(async() => {
     postsWrapper.pageTitle = CONSTANT_SITE_TITLE;
     postsWrapper.username = req.session.username;
     console.log(postsWrapper);
-    res.render("#world", postsWrapper);
+    res.render("#world", postsWrapper, helpersArr);
 });
 
 router.addRoute('login').matched.add(() => {

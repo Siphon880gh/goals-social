@@ -1,11 +1,12 @@
-/**
- * The MongoDB tables are:
- *  - users
- * 
- * 
- * MongoDB ReadMe: https://erikolson186.github.io/zangodb
- */
-new zango.Db('goals_social_db').drop(); // Force Sync
+autoseed:
+    /**
+     * The MongoDB tables are:
+     *  - users
+     * 
+     * 
+     * MongoDB ReadMe: https://erikolson186.github.io/zangodb
+     */
+    new zango.Db('goals_social_db').drop(); // Force Sync
 var db = new zango.Db('goals_social_db', {
     users: ['_id'],
     posts: ['_id']
@@ -45,15 +46,45 @@ users.insert(udocs).then(() => {
 // <MAJOR: Posts>
 window.posts = db.collection('posts');
 
+/**
+ * Example goals:
+ * 
+ * Exercise more.
+ * Lose weight.
+ * Get organized.
+ * Learn a new skill or hobby.
+ * Live life to the fullest.
+ * Save more money / spend less money.
+ * Quit smoking.
+ * Spend more time with family and friends.
+ * 
+ */
+
+
 var pdocs = [{
     user_id: 1,
-    content: "blah"
+    goal: "Lose weight",
+    detail: "I want to lose 50lb so I can look good and feel good",
+    start: moment().format("M/D/YYYY H:m:SS"),
+    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
 }, {
     user_id: 1,
-    content: "blah blah"
+    goal: "Get organized with minimalism",
+    detail: "I want to be less stressed by clutter by cleaning surroundings, emails, and pc, and developing habits to keep things minimal.",
+    start: moment().format("M/D/YYYY H:m:SS"),
+    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
 }, {
     user_id: 1,
-    content: "blah blah blah"
+    goal: "Learn to play guitar",
+    detail: "I want to pick up a new habit that I can learn to enjoy. I like the idea of making music tunes.",
+    start: moment().format("M/D/YYYY H:m:SS"),
+    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
+}, {
+    user_id: 1,
+    goal: "Save more money",
+    detail: "I want to save more money so I can feel good about the increasing savings on my bank account.",
+    start: moment().format("M/D/YYYY H:m:SS"),
+    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
 }];
 
 posts.insert(pdocs).then(() => {});
