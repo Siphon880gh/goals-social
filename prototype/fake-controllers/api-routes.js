@@ -84,11 +84,14 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
         start,
         end,
         _id,
-        milestones
+        milestones,
     } = window.req.body;
 
+    // Sanitize for DB
+    delete req.body.milestones;
     var postId = _id;
     delete _id;
+    req.body.user_id = window.req.session.user.userId;
 
     // Update post (milestones will be updated on its own table)
     window.posts.update({ _id: postId }, req.body);
@@ -121,6 +124,53 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
             });
         });
     }
+    if (newMilestones) {
+        window.milestones.insert(newMilestones, (error) => {
+            if (error) { throw error; }
+        });
+    }
+
+    // Go to own profile
+    hasher.setHash("profile/");
+});
+
+
+/**
+ * Create post and its milestones from goal planner
+ * Ids etc are mostly left intact from patching post to keep code scalable
+ */
+router.addRoute('post-api/posts/').matched.add(async() => {
+    var {
+        goal,
+        detail,
+        start,
+        end,
+        _id,
+        milestones,
+    } = window.req.body;
+
+    // Sanitize for DB
+    delete req.body.milestones;
+    delete req.body._id;
+    req.body.user_id = window.req.session.user.userId;
+
+    // Create post (milestones will be updated on its own table)
+    await window.posts.insert(req.body);
+
+    // Get last inserted post ID
+    var lastPostIdBundle = await window.posts.find().sort({ _id: -1 }).toArray();
+    var postId = lastPostIdBundle[0]._id;
+
+    var newMilestones = milestones;
+    newMilestones = newMilestones.map(milestone => {
+        return {
+            milestone: milestone.milestoneName,
+            detail: milestone.milestoneDetail,
+            post_id: postId,
+            done: milestone.done
+        };
+    });
+
     if (newMilestones) {
         window.milestones.insert(newMilestones, (error) => {
             if (error) { throw error; }

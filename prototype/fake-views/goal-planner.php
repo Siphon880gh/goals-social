@@ -50,7 +50,9 @@
   margin-right: 10px;
   width: 68px;
   display: inline-block;
-  /* transform: translateX(50%); */
+}
+.txf-50pc-right {
+  transform: translateX(50%);
 }
 .goal-planner-page .carousel-indicators li:last-child {
   background-color: red;
@@ -136,10 +138,10 @@
         <div class="grid3 main-buttons-wrapper">
 
             {{#if @last}}
-            <a href="post-api/posts/{{_id}}" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button class="btn btn-danger" onclick="event.preventDefault(); create_post($(event.target));"><i class="fa fa-plus"></i> Add</button></a>
+              <a class="txf-50pc-right" href="#" onclick="event.preventDefault(); create_post($(event.target), 'post-id');"><button class="btn btn-danger"><i class="fa fa-plus"></i> Add</button></a>
             {{else}}
-              <a href="patch-api/posts/{{_id}}" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button class="btn btn-primary"><i class="fa fa-save"></i> Update</button></a>
-              <a href="delete-api/posts/{{_id}}" onclick="event.preventDefault(); delete_post($(event.target), 'post-id');"><button class="btn btn-secondary"><i class="fa fa-trash"></i> Delete</button></a>
+              <a href="#" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button class="btn btn-primary"><i class="fa fa-save"></i> Update</button></a>
+              <a href="#" onclick="event.preventDefault(); delete_post($(event.target), 'post-id');"><button class="btn btn-secondary"><i class="fa fa-trash"></i> Delete</button></a>
             {{/if}}
 
         </div>
@@ -169,18 +171,21 @@
     return;
     var postId = getClosestDataAttribute($here, datasetName);
     hasher.setHash(`delete-api/posts/${postId}`);
-  }
+  } // delete_post
+
   function update_post($here, datasetName) {
+  var $context = $here.closest(`[data-${datasetName}]`);
     var goalPostData = {
-      goal: $(".html-goal").html(),
-      detail: $(".html-detail").html(),
-      start:$(".date-start").val(),
-      end: $(".date-end").val(),
-      _id: getClosestDataAttribute($here, datasetName)
+      goal: $context.find(".html-goal").html(),
+      detail: $context.find(".html-detail").html(),
+      start: $context.find(".date-start").val(),
+      end: $context.find(".date-end").val(),
+      _id: $context.data(datasetName)
     }
 
-    var $milestones = $(".milestone");
-    var $milestoneDetails = $(".milestone-detail");
+    var $context = $here.closest(`[data-${datasetName}]`);
+    var $milestones =  $context.find(".milestone");
+    var $milestoneDetails =  $context.find(".milestone-detail");
     // go thru every milestone, get Id, and use that Id to get milestone details. also get milestone Id if exists
     var milestoneData = $milestones.map((i,milestone)=>{
         var milestoneId = $(milestone).data("milestone-id"); // "" vs a value
@@ -195,7 +200,38 @@
     window.req.body = goalPostData;
     // No need to get response other than error handling, just going to redirect to profile 
     hasher.setHash(`patch-api/posts/${goalPostData.id}`);
-}
+} // update_post
+
+function create_post($here, datasetName) {
+  var $context = $here.closest(`[data-${datasetName}]`);
+    var goalPostData = {
+      goal: $context.find(".html-goal").html(),
+      detail: $context.find(".html-detail").html(),
+      start: $context.find(".date-start").val(),
+      end: $context.find(".date-end").val(),
+      _id: null // similar to update_post but there's no existing psot id
+    }
+
+
+    var $milestones =  $context.find(".milestone");
+    var $milestoneDetails =  $context.find(".milestone-detail");
+    // go thru every milestone, get Id, and use that Id to get milestone details. also get milestone Id if exists
+    var milestoneData = $milestones.map((i,milestone)=>{
+        var milestoneId = $(milestone).data("milestone-id"); // "" vs a value
+        var milestoneName = $(milestone).val();
+        var milestoneDetail = $milestoneDetails.eq(i).val();
+        var done = $(milestone).attr("disabled")?1:0;
+        return {milestoneId, milestoneName, milestoneDetail, done }
+    }).toArray();
+    goalPostData.milestones = milestoneData;
+    debugger;
+
+    // Mimick ajax
+    window.req.body = goalPostData;
+    // No need to get response other than error handling, just going to redirect to profile 
+    hasher.setHash(`post-api/posts/`);
+} // create_post
+
 </script>
 <script>
 $(()=>{
