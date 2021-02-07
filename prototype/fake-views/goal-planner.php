@@ -63,6 +63,10 @@
 .goal-planner-page .inserting {
   color:red;
 }
+/** Fix bug where carousel arrow blocks top menu items from working */
+.carousel-control-next, .carousel-control-prev {
+  margin-top:50px;
+}
 
 /** Autocomplete dropdown styling to remove bullet style */
 .ui-autocomplete {
