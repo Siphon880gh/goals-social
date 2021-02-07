@@ -8,6 +8,29 @@ global.CONSTANT_SITE_TITLE = "Goals Social";
 
 // Setup API routes
 
+// Update user extra info
+router.addRoute('patch-api/users').matched.add(async() => {
+    // Only logged in users
+    if (!window.req.session.loggedIn)
+        return;
+
+    userId = parseInt(req.session.user.userId);
+    console.assert(userId === 1, userId);
+
+    // Retrofit for Db
+    req.body._uid = userId;
+
+    // Upsert userInfos. userInfos table does not identify with _id column but by _uid column
+    var foundUser = await window.userInfos.find({ _uid: userId }).toArray();
+    if (foundUser.length) {
+        window.userInfos.update({ _uid: userId }, req.body);
+    } else {
+        window.userInfos.insert(req.body);
+    }
+
+    hasher.setHash("profile/");
+});
+
 // Add comment
 router.addRoute('post-api/posts/{postId}/comments').matched.add(async(postId) => {
     postId = parseInt(postId);
@@ -15,7 +38,7 @@ router.addRoute('post-api/posts/{postId}/comments').matched.add(async(postId) =>
     var userId = req.session.user.userId;
     // console.assert(userId === 1, userId);
 
-    // Sanitize for Db
+    // Retrofit for Db
     req.body.post_id = postId;
     req.body.user_id = userId;
 
@@ -105,7 +128,7 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
         milestones,
     } = window.req.body;
 
-    // Sanitize for DB
+    // Retrofit for DB
     delete req.body.milestones;
     var postId = _id;
     delete _id;
@@ -167,7 +190,7 @@ router.addRoute('post-api/posts/').matched.add(async() => {
         milestones,
     } = window.req.body;
 
-    // Sanitize for DB
+    // Retrofit for DB
     delete req.body.milestones;
     delete req.body._id;
     req.body.user_id = window.req.session.user.userId;

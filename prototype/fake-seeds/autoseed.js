@@ -14,7 +14,8 @@ var db = new zango.Db('goals_social_db', {
     users: ['_id'],
     posts: ['_id'],
     comments: ['_id'],
-    milestones: ['_id']
+    milestones: ['_id'],
+    userInfos: ['_id']
 });
 
 /***    Users   ****/
@@ -122,3 +123,19 @@ var mdocs = [{
     done: 0
 }];
 milestones.insert(mdocs).then(() => {});
+
+/***    userInfos   ****/
+window.userInfos = db.collection('userInfos');
+var uidocs = [{
+    _uid: 1,
+    name: "Weng Fei FUng",
+    abbr: "WFF",
+    email: "weffung@ucdavis.edu",
+    location: "Los Angeles",
+    occupation: "Web Developer",
+    bio: "I like to eat, code, and sleep",
+    linkFacebook: "https://www.facebook.com/weng.fung",
+    linkInstagram: "https://www.instagram.com/siphon880tw/",
+    linkLinkedin: "https://www.linkedin.com/in/weng-fung/"
+}]
+userInfos.insert(uidocs).then(() => {});

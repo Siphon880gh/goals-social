@@ -147,18 +147,27 @@ router.addRoute('dashboard').matched.add(() => {
     res.render("#dashboard", genericData);
 });
 
-router.addRoute('edit-profile').matched.add(() => {
+router.addRoute('edit-profile').matched.add(async() => {
     // User must be logged in to view personal dashboard
     if (!req.session.loggedIn) {
         hasher.setHash("/login");
         return;
     }
 
-    var genericData = {
-        pageTitle: "Edit Profile",
-        username: req.body.username
-    }
-    res.render("#edit-profile", genericData);
+    var userId = req.session.user.userId;
+    console.assert(userId === 1, userId);
+    var userInfoWrapper = await userInfos.find({ _uid: userId }).toArray();
+
+    // Retrofit for Db
+    if (userInfoWrapper)
+        userInfoWrapper = userInfoWrapper[0];
+    else
+        userInfoWrapper = {};
+
+    userInfoWrapper.pageTitle = "Edit Profile",
+        userInfoWrapper.username = req.body.username
+
+    res.render("#edit-profile", userInfoWrapper);
 });
 
 router.addRoute('goal-planner').matched.add(async() => {
