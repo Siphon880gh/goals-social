@@ -59,7 +59,19 @@ router.addRoute('delete-api/milestones/{milestoneId}').matched.add(async(milesto
         if (error) { throw error; }
     });
 
-    // hasher.setHash("/");
+    // No need to redirect. The milestone DOM will delete on frontend.
+});
+
+/** Delete goal post */
+router.addRoute('delete-api/posts/{postId}').matched.add(async(postId) => {
+    // debugger;
+    postId = parseInt(postId);
+    window.posts.remove({ _id: postId }, (error) => {
+        if (error) { throw error; }
+    });
+
+    // Go to own profile
+    hasher.setHash("profile/");
 });
 
 /**
@@ -115,6 +127,6 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
         });
     }
 
-    // Go to world posts
-    hasher.setHash("/");
+    // Go to own profile
+    hasher.setHash("profile/");
 });

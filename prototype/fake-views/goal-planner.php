@@ -42,11 +42,15 @@
   width: 90%;
 }
 
-.goal-planner-page .goal-planner-last-button-wrapper {
+.goal-planner-page .main-buttons-wrapper {
   margin: 20px auto;
 }
-.goal-planner-page .goal-planner-last-button-wrapper button {
-  transform: translateX(50%);
+.goal-planner-page .main-buttons-wrapper a {
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 68px;
+  display: inline-block;
+  /* transform: translateX(50%); */
 }
 .goal-planner-page .carousel-indicators li:last-child {
   background-color: red;
@@ -129,12 +133,13 @@
             </div>
           </div> <!-- second before lsat -->
         </div>
-        <div class="grid3 goal-planner-last-button-wrapper">
+        <div class="grid3 main-buttons-wrapper">
 
             {{#if @last}}
-              <button class="btn btn-danger" onclick="event.preventDefault(); create_post($(event.target));"><i class="fa fa-plus"></i> Add</button>
+            <a href="post-api/posts/{{_id}}" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button class="btn btn-danger" onclick="event.preventDefault(); create_post($(event.target));"><i class="fa fa-plus"></i> Add</button></a>
             {{else}}
               <a href="patch-api/posts/{{_id}}" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button class="btn btn-primary"><i class="fa fa-save"></i> Update</button></a>
+              <a href="delete-api/posts/{{_id}}" onclick="event.preventDefault(); delete_post($(event.target), 'post-id');"><button class="btn btn-secondary"><i class="fa fa-trash"></i> Delete</button></a>
             {{/if}}
 
         </div>
@@ -159,6 +164,12 @@
 <link rel="stylesheet" href="assets/css/goal-planner.css">
 
 <script>
+  function delete_post($here, datasetName) {
+  if(!confirm("Are you sure you want to delete this post / goal?" ))
+    return;
+    var postId = getClosestDataAttribute($here, datasetName);
+    hasher.setHash(`delete-api/posts/${postId}`);
+  }
   function update_post($here, datasetName) {
     var goalPostData = {
       goal: $(".html-goal").html(),
