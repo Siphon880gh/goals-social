@@ -32,6 +32,7 @@ $(".login-form").on("submit", async(event)=>{
     // Pass login data to api post route
     window.req.body.username = username;
     window.req.body.password = password;
+    debugger;
     hasher.setHash("api-post/login");
     
     // Mimick request to response delay

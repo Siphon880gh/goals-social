@@ -36,11 +36,13 @@ var udocs = [{
 }]
 
 // Hash password
-var myPlainPassword = udocs[0].password;
-var bcrypt = dcodeIO.bcrypt; // Init bcrypt
-var salt = bcrypt.genSaltSync(10); // Prepare salt based on how many rounds
-var hashedPassword = bcrypt.hashSync(myPlainPassword, salt); // Finally, generate hashed password
-udocs[0].password = hashedPassword; // Database will get hashed password instead
+for (var i = 0; i < udocs.length; i++) {
+    var myPlainPassword = udocs[i].password;
+    var bcrypt = dcodeIO.bcrypt; // Init bcrypt
+    var salt = bcrypt.genSaltSync(10); // Prepare salt based on how many rounds
+    var hashedPassword = bcrypt.hashSync(myPlainPassword, salt); // Finally, generate hashed password
+    udocs[i].password = hashedPassword; // Database will get hashed password instead
+}
 
 users.insert(udocs).then(() => {
     return users.find({
