@@ -147,29 +147,6 @@ router.addRoute('dashboard').matched.add(() => {
     res.render("#dashboard", genericData);
 });
 
-router.addRoute('edit-profile').matched.add(async() => {
-    // User must be logged in to view personal dashboard
-    if (!req.session.loggedIn) {
-        hasher.setHash("/login");
-        return;
-    }
-
-    var userId = req.session.user.userId;
-    console.assert(userId === 1, userId);
-    var userInfoWrapper = await userInfos.find({ _uid: userId }).toArray();
-
-    // Retrofit for Db
-    if (userInfoWrapper)
-        userInfoWrapper = userInfoWrapper[0];
-    else
-        userInfoWrapper = {};
-
-    userInfoWrapper.pageTitle = "Edit Profile",
-        userInfoWrapper.username = req.body.username
-
-    res.render("#edit-profile", userInfoWrapper);
-});
-
 router.addRoute('goal-planner').matched.add(async() => {
     // User must be logged in to view personal dashboard
     if (!req.session.loggedIn) {
@@ -224,23 +201,8 @@ router.addRoute('goal-planner').matched.add(async() => {
     res.render("#goal-planner", postsWrapper, helpersArr);
 });
 
-/** View another profile */
-router.addRoute('profile/{userId}').matched.add(async(userId) => {
-    // User must be logged in to view personal dashboard
-    if (!req.session.loggedIn) {
-        hasher.setHash("/login");
-        return;
-    }
-
-    var genericData = {
-        pageTitle: "Your Details",
-        username: req.body.username
-    }
-    res.render("#profile", genericData);
-});
-
-/** View own profile */
-router.addRoute('profile').matched.add(async() => {
+/** Edit Profile */
+router.addRoute('profile/edit').matched.add(async() => {
     // User must be logged in to view personal dashboard
     if (!req.session.loggedIn) {
         hasher.setHash("/login");
@@ -249,6 +211,31 @@ router.addRoute('profile').matched.add(async() => {
 
     var userId = req.session.user.userId;
     console.assert(userId === 1, userId);
+    var userInfoWrapper = await userInfos.find({ _uid: userId }).toArray();
+
+    // Retrofit for Db
+    if (userInfoWrapper)
+        userInfoWrapper = userInfoWrapper[0];
+    else
+        userInfoWrapper = {};
+
+    userInfoWrapper.pageTitle = "Edit Profile",
+        userInfoWrapper.username = req.body.username
+
+    res.render("#edit-profile", userInfoWrapper);
+});
+
+/** View any profile */
+router.addRoute('profile/{userId}').matched.add(async(userId) => {
+    // User must be logged in to view personal dashboard
+    // if (!req.session.loggedIn) {
+    //     hasher.setHash("/login");
+    //     return;
+    // }
+
+    userId = parseInt(userId);
+    // console.assert((userId + "").length, userId);
+    // console.assert(userId === 1, userId);
 
     // Prepare profile wrapper which will have user info and personal posts
     var profileWrapper = {
@@ -256,12 +243,16 @@ router.addRoute('profile').matched.add(async() => {
         posts: []
     }
 
-    // Set userInfo or empty object
+    // Allow to edit own profile?
+    var viewingOwnProfile = req.session && req.session.user && userId === req.session.user.userId
+    profileWrapper.viewingOwnProfile = viewingOwnProfile;
+
+    // Set userInfo or falsy
     var userInfo = await window.userInfos.find({ _uid: userId }).limit(1).toArray();
     if (userInfo.length) {
         userInfo = userInfo[0];
     } else {
-        userInfo = {};
+        userInfo = false;
     }
     profileWrapper.userInfo = userInfo;
 
@@ -358,6 +349,20 @@ router.addRoute('profile').matched.add(async() => {
     res.render("#profile", profileWrapper, helpersArr);
 
 }); // profile
+
+
+/** View own profile */
+router.addRoute('profile').matched.add(async() => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        hasher.setHash("/login");
+        return;
+    }
+
+    // debugger;
+    var userId = req.session.user.userId;
+    hasher.setHash(`profile/${userId}`);
+});
 
 router.addRoute('signup').matched.add(() => {
     var genericData = {

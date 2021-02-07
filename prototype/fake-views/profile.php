@@ -95,33 +95,37 @@
     
 </style>
 
-
+    {{#if viewingOwnProfile}}
     <div class="own-profile-options mb-4">
         <div>This is your own personal profile of your bio, posts, goals, milestones, and post comments</div>
 
         <div class="mt-3">What do you want to do?</div>
             <ul>
-                <li><a class="d-none-off" href="edit-profile/" onclick="prototypeHooksLink(event);">Edit Profile</a></li>
+                <li><a class="d-none-off" href="profile/edit" onclick="prototypeHooksLink(event);">Edit Profile</a></li>
             </ul>
         </div>
     </div>
+    {{/if}}
 
     <div class="profile-page">
 
-        {{#with userInfo}}
-        <div class="infos mb-4">
-            {{#if name}}<div class="info name"><label>Name:</label><span>{{name}}</span></div>{{/if}}
-            {{#if abbr}}<div class="info abbr"><label>Abbreviation:</label><span>{{abbr}}</span></div>{{/if}}
-            {{#if email}}<div class="info email"><label>Email:</label><span>{{email}}</span></div>{{/if}}
-            {{#if location}}<div class="info location"><label>Location:</label><span>{{location}}</span></div>{{/if}}
-            {{#if occupation}}<div class="info occupation"><label>Occupation:</label><span>{{occupation}}</span></div>{{/if}}
-            {{#if bio}}<div class="info bio"><label>Bio:</label><span>{{bio}}</span></div>{{/if}}
-            {{#if linkFacebook}}<div class="info linkFacebook"><label><i class="fab fa-facebook">&nbsp;</i>Facebook:</label><a target="_blank" href="{{linkFacebook}}">{{linkFacebook}}</a></div>{{/if}}
-            {{#if linkInstagram}}<div class="info linkInstagram"><label><i class="fab fa-instagram">&nbsp;</i>Instagram</label><a target="_blank" href="{{linkInstagram}}">{{linkInstagram}}</a></div>{{/if}}
-            {{#if linkLinkedin}}<div class="info linkLinkedin"><label><i class="fab fa-linkedin">&nbsp;</i>Linkedin</label><a target="_blank" href="{{linkLinkedin}}">{{linkLinkedin}}</a></div>{{/if}}
-        </div> <!-- infos -->
-        {{/with}}
+        {{#if userInfo}}
+            <div class="infos mb-4">
+                {{#if userInfo.name}}<div class="info name"><label>Name:</label><span>{{name}}</span></div>{{/if}}
+                {{#if userInfo.abbr}}<div class="info abbr"><label>Abbreviation:</label><span>{{abbr}}</span></div>{{/if}}
+                {{#if userInfo.email}}<div class="info email"><label>Email:</label><span>{{email}}</span></div>{{/if}}
+                {{#if userInfo.location}}<div class="info location"><label>Location:</label><span>{{location}}</span></div>{{/if}}
+                {{#if userInfo.occupation}}<div class="info occupation"><label>Occupation:</label><span>{{occupation}}</span></div>{{/if}}
+                {{#if userInfo.bio}}<div class="info bio"><label>Bio:</label><span>{{bio}}</span></div>{{/if}}
+                {{#if userInfo.linkFacebook}}<div class="info linkFacebook"><label><i class="fab fa-facebook">&nbsp;</i>Facebook:</label><a target="_blank" href="{{linkFacebook}}">{{linkFacebook}}</a></div>{{/if}}
+                {{#if userInfo.linkInstagram}}<div class="info linkInstagram"><label><i class="fab fa-instagram">&nbsp;</i>Instagram</label><a target="_blank" href="{{linkInstagram}}">{{linkInstagram}}</a></div>{{/if}}
+                {{#if userInfo.linkLinkedin}}<div class="info linkLinkedin"><label><i class="fab fa-linkedin">&nbsp;</i>Linkedin</label><a target="_blank" href="{{linkLinkedin}}">{{linkLinkedin}}</a></div>{{/if}}
+            </div> <!-- infos -->
+        {{/if}}
 
+        {{#unless posts}}
+            <div class="no-posts">There are no posts by user!</div>
+        {{/unless}}
 
         {{#each posts}}
         <div class="post" data-post-id={{_id}} data-owner-id={{user_id}}>

@@ -128,7 +128,7 @@ milestones.insert(mdocs).then(() => {});
 window.userInfos = db.collection('userInfos');
 var uidocs = [{
     _uid: 1,
-    name: "Weng Fei FUng",
+    name: "Weng Fei Fung",
     abbr: "WFF",
     email: "weffung@ucdavis.edu",
     location: "Los Angeles",

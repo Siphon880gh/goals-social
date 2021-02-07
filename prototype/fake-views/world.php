@@ -79,6 +79,10 @@
 <div class="mb-3 posts">
 <!-- World View. All Public posts, goals, milestones, and comments are here. -->
 
+{{#unless posts}}
+            <div class="no-posts">There are no posts by any users!</div>
+        {{/unless}}
+
 {{#each posts}}
 <div class="post" data-post-id={{_id}} data-owner-id={{user_id}}>
     <div class="">
