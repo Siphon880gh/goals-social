@@ -50,3 +50,46 @@ router.addRoute('api/logout').matched.add(async() => {
     window.req.session.loggedIn = false;
     hasher.setHash("/");
 });
+
+
+router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
+    var {
+        goal,
+        detail,
+        start,
+        end,
+        id,
+        milestones
+    } = window.req.body;
+
+    var postId = id;
+    delete id;
+
+    // Differentiate old milestones that may need updating vs new milestones that need inserting
+    var oldMilestones = milestones.filter(milestone => milestone.milestoneId);
+    var newMilestones = milestones.filter(milestone => !milestone.milestoneId);
+    oldMilestones = oldMilestones.map(milestone => {
+        return {
+            _id: milestone.milestoneId,
+            milestone: milestone.milestoneName,
+            detail: milestone.milestoneDetail,
+            post_id: postId,
+            done: milestone.done
+        };
+    });
+    newMilestones = newMilestones.map(milestone => {
+        return {
+            milestone: milestone.milestoneName,
+            detail: milestone.milestoneDetail,
+            post_id: postId,
+            done: milestone.done
+        };
+    });
+
+    if (newMilestones) {
+        window.milestones.insert(newMilestones).then(() => { /* debugger; */ });
+
+    }
+    hasher.setHash("/");
+
+});

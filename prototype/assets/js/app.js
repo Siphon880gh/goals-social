@@ -23,7 +23,7 @@ function getClosestDataAttribute($here, datasetName) {
         $here = $here.closest(`[data-${datasetName}]`)
     }
     const datasetValue = $here.data(datasetName);
-    debugger;
+    // debugger;
     return datasetValue;
 }
 

@@ -200,7 +200,17 @@ router.addRoute('goal-planner').matched.add(async() => {
         username: req.body.username,
         posts: pdocs
     }
-    res.render("#goal-planner", postsWrapper);
+
+    const helpersArr = [{
+        name: "datepickerFormat",
+        fxn: function(options) {
+            const sqlDate = options;
+            const humanDate = moment(sqlDate).format("YYYY-MM-DD")
+            return humanDate;
+        }
+    }];
+
+    res.render("#goal-planner", postsWrapper, helpersArr);
 });
 
 router.addRoute('profile').matched.add(() => {

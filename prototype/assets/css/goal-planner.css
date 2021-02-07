@@ -1,4 +1,4 @@
-body {
+.goal-planner-page .goal-planner-page {
     font-family: Arial Narrow, sans-serif;
     font-weight: 100;
     color: #220C10;
@@ -10,7 +10,7 @@ body {
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#9BF8F4", endColorstr="#6F7BF7", GradientType=1);
 }
 
-.grid {
+.goal-planner-page .grid {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -20,20 +20,20 @@ body {
     padding: 0 15px 0 15px;
 }
 
-.grid2 {
+.goal-planner-page .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     border-bottom: solid black 5px;
 }
 
-.grid3 {
+.goal-planner-page .grid3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
 }
 
-.grid4 {
+.goal-planner-page .grid4 {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
@@ -42,29 +42,29 @@ body {
     margin: 10px;
 }
 
-.item {
+.goal-planner-page .item {
     padding-left: 20px;
 }
 
-.item1 {
+.goal-planner-page .item1 {
     font-size: 50px;
     text-transform: uppercase;
     letter-spacing: 5px;
     padding-left: 30px;
 }
 
-.item2 {
+.goal-planner-page .item2 {
     background-color: #77CBB9;
     border-top: solid black 5px;
     margin-bottom: 10px;
 }
 
-.item3 {
+.goal-planner-page .item3 {
     background-color: #CDD3D5;
     margin-bottom: 10px;
 }
 
-.help {
+.goal-planner-page .help {
     font-family: Caveat, cursive;
     font-size: 20px;
 }
@@ -76,13 +76,13 @@ span {
     font-weight: bold;
 }
 
-.date {
+.goal-planner-page .date {
     border: none;
     font-size: 15px;
     background-color: #75B8C8;
 }
 
-.text {
+.goal-planner-page .text {
     top: 65px;
     left: 55px;
     bottom: 10px;

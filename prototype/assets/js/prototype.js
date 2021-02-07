@@ -22,6 +22,7 @@ window.res = {};
 window.res.render = (querySelector, data, helpersArr, partialsArr) => {
     // Hide all other views
     $("[data-view]").addClass("d-none");
+    // debugger;
 
     // Register helpers
     // Render view at id=querySelector

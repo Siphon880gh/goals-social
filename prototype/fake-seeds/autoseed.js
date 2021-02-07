@@ -41,7 +41,7 @@ udocs[0].password = hashedPassword; // Database will get hashed password instead
 users.insert(udocs).then(() => {
     return users.find({
         username: { $eq: 'testUser' },
-    }).forEach(doc => console.log('users/doc (password shown in prototype for debugging purposes):', doc));
+    }).forEach(doc => { /* console.log('users/doc (password shown in prototype for debugging purposes):', doc) */ });
 });
 
 /***    Posts   ****/
@@ -66,26 +66,26 @@ var pdocs = [{
     user_id: 1,
     goal: "Lose weight",
     detail: "I want to lose 50lb so I can look good and feel good",
-    start: moment().format("M/D/YYYY H:m:SS"),
-    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
+    start: moment(new Date()).format("M/D/YYYY H:m:SS"),
+    end: moment(new Date()).add(30, "days").format("M/D/YYYY H:m:SS")
 }, {
     user_id: 1,
     goal: "Get organized with minimalism",
     detail: "I want to be less stressed by clutter by cleaning surroundings, emails, and pc, and developing habits to keep things minimal.",
-    start: moment().format("M/D/YYYY H:m:SS"),
-    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
+    start: moment(new Date()).format("M/D/YYYY H:m:SS"),
+    end: moment(new Date()).add(30, "days").format("M/D/YYYY H:m:SS")
 }, {
     user_id: 1,
     goal: "Learn to play guitar",
     detail: "I want to pick up a new habit that I can learn to enjoy. I like the idea of making music tunes.",
-    start: moment().format("M/D/YYYY H:m:SS"),
-    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
+    start: moment(new Date()).format("M/D/YYYY H:m:SS"),
+    end: moment(new Date()).add(30, "days").format("M/D/YYYY H:m:SS")
 }, {
     user_id: 1,
     goal: "Save more money",
     detail: "I want to save more money so I can feel good about the increasing savings on my bank account.",
-    start: moment().format("M/D/YYYY H:m:SS"),
-    end: moment().add(30, "days").format("M/D/YYYY H:m:SS")
+    start: moment(new Date()).format("M/D/YYYY H:m:SS"),
+    end: moment(new Date()).add(30, "days").format("M/D/YYYY H:m:SS")
 }];
 
 posts.insert(pdocs).then(() => {});
@@ -116,6 +116,6 @@ var mdocs = [{
     post_id: 1,
     milestone: "Check weight every Sunday (Milestone again on post 1)",
     detail: "Remember when testing new diets, may take 2 weeks before seeing weight changes.",
-    done: 1
+    done: 0
 }];
 milestones.insert(mdocs).then(() => {});
