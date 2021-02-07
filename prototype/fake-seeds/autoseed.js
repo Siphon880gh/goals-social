@@ -1,7 +1,10 @@
 /**
  * The MongoDB tables are:
  *  - users
- * 
+ *  - posts (they're goals)
+ *  - milestones
+ *  - comments
+ *  - userInfos
  * 
  * MongoDB ReadMe: https://erikolson186.github.io/zangodb
  */

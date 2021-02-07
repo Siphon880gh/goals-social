@@ -71,12 +71,15 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
         detail,
         start,
         end,
-        id,
+        _id,
         milestones
     } = window.req.body;
 
-    var postId = id;
-    delete id;
+    var postId = _id;
+    delete _id;
+
+    // Update post (milestones will be updated on its own table)
+    window.posts.update({ _id: postId }, req.body);
 
     // Differentiate old milestones that may need updating vs new milestones that need inserting
     var oldMilestones = milestones.filter(milestone => milestone.milestoneId);
@@ -111,6 +114,7 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
             if (error) { throw error; }
         });
     }
-    hasher.setHash("/");
 
+    // Go to world posts
+    hasher.setHash("/");
 });

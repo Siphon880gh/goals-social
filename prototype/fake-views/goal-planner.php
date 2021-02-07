@@ -165,7 +165,7 @@
       detail: $(".html-detail").html(),
       start:$(".date-start").val(),
       end: $(".date-end").val(),
-      id: getClosestDataAttribute($here, datasetName)
+      _id: getClosestDataAttribute($here, datasetName)
     }
 
     var $milestones = $(".milestone");
