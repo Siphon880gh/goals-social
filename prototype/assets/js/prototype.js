@@ -11,7 +11,7 @@ $(() => {
 });
 
 // @function showTable
-// For debugging purposes, call in browser console. Can show any Zanko DB table
+// Can show all of any Zanko DB table. Is for debugging purposes, so call in browser console.
 // Example: showTable(users, { _id: 1})
 var showTable = (table, optionalWhere) => {
     (async function(table, optionalWhere) {

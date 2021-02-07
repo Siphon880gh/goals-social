@@ -207,7 +207,20 @@ function doneMilestone($here) {
   
 }
 function deleteMilestone($here) {
-  var $milestone = $here.closest(".milestone-wrapper");
+  if(!confirm("Are you sure you want to delete? Chosen: " + $here.closest(".milestone-wrapper").find("input").val() ))
+    return;
+    
+  var $context = $here.closest(".milestone-wrapper");
+  var $milestone = $context;
+  var milestoneName = $context.find("input").val();
+  var milestoneId = $context.find("input").data("milestone-id");
+
+  // Remove from DB:
+  if (milestoneId) {
+    hasher.setHash(`delete-api/milestones/${milestoneId}`);
+  }
+
+  // Remove from DOM
   var whichIndex = $milestone.index();
   $milestone.remove();
   $(".milestone-detail").eq(whichIndex).remove();

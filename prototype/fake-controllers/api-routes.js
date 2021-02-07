@@ -51,7 +51,20 @@ router.addRoute('api/logout').matched.add(async() => {
     hasher.setHash("/");
 });
 
+/** Delete milestone */
+router.addRoute('delete-api/milestones/{milestoneId}').matched.add(async(milestoneId) => {
+    // debugger;
+    milestoneId = parseInt(milestoneId);
+    window.milestones.remove({ _id: milestoneId }, (error) => {
+        if (error) { throw error; }
+    });
 
+    // hasher.setHash("/");
+});
+
+/**
+ * Update post and its milestones from goal planner
+ */
 router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
     var {
         goal,
