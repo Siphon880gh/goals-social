@@ -174,7 +174,7 @@
   } // delete_post
 
   function update_post($here, datasetName) {
-  var $context = $here.closest(`[data-${datasetName}]`);
+    var $context = $here.closest(`[data-${datasetName}]`);
     var goalPostData = {
       goal: $context.find(".html-goal").html(),
       detail: $context.find(".html-detail").html(),

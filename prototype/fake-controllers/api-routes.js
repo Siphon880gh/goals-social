@@ -7,6 +7,24 @@ if (!window.res.render) alert("Error Dependencies: Load res.render.js before thi
 global.CONSTANT_SITE_TITLE = "Goals Social";
 
 // Setup API routes
+
+// Add comment
+router.addRoute('post-api/posts/{postId}/comments').matched.add(async(postId) => {
+    postId = parseInt(postId);
+    // console.assert(postId === 2, postId);
+    var userId = req.session.user.userId;
+    // console.assert(userId === 1, userId);
+
+    // Sanitize for Db
+    req.body.post_id = postId;
+    req.body.user_id = userId;
+
+    window.comments.insert(req.body);
+
+    hasher.setHash("/");
+});
+
+// Login information
 router.addRoute('api-post/login').matched.add(async() => {
     // Any user is logged out
     window.req.session.loggedIn = 0;

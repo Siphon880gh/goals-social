@@ -52,6 +52,9 @@ router.addRoute('/').matched.add(async() => {
             renameId: "comment_id"
         });
 
+        // Can comment or not?
+        doc.canComment = Boolean(req.session.loggedIn);
+
         // Modify Row
         doc.milestones = milestonesData;
 
@@ -81,10 +84,9 @@ router.addRoute('/').matched.add(async() => {
         doc.comments = commentsData;
 
 
-        // debugger;
-
         docs[i] = doc;
-    };
+    }; // docs
+
     // debugger;
 
     const helpersArr = [{
@@ -105,7 +107,7 @@ router.addRoute('/').matched.add(async() => {
         }
         // postsWrapper.pageTitle = global.CONSTANT_SITE_TITLE;
     postsWrapper.pageTitle = CONSTANT_SITE_TITLE;
-    postsWrapper.username = req.session.username;
+    postsWrapper.username = req.session.user.username;
     console.log(postsWrapper);
     res.render("#world", postsWrapper, helpersArr);
 });

@@ -55,6 +55,25 @@
 .clear-fix {
     clear: both;
 }
+.comment-add-body {
+    padding: 10px;
+    border: 2px solid black;
+    width: 75%;
+    margin: 0 auto;
+}
+.comment-add-wrapper {
+    padding: 5px !important;
+    margin-top: 15px;
+}
+.comment-sign-in {
+    width: 75%;
+    margin: 0 auto;
+}
+.add-comment-input {
+    width: 100%;
+    display: block;
+    resize: none;
+}
 </style>
 
 <div class="mb-3 posts">
@@ -110,6 +129,23 @@
                     <div class="clear-fix"></div>
                 </div>
                 {{/each}}
+                {{#if canComment}}
+                <div class="comment-add-wrapper">
+                    <div class="comment-header">&nbsp;</div>
+                    <form class="form-add-comment">
+                        <div class="comment-add-body">
+                            <div class="input-group">
+                                <label>Add your comment:</label>
+                                <textarea class="add-comment-input editing"></textarea>
+                            </div>
+    
+                            <a href="#" onclick="event.preventDefault(); addComment($(event.target), 'post-id');"><button class="add-comment standout">Submit</button></a>
+                        </div>
+                    </form>
+                </div>
+                {{else}}
+                <div class="comment-sign-in pt-3">Want to add your comment? <a href="login/" onclick="event.preventDefault(); prototypeHooksLink(event);">Log in</a></div>
+                {{/if}}
                 </div>
             </div>
         </div>
@@ -121,6 +157,18 @@
 </div> <!-- posts -->
 
 <script>
+function addComment($here, datasetName) {
+    var $context = $here.closest(`[data-${datasetName}]`);
+    var postId = $context.data("post-id");
+    console.assert(postId==="2", $context);
+
+    var commentData = {
+      comment: $context.find(".add-comment-input").val()
+    }
+
+    window.req.body = commentData;
+    hasher.setHash(`post-api/posts/${postId}/comments`);
+}
 $(()=>{
     /**
      * A post tab is clicked. Two important components are A  which is the tabs,
