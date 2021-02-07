@@ -111,15 +111,15 @@
 
         {{#if userInfo}}
             <div class="infos mb-4">
-                {{#if userInfo.name}}<div class="info name"><label>Name:</label><span>{{name}}</span></div>{{/if}}
-                {{#if userInfo.abbr}}<div class="info abbr"><label>Abbreviation:</label><span>{{abbr}}</span></div>{{/if}}
-                {{#if userInfo.email}}<div class="info email"><label>Email:</label><span>{{email}}</span></div>{{/if}}
-                {{#if userInfo.location}}<div class="info location"><label>Location:</label><span>{{location}}</span></div>{{/if}}
-                {{#if userInfo.occupation}}<div class="info occupation"><label>Occupation:</label><span>{{occupation}}</span></div>{{/if}}
-                {{#if userInfo.bio}}<div class="info bio"><label>Bio:</label><span>{{bio}}</span></div>{{/if}}
-                {{#if userInfo.linkFacebook}}<div class="info linkFacebook"><label><i class="fab fa-facebook">&nbsp;</i>Facebook:</label><a target="_blank" href="{{linkFacebook}}">{{linkFacebook}}</a></div>{{/if}}
-                {{#if userInfo.linkInstagram}}<div class="info linkInstagram"><label><i class="fab fa-instagram">&nbsp;</i>Instagram</label><a target="_blank" href="{{linkInstagram}}">{{linkInstagram}}</a></div>{{/if}}
-                {{#if userInfo.linkLinkedin}}<div class="info linkLinkedin"><label><i class="fab fa-linkedin">&nbsp;</i>Linkedin</label><a target="_blank" href="{{linkLinkedin}}">{{linkLinkedin}}</a></div>{{/if}}
+                {{#if userInfo.name}}<div class="info name"><label>Name:</label><span>{{userInfo.name}}</span></div>{{/if}}
+                {{#if userInfo.abbr}}<div class="info abbr"><label>Abbreviation:</label><span>{{userInfo.abbr}}</span></div>{{/if}}
+                {{#if userInfo.email}}<div class="info email"><label>Email:</label><span>{{userInfo.email}}</span></div>{{/if}}
+                {{#if userInfo.location}}<div class="info location"><label>Location:</label><span>{{userInfo.location}}</span></div>{{/if}}
+                {{#if userInfo.occupation}}<div class="info occupation"><label>Occupation:</label><span>{{userInfo.occupation}}</span></div>{{/if}}
+                {{#if userInfo.bio}}<div class="info bio"><label>Bio:</label><span>{{userInfo.bio}}</span></div>{{/if}}
+                {{#if userInfo.linkFacebook}}<div class="info linkFacebook"><label><i class="fab fa-facebook">&nbsp;</i>Facebook:</label><a target="_blank" href="{{linkFacebook}}">{{userInfo.linkFacebook}}</a></div>{{/if}}
+                {{#if userInfo.linkInstagram}}<div class="info linkInstagram"><label><i class="fab fa-instagram">&nbsp;</i>Instagram</label><a target="_blank" href="{{linkInstagram}}">{{userInfo.linkInstagram}}</a></div>{{/if}}
+                {{#if userInfo.linkLinkedin}}<div class="info linkLinkedin"><label><i class="fab fa-linkedin">&nbsp;</i>Linkedin</label><a target="_blank" href="{{linkLinkedin}}">{{userInfo.linkLinkedin}}</a></div>{{/if}}
             </div> <!-- infos -->
         {{/if}}
 
