@@ -20,8 +20,9 @@ window.req.session.user = {
 }
 window.res = {};
 window.res.render = (querySelector, data, helpersArr, partialsArr) => {
-    // Hide all other views
+    // Hide all other views and also destroy their old states
     $("[data-view]").addClass("d-none");
+    $("[data-view] article").html("");
     // debugger;
 
     // Register helpers
