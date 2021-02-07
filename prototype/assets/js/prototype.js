@@ -10,6 +10,16 @@ $(() => {
     }, 2000);
 });
 
+// @function showTable
+// For debugging purposes, call in browser console. Can show any Zanko DB table
+// Example: showTable(users, { _id: 1})
+var showTable = (table, optionalWhere) => {
+    (async function(table, optionalWhere) {
+        return await table.find(optionalWhere ? optionalWhere : {}).toArray()
+    })(table, optionalWhere)
+    .then(dat => { console.log(dat); });
+}
+
 // Setup req and res
 window.req = {}
 window.req.body = {};
