@@ -276,7 +276,7 @@ var milestonesToDisable = [];
 
 for(var i=0; i<milestonesToDisable.length; i++) {
   var milestoneId = milestonesToDisable[i];
-  $(`[data-milestone-id="${milestoneId}"]`).attr("disabled", true).addClass("bg-dark text-white border-success");
+  $(`[data-milestone-id="${milestoneId}"]`).attr("disabled", true).addClass("bg-secondary text-white border-success");
 }
 </script>
 <script>
@@ -298,11 +298,11 @@ function doneMilestone($here) {
   var $milestone = $milestoneWrapper.find("input");
   var wasDisabled = $milestone.attr("disabled")?true:false;
   if(!wasDisabled) {
-    $milestone.attr("disabled", true).addClass("bg-dark text-white border-success");
-    $(".milestone-detail").eq(whichIndex).attr("disabled", true).addClass("bg-dark text-white border-success");
+    $milestone.attr("disabled", true).addClass("bg-secondary text-white border-success");
+    $(".milestone-detail").eq(whichIndex).attr("disabled", true).addClass("bg-secondary text-white border-success");
   } else {
-    $milestone.attr("disabled", false).removeClass("bg-dark text-white border-success");
-    $(".milestone-detail").eq(whichIndex).attr("disabled", false).removeClass("bg-dark text-white border-success");
+    $milestone.attr("disabled", false).removeClass("bg-secondary text-white border-success");
+    $(".milestone-detail").eq(whichIndex).attr("disabled", false).removeClass("bg-secondary text-white border-success");
   }
   
 }
