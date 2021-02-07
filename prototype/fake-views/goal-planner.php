@@ -224,7 +224,7 @@ function create_post($here, datasetName) {
         return {milestoneId, milestoneName, milestoneDetail, done }
     }).toArray();
     goalPostData.milestones = milestoneData;
-    debugger;
+    // debugger;
 
     // Mimick ajax
     window.req.body = goalPostData;
@@ -232,6 +232,23 @@ function create_post($here, datasetName) {
     hasher.setHash(`post-api/posts/`);
 } // create_post
 
+</script>
+
+<script>
+/** Onload disable milestones that are done */
+var milestonesToDisable = [];
+{{#each posts}}
+  {{#each milestones}}
+    {{#if done}}
+    milestonesToDisable.push({{milestone_id}});
+    {{/if}}
+  {{/each}}
+{{/each}}
+
+for(var i=0; i<milestonesToDisable.length; i++) {
+  var milestoneId = milestonesToDisable[i];
+  $(`[data-milestone-id="${milestoneId}"]`).attr("disabled", true).addClass("bg-dark text-white border-success");
+}
 </script>
 <script>
 $(()=>{
@@ -247,10 +264,17 @@ $(()=>{
 });
 
 function doneMilestone($here) {
-  var $milestone = $here.closest(".milestone-wrapper");
-  var whichIndex = $milestone.index();
-  $milestone.find("input, button").attr("disabled", true);
-  $(".milestone-detail").eq(whichIndex).attr("disabled", true);
+  var $milestoneWrapper = $here.closest(".milestone-wrapper");
+  var whichIndex = $milestoneWrapper.index();
+  var $milestone = $milestoneWrapper.find("input");
+  var wasDisabled = $milestone.attr("disabled")?true:false;
+  if(!wasDisabled) {
+    $milestone.attr("disabled", true).addClass("bg-dark text-white border-success");
+    $(".milestone-detail").eq(whichIndex).attr("disabled", true).addClass("bg-dark text-white border-success");
+  } else {
+    $milestone.attr("disabled", false).removeClass("bg-dark text-white border-success");
+    $(".milestone-detail").eq(whichIndex).attr("disabled", false).removeClass("bg-dark text-white border-success");
+  }
   
 }
 function deleteMilestone($here) {
