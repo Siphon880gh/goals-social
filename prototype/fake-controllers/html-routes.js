@@ -26,6 +26,7 @@ router.addRoute('/').matched.add(async() => {
         // Then unwind
         if (appendDoc.length) {
             appendDoc = appendDoc[0];
+            appendDoc.assoc_user_id = appendDoc._id;
             delete appendDoc._id;
             var mergedDoc = {...doc, ...appendDoc };
             doc = mergedDoc;
@@ -73,6 +74,7 @@ router.addRoute('/').matched.add(async() => {
             commentUserInfo = commentUserInfo[0];
             comment.username = commentUserInfo.username;
             comment.avatar = commentUserInfo.avatar;
+            comment.assoc_user_id = comment.user_id;
 
             // Mock
             // comment.username = "Fake username";
@@ -272,6 +274,7 @@ router.addRoute('profile/{userId}').matched.add(async(userId) => {
         // Then unwind
         if (appendDoc.length) {
             appendDoc = appendDoc[0];
+            appendDoc.assoc_user_id = appendDoc._id;
             delete appendDoc._id;
             var mergedDoc = {...doc, ...appendDoc };
             doc = mergedDoc;
@@ -319,6 +322,7 @@ router.addRoute('profile/{userId}').matched.add(async(userId) => {
             commentUserInfo = commentUserInfo[0];
             comment.username = commentUserInfo.username;
             comment.avatar = commentUserInfo.avatar;
+            comment.assoc_user_id = comment.user_id;
 
             // Mock
             // comment.username = "Fake username";

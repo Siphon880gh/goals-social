@@ -132,7 +132,7 @@
             <div class="">
                 <figure class="post_user_info p-2">
                     <img class="avatar" src="assets/img/users-default-avatars/{{avatar}}.png"></img>
-                    <figcaption class="post-owner">{{post_username}}</figcaption>
+                    <figcaption class="post-owner"><a href="profile/{{assoc_user_id}}" onclick="prototypeHooksLink(event);">{{post_username}}</a></figcaption>
                 </figure>
                 <div class="goal"><label>Goal: </label><span>{{goal}}</span></div>
                 <div class="detail"><label>Detail: </label><span>{{detail}}</span></div>
@@ -171,7 +171,7 @@
                         <div class="comment-wrapper mt-2 mb-2 p-1" data-comment-id={{comment_id}} data-post-id={{post_id}} data-user-id={{user_id}}>
                             <figure class="post_user_info p-2">
                                 <img class="avatar" src="assets/img/users-default-avatars/{{avatar}}.png"></img>
-                                <figcaption class="post-owner">{{username}}</figcaption>
+                                <figcaption class="post-owner"><a href="profile/{{assoc_user_id}}" onclick="prototypeHooksLink(event);">{{username}}</a></figcaption>
                             </figure>
                             <label>Comment: </label><span>{{comment}}</span>
                             <div class="clear-fix"></div>
