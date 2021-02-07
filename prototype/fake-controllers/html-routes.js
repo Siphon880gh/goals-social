@@ -36,6 +36,7 @@ router.addRoute('/').matched.add(async() => {
         doc.post_username = doc.username;
         delete doc.username;
         delete password;
+        doc.avatar = doc.avatar.length ? doc.avatar : "default";
 
         // Join as array (params A, B)
         // A=Milestones, B=Posts
@@ -73,8 +74,9 @@ router.addRoute('/').matched.add(async() => {
             });
             commentUserInfo = commentUserInfo[0];
             comment.username = commentUserInfo.username;
-            comment.avatar = commentUserInfo.avatar;
+            comment.avatar = commentUserInfo.avatar.length ? commentUserInfo.avatar : "default";
             comment.assoc_user_id = comment.user_id;
+            debugger;
 
             // Mock
             // comment.username = "Fake username";
@@ -284,6 +286,7 @@ router.addRoute('profile/{userId}').matched.add(async(userId) => {
         doc.post_username = doc.username;
         delete doc.username;
         delete password;
+        doc.avatar = doc.avatar.length ? doc.avatar : "default";
 
         // Join as array (params A, B)
         // A=Milestones, B=Posts
@@ -321,7 +324,7 @@ router.addRoute('profile/{userId}').matched.add(async(userId) => {
             });
             commentUserInfo = commentUserInfo[0];
             comment.username = commentUserInfo.username;
-            comment.avatar = commentUserInfo.avatar;
+            comment.avatar = commentUserInfo.avatar ? commentUserInfo.avatar : "default";
             comment.assoc_user_id = comment.user_id;
 
             // Mock

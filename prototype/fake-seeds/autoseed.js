@@ -24,11 +24,11 @@ window.users = db.collection('users');
 var udocs = [{
     username: "testUser",
     password: "testUser",
-    avatar: "o"
+    avatar: "" // o vs default
 }, {
     username: "testUser2",
     password: "testUser2",
-    avatar: "m"
+    avatar: "m" // m vs default
 }, {
     username: "testUser3",
     password: "testUser3",
