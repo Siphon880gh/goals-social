@@ -171,6 +171,7 @@ function addComment($here, datasetName) {
 }
 $(()=>{
     /**
+     * Switching post tabs
      * A post tab is clicked. Two important components are A  which is the tabs,
      * and components B which is the appropriate content below the selected tab.
      * Information displayed through this manner can be milestones, comments, and 

@@ -224,7 +224,8 @@ router.addRoute('goal-planner').matched.add(async() => {
     res.render("#goal-planner", postsWrapper, helpersArr);
 });
 
-router.addRoute('profile').matched.add(() => {
+/** View another profile */
+router.addRoute('profile/{userId}').matched.add(async(userId) => {
     // User must be logged in to view personal dashboard
     if (!req.session.loggedIn) {
         hasher.setHash("/login");
@@ -237,6 +238,126 @@ router.addRoute('profile').matched.add(() => {
     }
     res.render("#profile", genericData);
 });
+
+/** View own profile */
+router.addRoute('profile').matched.add(async() => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        hasher.setHash("/login");
+        return;
+    }
+
+    var userId = req.session.user.userId;
+    console.assert(userId === 1, userId);
+
+    // Prepare profile wrapper which will have user info and personal posts
+    var profileWrapper = {
+        userInfo: {},
+        posts: []
+    }
+
+    // Set userInfo or empty object
+    var userInfo = await window.userInfos.find({ _uid: userId }).limit(1).toArray();
+    if (userInfo.length) {
+        userInfo = userInfo[0];
+    } else {
+        userInfo = {};
+    }
+    profileWrapper.userInfo = userInfo;
+
+    // Set posts with all its joined comments, milestones, usernames, avatars (of owner and commenters)
+    var docs = await posts.find({ user_id: userId }).toArray();
+    for (var i = 0; i < docs.length; i++) {
+        var doc = docs[i];
+        var post = doc;
+        // Join and unwind (params A, B)
+        // A=Posts, B=Users
+        var appendDoc = await includeA_assoc_B({
+            foreignKeyFromA: post.user_id,
+            foreignTableB: users,
+            foreignTarget: "_id"
+        });
+
+        // Then unwind
+        if (appendDoc.length) {
+            appendDoc = appendDoc[0];
+            delete appendDoc._id;
+            var mergedDoc = {...doc, ...appendDoc };
+            doc = mergedDoc;
+        }
+
+        // Modify Row
+        doc.post_username = doc.username;
+        delete doc.username;
+        delete password;
+
+        // Join as array (params A, B)
+        // A=Milestones, B=Posts
+        var milestonesData = await includeA_assoc_B({
+            foreignKeyFromA: post._id,
+            foreignTableB: milestones,
+            foreignTarget: "post_id",
+            renameId: "milestone_id"
+        });
+        // A=Comments, B=Posts
+        var commentsData = await includeA_assoc_B({
+            foreignKeyFromA: post._id,
+            foreignTableB: comments,
+            foreignTarget: "post_id",
+            renameId: "comment_id"
+        });
+
+        // Can comment or not?
+        doc.canComment = Boolean(req.session.loggedIn);
+
+        // Modify Row
+        doc.milestones = milestonesData;
+
+        // Each comments will have avatar and username of comment owner
+        for (var j = 0; j < commentsData.length; j++) {
+            var comment = commentsData[j];
+            console.log({ "commentUserId": comment.user_id })
+
+            // Join and unwind (params A, B)
+            // A=Comment ID, B=Users
+            var commentUserInfo = await includeA_assoc_B({
+                foreignKeyFromA: comment.user_id,
+                foreignTableB: users,
+                foreignTarget: "_id"
+            });
+            commentUserInfo = commentUserInfo[0];
+            comment.username = commentUserInfo.username;
+            comment.avatar = commentUserInfo.avatar;
+
+            // Mock
+            // comment.username = "Fake username";
+            // comment.avatar = "Fake avatar";
+
+            commentsData[j] = comment;
+        }; // for every comment
+
+        doc.comments = commentsData;
+
+
+        docs[i] = doc;
+    }; // for every post
+
+    profileWrapper.posts = docs;
+
+    // Prepare handlebar
+    const helpersArr = [{
+        name: "date",
+        fxn: function(options) {
+            const sqlDate = options;
+            const humanDate = moment(sqlDate).format("MM/DD/YY")
+            return humanDate;
+        }
+    }];
+
+    profileWrapper.pageTitle = "Your Details";
+    res.render("#profile", profileWrapper, helpersArr);
+
+}); // profile
 
 router.addRoute('signup').matched.add(() => {
     var genericData = {
