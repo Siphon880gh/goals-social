@@ -28,6 +28,11 @@ router.addRoute('patch-api/users').matched.add(async() => {
         window.userInfos.insert(req.body);
     }
 
+    // If user is also changing avatar:
+    if (req.body.chosenAvatarName) {
+        users.update({ _id: userId }, { avatar: req.body.chosenAvatarName });
+    }
+
     hasher.setHash("profile/");
 });
 

@@ -71,6 +71,18 @@ div.edit-profile input[type="submit"]:hover {
 .bio {
   resize: none;
 }
+.choose-avatar-label {
+  font-size: 1.5rem;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+input[type=radio] {
+  transform: scale(1.5);
+}
 </style>
 
 
@@ -78,7 +90,43 @@ div.edit-profile input[type="submit"]:hover {
         <div class="edit-profile">
           <div class="container">
             <h1 class="mb-4">Edit Profile Information</h1>
-            <div class="inputs-wrapper">
+
+
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="choose-avatar-label mb-3 text-center">Choose avatar:</div>
+      <ol class="carousel-indicators" style="bottom:-45px;">
+      {{#each avatars}}
+        <li data-bs-target="#myCarousel" data-bs-slide-to="{{@index}}"></li>
+      {{/each}}
+      </ol>
+    
+    <div class="carousel-inner text-center">
+      <form>
+      {{#each avatars}}
+        <article class="carousel-item {{#if @first}}active{{/if}}">
+          <img src="assets/img/users-default-avatars/{{avatar}}.png"></img>
+          <div><label for="">Choose</label> <input type="radio" class="avatar-choice" name="avatar" value="{{avatar}}"> </div>
+        </article> <!-- .carousel-item.active -->
+      {{/each}}
+      </form>
+
+      </div> <!-- .carousel-inner -->
+    </div> <!-- .carousel.slide data-bs-ride="carousel" -->
+
+<!-- #carouselExampleControls -->
+<a class="carousel-control-prev-off float-left" href="#myCarousel" role="button" data-bs-slide="prev" onclick="event.preventDefault();">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next-off float-right" href="#myCarousel" role="button" data-bs-slide="next" onclick="event.preventDefault();">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+  </div> <!-- goal-planner-page -->
+
+
+            <div class="inputs-wrapper pb-4 mt-4">
               <input type="text" class="full-name" value="{{name}}" placeholder="Full Name" />
               <input type="text" class="abb-name" value="{{abbr}}" placeholder="Abbreviated Name" maxlength="3"/>
               <input type="text" class="email" value="{{email}}" placeholder="Change Email Address" />
@@ -94,6 +142,19 @@ div.edit-profile input[type="submit"]:hover {
     </div>
 
 <script>
+$(()=>{
+  var myCarousel = document.querySelector('#myCarousel');
+  var settings = {
+    interval: false,
+    wrap: true,
+    touch: true
+  }
+  var carousel = new bootstrap.Carousel(myCarousel, settings);
+  window.goalPlannerNext = carousel.next;
+  window.goalPlannerPrev = carousel.prev;
+});
+</script>
+<script>
 function updateUserInfo() {
 
   var $context = $(".edit-profile");
@@ -108,6 +169,13 @@ function updateUserInfo() {
     linkInstagram: $context.find(".link-instagram").val(),
     linkLinkedin: $context.find(".link-linkedin").val()
   }
+
+  var chosenAvatar = $(".avatar-choice:checked").length>0;
+  if(chosenAvatar) {
+    var chosenAvatarName = $(".avatar-choice:checked").val();
+    userInfoData.chosenAvatarName = chosenAvatarName;
+  }
+
 
   window.req.body = userInfoData;
   hasher.setHash("patch-api/users")

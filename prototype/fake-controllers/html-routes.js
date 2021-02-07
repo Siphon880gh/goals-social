@@ -76,7 +76,7 @@ router.addRoute('/').matched.add(async() => {
             comment.username = commentUserInfo.username;
             comment.avatar = commentUserInfo.avatar.length ? commentUserInfo.avatar : "default";
             comment.assoc_user_id = comment.user_id;
-            debugger;
+            // debugger;
 
             // Mock
             // comment.username = "Fake username";
@@ -222,6 +222,28 @@ router.addRoute('profile/edit').matched.add(async() => {
         userInfoWrapper = userInfoWrapper[0];
     else
         userInfoWrapper = {};
+
+    // Avatar choices
+    userInfoWrapper.avatars = [
+        { avatar: "default" },
+        { avatar: "a" },
+        { avatar: "b" },
+        { avatar: "c" },
+        { avatar: "d" },
+        { avatar: "e" },
+        { avatar: "f" },
+        { avatar: "g" },
+        { avatar: "h" },
+        { avatar: "i" },
+        { avatar: "j" },
+        { avatar: "k" },
+        { avatar: "l" },
+        { avatar: "m" },
+        { avatar: "n" },
+        { avatar: "o" },
+        { avatar: "p" },
+        { avatar: "q" }
+    ]
 
     userInfoWrapper.pageTitle = "Edit Profile",
         userInfoWrapper.username = req.body.username
