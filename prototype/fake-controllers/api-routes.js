@@ -15,7 +15,7 @@ router.addRoute('patch-api/users').matched.add(async() => {
         return;
 
     userId = parseInt(req.session.user.userId);
-    console.assert(userId === 1, userId);
+    // console.assert(userId === 1, userId);
 
     // Retrofit for Db
     req.body._uid = userId;

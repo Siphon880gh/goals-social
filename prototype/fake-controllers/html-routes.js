@@ -176,9 +176,9 @@ router.addRoute('goal-planner').matched.add(async() => {
         });
         post.milestones = milestonesData;
         pdocs[i] = post;
-        if (i === 0) {
-            console.assert(post.milestones.length == 2, post.milestones);
-        }
+        // if (i === 0) {
+        //     console.assert(post.milestones.length == 2, post.milestones);
+        // }
     }
 
 
@@ -212,7 +212,7 @@ router.addRoute('profile/edit').matched.add(async() => {
     }
 
     var userId = req.session.user.userId;
-    console.assert(userId === 1, userId);
+    // console.assert(userId === 1, userId);
     var userInfoWrapper = await userInfos.find({ _uid: userId }).toArray();
 
     // Retrofit for Db
