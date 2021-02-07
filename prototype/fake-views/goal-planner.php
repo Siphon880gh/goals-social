@@ -34,7 +34,7 @@
 }
 .goal-planner-page .milestone-add {
   display: block;
-  margin-top: 10px;
+  margin: 10px auto 5px 0;
 }
 
 /* Milestone details */
@@ -98,7 +98,7 @@
               </div>
               {{/each}}
             </div>
-            <button class="milestone-add btn btn-primary"><i class="fa fa-plus"></i> Add new milestone! </button>
+            <button class="milestone-add btn btn-primary" onclick="addMilestone($(event.target));"><i class="fa fa-plus"></i> Add new milestone! </button>
             
           </div>
           <div class="item item3">
@@ -106,7 +106,7 @@
             <p class="help">(how you do it)</p>
             <div class="milestone-details">
               {{#each milestones}}
-                <input class="milestone-detail" data-milestone-id={{milestone_id}} type="text"/>
+                <input class="milestone-detail" data-milestone-id={{milestone_id}} type="text" value="{{detail}}"/>
               {{/each}}
               <!-- <p class="text milestone-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter more details"></p> -->
             </div>
@@ -212,8 +212,7 @@ function deleteMilestone($here) {
   $milestone.remove();
   $(".milestone-detail").eq(whichIndex).remove();
 }
-$(".milestone-add").on("click", (event)=>{
-  var $here = $(event.target);
+function addMilestone($here) {
   var $milestones = $here.prev(".milestones");
   $milestones.append(`
   <div class="milestone-wrapper">
@@ -228,7 +227,7 @@ $(".milestone-add").on("click", (event)=>{
   $ancestor.find(".milestone-details").append(`
     <input class="milestone-detail" type="text" data-milestone-id=""/>
   `)
-})
+}
 </script>
 
 <!-- Remove line when refactored into production code: -->

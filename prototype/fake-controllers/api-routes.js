@@ -86,9 +86,17 @@ router.addRoute('patch-api/posts/{postId}').matched.add(async() => {
         };
     });
 
+    if (oldMilestones) {
+        oldMilestones.forEach(oldMilestone => {
+            window.milestones.update({ _id: oldMilestone._id }, oldMilestone, (error) => {
+                if (error) { throw error; }
+            });
+        });
+    }
     if (newMilestones) {
-        window.milestones.insert(newMilestones).then(() => { /* debugger; */ });
-
+        window.milestones.insert(newMilestones, (error) => {
+            if (error) { throw error; }
+        });
     }
     hasher.setHash("/");
 
