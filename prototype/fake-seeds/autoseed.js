@@ -113,13 +113,68 @@ comments.insert(cdocs).then(() => {});
 window.milestones = db.collection('milestones');
 var mdocs = [{
     post_id: 1,
-    milestone: "Log daily on MyFitnessPal (Milestone on post 1)",
+    milestone: "Log daily on MyFitnessPal",
     detail: "Make the app available on your phone's first screen",
     done: 1
 }, {
     post_id: 1,
-    milestone: "Check weight every Sunday (Milestone again on post 1)",
+    milestone: "Check weight every Sunday",
     detail: "Remember when testing new diets, may take 2 weeks before seeing weight changes.",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Throw away or donate items you don't need.",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Clean emails",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Clean computer",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Memorize chords",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Learn music theory on the intervals",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Learn music theory on the scales",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Buy a guitar",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Buy a synthesizer",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Look over bank statements and differentiate needs vs wants.",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Create a budget in different areas of life.",
+    detail: "",
+    done: 0
+}, {
+    post_id: null,
+    milestone: "Purchase a running training program.",
+    detail: "",
     done: 0
 }];
 milestones.insert(mdocs).then(() => {});

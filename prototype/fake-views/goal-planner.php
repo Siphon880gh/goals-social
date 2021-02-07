@@ -63,8 +63,33 @@
 .goal-planner-page .inserting {
   color:red;
 }
+
+/** Autocomplete dropdown styling to remove bullet style */
+.ui-autocomplete {
+    z-index: 99999;
+    background-color:white;
+    border-left: 1px solid gray;
+   margin-left: 0;
+   padding-left: 5px;
+   font-size: 1.25rem;
+   font-style: Arial;
+ }
+ .ui-autocomplete li {
+   list-style: none;
+   margin-left: 0;
+   padding-left: 0;
+ }
+ .ui-helper-hidden-accessible {
+   display: none;
+ }
 </style>
 
+<script>
+// Sets recommendations for milestone autocompletion
+// TODO: For recommendations, you want to setup an api route that gives this information back to window.recommendations
+window.recommendations = [];
+(async() => { return await window.milestones.find().toArray() })().then(arr=>{ window.recommendations = arr.map(obj=>obj.milestone); });
+</script>
 <div class="goal-planner-page">
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 
@@ -298,6 +323,8 @@ function deleteMilestone($here) {
 }
 function addMilestone($here) {
   var $milestones = $here.prev(".milestones");
+
+  // Append milestone
   $milestones.append(`
   <div class="milestone-wrapper">
     <input class="milestone" type="text" data-milestone-id=""/>
@@ -305,13 +332,54 @@ function addMilestone($here) {
     <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
   </div>
   `);
-
+  
+  // Append milestone detail
   var $ancestor = $milestones.closest(".carousel-item");
-
   $ancestor.find(".milestone-details").append(`
     <input class="milestone-detail" type="text" data-milestone-id=""/>
-  `)
+  `);
+
+  // Re-add autocompletion to all milestones
+  setRecommendationsToMilestoneInputs();
 }
+</script>
+
+<script>
+function setRecommendationsToMilestoneInputs() {
+
+  /** This jQuery UI autocompletion setting:
+   *  - Array is fed to source.
+   *  - That array has mixed values.
+   *    - String
+   *    - HTML tags. If has HTML tags, the first DIV's text will go to text input on selection
+  */
+  $("input.milestone").autocomplete({
+    source: window.recommendations,
+    html: true,
+
+    select: function( event, ui ) { 
+        var $input = $(event.target);
+        
+          var raw = ui.item.value;
+          var tempDom = $(`<article>${raw}</article>`);
+          var hasDiv = tempDom.find("*").first().length
+          if(hasDiv) {
+            var text = tempDom.find("*").first().text();
+            $input.val(text);
+          } else {
+            $input.val(raw);
+          }
+          // Allowing you to override the default behaivor of clicking a suggestion
+          return false;
+      } // select
+  
+  });
+}
+setTimeout(()=>{
+  window.recommendations.push("<span>Get an accountability partner</span><span style='margin-left:100px'><i class='fa fa-thumbs-up'></i> Improved chances</span>");
+  window.recommendations = [...new Set(window.recommendations)];
+  setRecommendationsToMilestoneInputs();
+}, 2000);
 </script>
 
 <!-- Remove line when refactored into production code: -->
