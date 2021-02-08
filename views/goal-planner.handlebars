@@ -332,7 +332,21 @@ function deleteMilestone($here) {
 
   // Remove from DB:
   if (milestoneId) {
-    hasher.setHash(`delete-api/milestones/${milestoneId}`);
+    $.ajax({
+      headers : {
+          'Accept' : 'application/json',
+          'Content-Type' : 'application/json'
+      },
+      url: `/api/milestones/${milestoneId}`,
+      type: "DELETE",
+      success: function(data){
+        console.log(data);
+        window.location.pathname = "/profile";
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
   }
 
   // Remove from DOM

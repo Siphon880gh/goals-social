@@ -132,6 +132,14 @@ router.get('/logout', (req, res) => {
     }
 });
 
+/** Delete milestone */
+router.delete('/milestones/:milestoneId', async(req, res) => {
+    milestoneId = parseInt(req.params.milestoneId);
+    var statusDeleteMilestone = Milestones.destroy({ where: { id: milestoneId } });
+
+    // Redirection is handled by ajax
+    res.status(200).json({ success: "Deleted milestone" });
+});
 
 /**
  * Update post and its milestones from goal planner
