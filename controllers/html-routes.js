@@ -32,17 +32,85 @@ router.get('/posts/dashboard', (req, res) => {
 
 // HTML routes
 router.get('/', async(req, res) => {
-    // TODO
+
+    // Get posts with all its joined comments, milestones, usernames, avatars (of owner and commenters)
+    var posts = await Posts.findAll({
+        include: [{
+            model: User,
+            attributes: ["id", "username", "avatar"]
+        }, {
+            model: Comments,
+            attributes: [
+                ["id", "comment_id"], "comment", "post_id", ["user_id", "assoc_user_id"], "created_at", "updated_at"
+            ],
+            include: {
+                model: User,
+                attributes: [
+                    ["id", "assoc_user_id"], "username", "avatar", "created_at", "updated_at"
+                ],
+            }
+        }, {
+            model: Milestones,
+            attributes: [
+                ["id", "milestone_id"], "post_id", "milestone", "detail", "done"
+            ]
+        }, ],
+    }).then(rows => {
+        rows = rows.map(row => { // for every single post
+            var row = row.get({ plain: true });
+            row.post_id = row.id;
+
+            // Post level
+            var { id, username, avatar } = row.user;
+            delete row.user;
+            row.user_id = id;
+            row.post_username = username;
+            row.avatar = avatar;
+
+            // Post -> Comments[] -> Comment object level
+            row.comments = row.comments.map(comment => {
+                var { username, avatar, assoc_user_id } = comment.user;
+                delete comment.user;
+                comment.username = username;
+                comment.avatar = avatar;
+                comment.assoc_user_id = assoc_user_id;
+                return comment;
+            });
+
+            row.canComment = Boolean(req.session.loggedIn);
+            return row;
+        });
+        return rows;
+    }).catch(err => {
+        console.error(err);
+        return;
+    });
+    // console.log(JSON.stringify(posts));
+    // process.exit(0);
+
+    // Retrofit for template
+    var postsWrapper = {};
+    postsWrapper.posts = posts ? posts : [];
+    postsWrapper.pageTitle = "Edit Profile";
+
+    res.render("world", postsWrapper);
+}); // world view "/"
+
+
+router.get('/login', (req, res) => {
+    // If already logged in, then homepage
+    // if (req.session.loggedIn) {
+    //     res.redirect('/');
+    //     return;
+    // }
 
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
     dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
-    if (dataStraightThrough.username) {
-        res.render("homepage", dataStraightThrough);
-    } else {
-        res.redirect('/login')
-    }
+
+    res.render("login", dataStraightThrough);
 });
+
 
 //Chatroom route
 router.get('/chatroom', (req, res) => {
@@ -69,21 +137,6 @@ router.get('/dashboard', (req, res) => {
     }
     res.render("dashboard", genericData);
 });
-
-router.get('/login', (req, res) => {
-    // If already logged in, then homepage
-    // if (req.session.loggedIn) {
-    //     res.redirect('/');
-    //     return;
-    // }
-
-    let dataStraightThrough = {};
-    dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
-    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
-
-    res.render("login", dataStraightThrough);
-});
-
 
 /** Edit Profile */
 router.get('/profile/edit', async(req, res) => {
@@ -137,7 +190,7 @@ router.get('/profile/edit', async(req, res) => {
     // process.exit(0);
 
     res.render("edit-profile", userInfoWrapper);
-});
+}); // profile/edit
 
 /** View any profile */
 router.get('/profile/:userId', async(req, res) => {
@@ -168,10 +221,7 @@ router.get('/profile/:userId', async(req, res) => {
     // console.log(userInfo);
     // process.exit(0);
 
-    // console.table({ Posts.findAll });
-    // process.exit(0);
-
-    // Set posts with all its joined comments, milestones, usernames, avatars (of owner and commenters)
+    // Get posts with all its joined comments, milestones, usernames, avatars (of owner and commenters)
     var docs = await Posts.findAll({
         where: {
             user_id: userId
@@ -182,7 +232,7 @@ router.get('/profile/:userId', async(req, res) => {
         }, {
             model: Comments,
             attributes: [
-                ["id", "comment_id"], "comment", ["user_id", "assoc_user_id"], "created_at", "updated_at"
+                ["id", "comment_id"], "comment", "post_id", ["user_id", "assoc_user_id"], "created_at", "updated_at"
             ],
             include: {
                 model: User,
@@ -191,11 +241,15 @@ router.get('/profile/:userId', async(req, res) => {
                 ],
             }
         }, {
-            model: Milestones
+            model: Milestones,
+            attributes: [
+                ["id", "milestone_id"], "post_id", "milestone", "detail", "done"
+            ]
         }, ],
     }).then(rows => {
         rows = rows.map(row => { // for every single post
             var row = row.get({ plain: true });
+            row.post_id = row.id;
 
             // Post level
             var { id, username, avatar } = row.user;
