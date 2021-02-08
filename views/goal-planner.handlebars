@@ -254,7 +254,6 @@ function create_post($here, datasetName) {
       id: null // similar to update_post but there's no existing psot id
     }
 
-
     var $milestones =  $context.find(".milestone");
     var $milestoneDetails =  $context.find(".milestone-detail");
     // go thru every milestone, get Id, and use that Id to get milestone details. also get milestone Id if exists
@@ -268,10 +267,25 @@ function create_post($here, datasetName) {
     goalPostData.milestones = milestoneData;
     // debugger;
 
-    // Mimick ajax
-    window.req.body = goalPostData;
     // No need to get response other than error handling, just going to redirect to profile 
-    hasher.setHash(`post-api/posts/`);
+    // hasher.setHash(`post-api/posts/`);
+    // Send ajax request to update post
+    $.ajax({
+      headers : {
+          'Accept' : 'application/json',
+          'Content-Type' : 'application/json'
+      },
+      url: `/api/posts`,
+      type: "POST",
+      data: JSON.stringify(goalPostData),
+      success: function(data){
+        console.log(data);
+        window.location.pathname = "/profile";
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
 } // create_post
 
 </script>

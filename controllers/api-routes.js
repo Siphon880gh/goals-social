@@ -200,4 +200,56 @@ router.patch('/posts/:postId', async(req, res) => {
     res.status(200).json({ success: "Updated goal post and its milestones" });
 });
 
+
+/**
+ * Create post and its milestones from goal planner
+ * Ids etc are mostly left intact from patching post to keep code scalable
+ */
+router.post('/posts', async(req, res) => {
+    var {
+        goal,
+        detail,
+        start,
+        end,
+        id,
+        milestones,
+    } = req.body;
+
+    // Retrofit for DB
+    delete req.body.milestones;
+    delete req.body._id;
+    req.body.user_id = req.session.user.userId;
+
+    // Create post (milestones will be updated on its own table)
+    var statusCreatePost = await Posts.create(req.body);
+
+    // console.log(JSON.stringify(statusCreatePost));
+    // process.exit(0);
+
+    if (!statusCreatePost) {
+        res.status(500).json({ success: 0, error: "Please contact web developer. Unable to create post due to a server error." });
+        return;
+    }
+
+    // Get last inserted post ID
+    var postId = statusCreatePost.id;
+
+    var newMilestones = milestones;
+    newMilestones = newMilestones.map(milestone => {
+        return {
+            milestone: milestone.milestoneName,
+            detail: milestone.milestoneDetail,
+            post_id: postId,
+            done: milestone.done
+        };
+    });
+
+    if (newMilestones) {
+        var statusInsertedMilestone = Milestones.bulkCreate(newMilestones);
+    }
+
+    // Redirection is handled by ajax
+    res.status(200).json({ success: "Created goal post and any of its milestones" });
+});
+
 module.exports = router;
