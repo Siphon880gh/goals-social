@@ -85,6 +85,60 @@ router.get('/login', (req, res) => {
 });
 
 
+/** Edit Profile */
+router.get('/profile/edit', async(req, res) => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        res.redirect("/login");
+        return;
+    }
+
+    var userId = req.session.user.userId;
+    // console.assert(userId === 1, userId);
+
+    var userInfo = await UserInfos.findOne({ where: { uid: userId } })
+        .then(row => row.get({ plain: true }))
+        .catch(err => {
+            console.error(err);
+            return;
+        });
+
+    // Retrofit for template
+    var userInfoWrapper = {};
+    if (userInfo)
+        userInfoWrapper = Object.assign({}, userInfo)
+
+    // Avatar choices
+    userInfoWrapper.avatars = [
+        { avatar: "default" },
+        { avatar: "a" },
+        { avatar: "b" },
+        { avatar: "c" },
+        { avatar: "d" },
+        { avatar: "e" },
+        { avatar: "f" },
+        { avatar: "g" },
+        { avatar: "h" },
+        { avatar: "i" },
+        { avatar: "j" },
+        { avatar: "k" },
+        { avatar: "l" },
+        { avatar: "m" },
+        { avatar: "n" },
+        { avatar: "o" },
+        { avatar: "p" },
+        { avatar: "q" }
+    ]
+
+    userInfoWrapper.pageTitle = "Edit Profile";
+    userInfoWrapper.username = req.session.user.username;
+
+    // console.log(JSON.stringify(userInfoWrapper));
+    // process.exit(0);
+
+    res.render("edit-profile", userInfoWrapper);
+});
+
 /** View any profile */
 router.get('/profile/:userId', async(req, res) => {
     var userId = req.params.userId;
