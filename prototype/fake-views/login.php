@@ -1,3 +1,32 @@
+<style>
+.login-page {
+    background-color: transparent;
+}
+
+.form-wrapper .form-header {
+    background-color: #77CBB9;
+    color: white;
+}
+
+.login-page .form-body {
+    border: 2px solid;
+    border-color: #220C10;
+}
+
+.form-body .standout {
+    background-color:#77CBB9;
+}
+
+.form-body .signup-instead {
+    color: #220C10;
+    text-decoration: underline;
+}
+
+</style>
+
+
+
+
 <div class="login-page form-wrapper">
     <header class="form-header">
         Login
@@ -14,7 +43,7 @@
             </div>
             <div>
                 <button class="standout" type="submit" data-route="/login">Login</button>
-                <a href="signup/" onclick="prototypeHooksLink(event);" data-route="/signup">Sign up instead</a>
+                <a href="signup/" class="signup-instead" onclick="prototypeHooksLink(event);" data-route="/signup">Sign up instead</a>
             </div>
             </form>
     </div> <!-- form-body -->

@@ -14,11 +14,13 @@
 }
 .edit-profile {
   width: 400px;
-  margin: 0 auto;
+  margin: auto;
   margin-top: 8px;
   margin-bottom: 2%;
   transition: opacity 1s;
   -webkit-transition: opacity 1s;
+
+  
 }
 .edit-profile h1 {
   background: #77CBB9;
@@ -30,14 +32,15 @@
 }
 div .edit-profile .container {
   background: transparent;
-  padding: 6% 4%;
+  padding: 10% 4%;
+
 }
 div.edit-profile input[type="email"],
 div.edit-profile input[type="text"],
 div.edit-profile input[type="password"], div.edit-profile select, div.edit-profile textarea {
   width: 92%;
   background: #fff;
-  margin-bottom: 4%;
+  margin: 0 10px 10px 15px;
   border: 1px solid #ccc;
   padding: 4%;
   font-family: 'Open Sans', sans-serif;
