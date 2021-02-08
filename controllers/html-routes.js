@@ -78,6 +78,18 @@ router.get('/login', (req, res) => {
     res.render("login", dataStraightThrough);
 });
 
+/** View own profile */
+router.get('/profile', async(req, res) => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+
+    // debugger;
+    var userId = req.session.user.userId;
+    res.redirect(`/profile/${userId}`);
+});
 
 router.get('/signup', (req, res) => {
     let dataStraightThrough = {};
