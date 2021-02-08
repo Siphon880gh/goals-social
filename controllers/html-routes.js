@@ -138,6 +138,49 @@ router.get('/dashboard', (req, res) => {
     res.render("dashboard", genericData);
 });
 
+router.get('/goal-planner', async(req, res) => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+
+    var userId = req.session.user.userId;
+    // console.assert(req.session.loggedIn === 1);
+    // console.assert(req.session.user.userId === 1);
+
+    var pdocs = await Posts.findAll({ where: { user_id: userId } }, {
+            include: {
+                model: Milestones,
+                attributes: [
+                    ["id", "milestone_id"], "post_id", "milestone", "detail", "done"
+                ]
+            }
+        })
+        .then(rows => {
+            rows = rows.map(row => {
+                return row.get({ plain: true }); // Or:
+                //return row.toJSON();
+            }); // map
+            return rows;
+        }).catch(err => {
+            console.error(err);
+            return;
+        });
+
+    // console.assert(pdocs.length === 4, pdocs.length)
+    pdocs.push({}); // there's always a blank goal at the end to add
+
+    var postsWrapper = {
+        pageTitle: "Goal Planner",
+        username: req.body.username,
+        posts: pdocs
+    }
+
+    res.render("goal-planner", postsWrapper);
+});
+
+
 /** Edit Profile */
 router.get('/profile/edit', async(req, res) => {
     // User must be logged in to view personal dashboard

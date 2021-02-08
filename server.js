@@ -18,6 +18,11 @@ const hbs = exhbs.create({
         },
         CONSTANT_SITE_TITLE: function() {
             return global.CONSTANT_SITE_TITLE;
+        },
+        datepickerFormat: function(options) {
+            const sqlDate = options;
+            const humanDate = moment(sqlDate).format("YYYY-MM-DD")
+            return humanDate;
         }
     }
 });
