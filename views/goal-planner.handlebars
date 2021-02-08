@@ -91,8 +91,8 @@
 <script>
 // Sets recommendations for milestone autocompletion
 // TODO: For recommendations, you want to setup an api route that gives this information back to window.recommendations
-window.recommendations = [];
-(async() => { return await window.milestones.find().toArray() })().then(arr=>{ window.recommendations = arr.map(obj=>obj.milestone); });
+// window.recommendations = [];
+// (async() => { return await window.milestones.find().toArray() })().then(arr=>{ window.recommendations = arr.map(obj=>obj.milestone); });
 </script>
 <div class="goal-planner-page">
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -379,11 +379,11 @@ function setRecommendationsToMilestoneInputs() {
   
   });
 }
-setTimeout(()=>{
-  window.recommendations.push("<span>Get an accountability partner</span><span style='margin-left:100px'><i class='fa fa-thumbs-up'></i> Improved chances</span>");
-  window.recommendations = [...new Set(window.recommendations)];
-  setRecommendationsToMilestoneInputs();
-}, 2000);
+// setTimeout(()=>{
+//  window.recommendations.push("<span>Get an accountability partner</span><span style='margin-left:100px'><i class='fa fa-thumbs-up'></i> Improved chances</span>");
+//  window.recommendations = [...new Set(window.recommendations)];
+//  setRecommendationsToMilestoneInputs();
+//}, 2000);
 </script>
 
 <!-- Remove line when refactored into production code: -->

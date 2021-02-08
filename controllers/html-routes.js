@@ -149,7 +149,8 @@ router.get('/goal-planner', async(req, res) => {
     // console.assert(req.session.loggedIn === 1);
     // console.assert(req.session.user.userId === 1);
 
-    var pdocs = await Posts.findAll({ where: { user_id: userId } }, {
+    var pdocs = await Posts.findAll({
+            where: { user_id: userId },
             include: {
                 model: Milestones,
                 attributes: [
@@ -176,6 +177,9 @@ router.get('/goal-planner', async(req, res) => {
         username: req.body.username,
         posts: pdocs
     }
+
+    // console.log(JSON.stringify(postsWrapper));
+    // process.exit(0);
 
     res.render("goal-planner", postsWrapper);
 });
