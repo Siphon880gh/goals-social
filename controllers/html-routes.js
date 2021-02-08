@@ -32,7 +32,7 @@ router.get('/', async(req, res) => {
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
     dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
     if (dataStraightThrough.username) {
-    res.render("homepage", dataStraightThrough);
+        res.render("homepage", dataStraightThrough);
     } else {
         res.redirect('/login')
     }
@@ -44,11 +44,25 @@ router.get('/chatroom', (req, res) => {
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
     dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
     if (dataStraightThrough.username) {
-    res.render('chatroom',dataStraightThrough);
+        res.render('chatroom', dataStraightThrough);
     } else {
         res.redirect('/login')
     }
-  });
+});
+
+router.get('/dashboard', (req, res) => {
+    // User must be logged in to view personal dashboard
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+
+    var genericData = {
+        pageTitle: "Your Details",
+        username: req.body.username
+    }
+    res.render("dashboard", genericData);
+});
 
 router.get('/login', (req, res) => {
     // If already logged in, then homepage
@@ -63,6 +77,7 @@ router.get('/login', (req, res) => {
 
     res.render("login", dataStraightThrough);
 });
+
 
 router.get('/signup', (req, res) => {
     let dataStraightThrough = {};
