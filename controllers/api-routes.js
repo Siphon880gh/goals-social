@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User } = require('../../models');
-const Chatroom = require('../../models/Chatroom');
-const chatroomRoutes = require('./chatroom-routes.js')
+const { User } = require('../models');
+const Chatroom = require('../models/Chatroom');
+const chatroomRoutes = require('./api/chatroom-routes.js')
 
 router.post('/login', async(req, res) => {
     // User logging in
@@ -95,7 +95,5 @@ router.get('/logout', (req, res) => {
         res.status(404).redirect("../login");
     }
 });
-
-router.use('/chatroom', chatroomRoutes);
 
 module.exports = router;
