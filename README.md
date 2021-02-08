@@ -40,14 +40,14 @@ Installation
 Usage
 ---
 1. Run `npm start`
-2. It will mention the port being listend at. Open your web-browser and go to the localhost:port, eg. localhost:3001
+2. It will mention the port being listened at. Open your web-browser and go to the localhost:port, eg. localhost:3001
 3. Or you can also deploy to other servers such as Heroku (you need the JawsDB addon).
 
 Architecture
 ---
 If you want to contribute, you may want to know the architecture and methodology. 
 
-The database relies on a live MySql server, rather than is on your localhost computer or an online server. The node module uses Sequelize which connects to the MySql server and can recreate tables, however it cannot recreate databases (hence you had to manually create the database from db/schema.sql at the MySql shell. My MySql server credentials will likely differ from yours but you will need to create an .env file at the root to assign the variables:
+The database relies on a live MySQL server, rather that is on your localhost computer or an online server. The node module uses Sequelize which connects to the MySql server and can recreate tables, however it cannot recreate databases (hence you had to manually create the database from db/schema.sql at the MySql shell. My MySql server credentials will likely differ from yours but you will need to create an .env file at the root to assign the variables:
 ```
 DB_NAME=goals_social_db
 DB_USER=<YOUR_MYSQL_SERVER_USERNAME>
@@ -67,12 +67,11 @@ We went from TDD to prototyping a complete single page application using fronten
 
 We also dynamically changed the webpage's layout by changing the URL pathname with a combination of Crossroads JS, Hasher JS, and Signals. This allowed us to mock what would happen with an Express app where the URL changes and that affects the HTML delivered to the browser, except we never left the page because the layout is changed dynamically with the URL. The URL change's default behavior of loading another page was stopped by those libraries. We also mocked the functionality of backend code like `res.render` and `req.body` using the global scope. What made this approach fast was less trial and error with getting information to send correctly to/from the backend and frontend, and because `res` and `req` worked and because the dynamic routes closely matched what we would have for a full-stack app, then later we could refactor our dynamic routes into Express routes.
 
-We also mocked Sequelize on the frontend by using a completely front-end tool: Zango DB. It was frontend by using the web browser's IndexedDB. The advantage was later we could refactor the modeling code into Sequelize. Another advantage was that Zango DB was inspired by MongoDB. Unlike Sequelize where we must have an idea of the database schema and relationships, MongoDB allowed us to create tables (aka collections) on the fly without being strict on the schema. There were countless times when we realized that a table needed more columns, and we could adjust the frontend Zango DB easily. After a fully functional Prototype, we refactored the Zango DB into Sequelize, implemented the associations, and made it a full SQL database.
+We also mocked Sequelize on the frontend by using a completely front-end tool: ZangoDB. It was frontend by using the web browser's IndexedDB. The advantage was later we could refactor the modeling code into Sequelize. Another advantage was that ZangoDB was inspired by MongoDB. Unlike Sequelize where we must have an idea of the database schema and relationships, MongoDB allowed us to create tables (aka collections) on the fly without being strict on the schema. There were countless times when we realized that a table needed more columns, and we could adjust the frontend ZangoDB easily. After a fully functional Prototype, we refactored the ZangoDB into Sequelize, implemented the associations, and made it a full SQL database.
 
 After developing a rapid Prototype, we refactored the PHP-include files, frontend Handlebar templates, the dynamic routes, and ZangoDB into a full stack app. Because of how similar they are to the backend technology, we refactored them into Express-Handlebar templates, Express Routes, and Sequelize with relative ease.
 
 The testing and prototyping are in the folders __test__, __test2__, and prototype/ folders, and therefore you can ignore those folders when it concerns how the app actually works. But if you want to add more features, you can use the same methodology with these testing and prototyping folders.
-
 
 Tests
 ---
