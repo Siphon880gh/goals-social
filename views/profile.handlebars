@@ -228,18 +228,33 @@ function updateUserInfo() {
 </script>
 
 <script>
+
 function addComment($here, datasetName) {
     var $context = $here.closest(`[data-${datasetName}]`);
     var postId = $context.data("post-id");
-    console.assert(postId==="2", $context);
+    // console.assert(postId==="2", $context);
 
     var commentData = {
       comment: $context.find(".add-comment-input").val()
     }
 
-    window.req.body = commentData;
-    hasher.setHash(`post-api/posts/${postId}/comments`);
-}
+    $.ajax({
+        headers : {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json'
+        },
+            url: `/api/posts/${postId}/comments`,
+            type: "POST",
+            data: JSON.stringify(commentData),
+        success: function(data){
+            console.log(data);
+            window.location.pathname = "/profile";
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+} // addComment
 $(()=>{
     /**
      * Switching post tabs
