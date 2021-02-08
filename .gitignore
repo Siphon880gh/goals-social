@@ -4,6 +4,7 @@ desktop.ini
 .vscode
 package-lock.json
 node_modules/
+prototype/node_modules/
 .sass-cache/
 *.css.map
 out/
