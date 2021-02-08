@@ -1,25 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+  .style-chatroom {
+    background-color: transparent;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatroom</title>
-  <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
-  <script type='text/javascript' src="assets/js/chatroom.js"></script>
-  <link rel="stylesheet" href="assets/css/chatroom.css" />
-</head>
 
-<body>
+  .title {
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .title h1 {
+    position: relative;
+    display: inline-block;
+    letter-spacing: 4px;
+    padding: 15px;
+    color: white;
+    text-align: center;
+  }
+
+  .title h1:before,
+  .title h1:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    border-bottom: 2px solid;
+    width: 100vw;
+    margin: 0 20px;
+  }
+
+  .title h1:before {
+    right: 100%;
+  }
+
+  .title h1:after {
+    left: 100%;
+  }
+
+
+
+  .input-area {
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+  }
+
+ 
+
+  .style-chatroom .text-area {
+    margin-top: 10px;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    max-height: 600px;
+    background-color: white;
+    display: none;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #77CBB9;
+
+  }
+
+
+
+  textarea {
+    width: 70%;
+    padding: 10px;
+  }
+
+   #text-area {
+    border-radius: 8px;
+    border: 2px solid #77CBB9;
+    padding: 15px;
+    width: 70% auto;
+    height: 120px;
+  }
+
+
+  #chat-button {
+    width: 30%;
+    height: 100%;
+    margin-left: 20px;
+    padding: 5px 15px 5px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #77CBB9;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+  }
+</style>
+
+<div class="style-chatroom">
+  <div class="title">
+    <h1>
+      Public Chat 
+    </h1>
+  </div>
   {{#if username}}
-    <div id="loading-text-area">...Loading Chatroom</div>
-    <div class="text-area"></div>
-    <form class="input-area" onsubmit="onSubmitForm(); return false;">
-      <div class="input name" style="display: none;">{{username}}</div>
-      <textarea class="input content" placeholder="Message.."></textarea>
-      <input type="submit" class="input button" id='chat-button' value="Send"/>
-    </form>
+  <div id="loading-text-area">...Loading Chatroom</div>
+  <div class="text-area"></div>
+  <form class="input-area" onsubmit="onSubmitForm(); return false;">
+    <div class="input name" id="user-name" style="display: none;">{{username}}</div>
+    <textarea class="input content" id="text-area" placeholder="Message.."></textarea>
+    <input type="submit" class="input button" id='chat-button' value="Send" />
+  </form>
   {{/if}}
-</body>
+</div>
 
-</html>
+
+<script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+<script type='text/javascript' src="assets/js/chatroom.js"></script>
