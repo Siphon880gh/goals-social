@@ -33,9 +33,8 @@ router.put('/users', async(req, res) => {
         User.update({ avatar: req.body.chosenAvatarName }, { where: { id: userId } });
     }
 
-    res.status(200).json({ success: "Updated profile bio and avatar" });
     // Redirection is handled by ajax
-    // res.redirect("/profile");
+    res.status(200).json({ success: "Updated profile bio and avatar" });
 });
 
 router.post('/login', async(req, res) => {
@@ -131,6 +130,66 @@ router.get('/logout', (req, res) => {
         // res.status(404).json({ loggedIn: 0 });
         res.status(404).redirect("../login");
     }
+});
+
+
+/**
+ * Update post and its milestones from goal planner
+ */
+router.patch('/posts/:postId', async(req, res) => {
+    var postId = req.params.postId;
+    var {
+        goal,
+        detail,
+        start,
+        end,
+        id,
+        milestones,
+    } = req.body;
+
+    // Retrofit for DB
+    delete req.body.milestones;
+    var postId = id;
+    delete _id;
+    req.body.user_id = req.session.user.userId;
+
+    // Update post (milestones will be updated on its own table)
+    var statusPostsUpdate = await Posts.update(req.body, { where: { id: postId } });
+
+    // Differentiate old milestones that may need updating vs new milestones that need inserting
+    // console.log(JSON.stringify(milestones));
+    // process.exit(0);
+    var oldMilestones = milestones.filter(milestone => milestone.milestoneId);
+    var newMilestones = milestones.filter(milestone => !milestone.milestoneId);
+    oldMilestones = oldMilestones.map(milestone => {
+        return {
+            id: milestone.milestoneId,
+            milestone: milestone.milestoneName,
+            detail: milestone.milestoneDetail,
+            post_id: postId,
+            done: milestone.done
+        };
+    });
+    newMilestones = newMilestones.map(milestone => {
+        return {
+            milestone: milestone.milestoneName,
+            detail: milestone.milestoneDetail,
+            post_id: postId,
+            done: milestone.done
+        };
+    });
+
+    if (oldMilestones) {
+        oldMilestones.forEach(async(oldMilestone) => {
+            var statusOldMilestonesUpdate = await Milestones.update(oldMilestone, { where: { id: oldMilestone.id } });
+        });
+    }
+    if (newMilestones) {
+        var statusNewMilestonesUpdate = await Milestones.bulkCreate(newMilestones);
+    }
+
+    // Redirection is handled by ajax
+    res.status(200).json({ success: "Updated goal post and its milestones" });
 });
 
 module.exports = router;

@@ -108,9 +108,9 @@
   <div class="carousel-inner">
 
   {{#each posts}}
-    <article class="carousel-item {{#if @first}}active{{/if}}">
+    <article class="goal-planner carousel-item {{#if @first}}active{{/if}}">
 
-      <div class="grid grid-wrapper" data-post-id="{{_id}}">
+      <div class="grid grid-wrapper" data-post-id="{{id}}">
         <div class="item item1">
           <p class="{{#if @last}}inserting{{/if}}"><strong>Goal</strong> Setting</p>
         </div>
@@ -209,7 +209,7 @@
       detail: $context.find(".html-detail").html(),
       start: $context.find(".date-start").val(),
       end: $context.find(".date-end").val(),
-      _id: $context.data(datasetName)
+      id: $context.data(datasetName)
     }
 
     var $context = $here.closest(`[data-${datasetName}]`);
@@ -225,10 +225,23 @@
     }).toArray();
     goalPostData.milestones = milestoneData;
 
-    // Mimick ajax
-    window.req.body = goalPostData;
-    // No need to get response other than error handling, just going to redirect to profile 
-    hasher.setHash(`patch-api/posts/${goalPostData.id}`);
+    // Send ajax request to update post
+    $.ajax({
+      headers : {
+          'Accept' : 'application/json',
+          'Content-Type' : 'application/json'
+      },
+      url: `/api/posts/${goalPostData.id}`,
+      type: "PATCH",
+      data: JSON.stringify(goalPostData),
+      success: function(data){
+        console.log(data);
+        window.location.pathname = "/profile";
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
 } // update_post
 
 function create_post($here, datasetName) {
@@ -238,7 +251,7 @@ function create_post($here, datasetName) {
       detail: $context.find(".html-detail").html(),
       start: $context.find(".date-start").val(),
       end: $context.find(".date-end").val(),
-      _id: null // similar to update_post but there's no existing psot id
+      id: null // similar to update_post but there's no existing psot id
     }
 
 
@@ -293,16 +306,18 @@ $(()=>{
 });
 
 function doneMilestone($here) {
+  var $context = $here.closest(".goal-planner");
   var $milestoneWrapper = $here.closest(".milestone-wrapper");
   var whichIndex = $milestoneWrapper.index();
   var $milestone = $milestoneWrapper.find("input");
+  var $milestoneDetails = $context.find(".milestone-detail");
   var wasDisabled = $milestone.attr("disabled")?true:false;
   if(!wasDisabled) {
     $milestone.attr("disabled", true).addClass("bg-secondary text-white border-success");
-    $(".milestone-detail").eq(whichIndex).attr("disabled", true).addClass("bg-secondary text-white border-success");
+    $milestoneDetails.eq(whichIndex).attr("disabled", true).addClass("bg-secondary text-white border-success");
   } else {
     $milestone.attr("disabled", false).removeClass("bg-secondary text-white border-success");
-    $(".milestone-detail").eq(whichIndex).attr("disabled", false).removeClass("bg-secondary text-white border-success");
+    $milestoneDetails.eq(whichIndex).attr("disabled", false).removeClass("bg-secondary text-white border-success");
   }
   
 }
@@ -350,7 +365,7 @@ function addMilestone($here) {
 
 <script>
 function setRecommendationsToMilestoneInputs() {
-
+  return;
   /** This jQuery UI autocompletion setting:
    *  - Array is fed to source.
    *  - That array has mixed values.
