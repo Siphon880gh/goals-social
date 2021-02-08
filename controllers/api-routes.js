@@ -35,8 +35,29 @@ router.put('/users', async(req, res) => {
 
     // Redirection is handled by ajax
     res.status(200).json({ success: "Updated profile bio and avatar" });
+}); // PUT /users
+
+// Add comment
+router.post('/posts/:postId/comments', async(req, res) => {
+    postId = parseInt(req.params.postId);
+    var userId = req.session.user.userId;
+    // console.assert(postId === 2, postId);
+    // console.assert(userId === 1, userId);
+
+    // Retrofit for Db
+    req.body.post_id = postId;
+    req.body.user_id = userId;
+
+    // console.log(JSON.stringify(req.body));
+    // process.exit(0);
+
+    Comments.create(req.body);
+
+    // Redirection is handled by ajax
+    res.status(200).json({ success: "Created comment" });
 });
 
+// Login information
 router.post('/login', async(req, res) => {
     // User logging in
     // TODO: User logging in
