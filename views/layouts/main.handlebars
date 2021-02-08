@@ -181,17 +181,22 @@
                 <li>
                     <a class="d-none-off" href="/dashboard">Dashboard</a>
                 </li>
-                <li>
-                    <a class="d-none-off" href="/login">Login</a>
-                </li>
+                {{#if username}}
                 <li>
                     <a class="d-none-off" href="/api/logout">Logout</a>
                 </a>
-                </li>            
+                </li>
+                {{else}}
+                <li>
+                    <a class="d-none-off" href="/login">Login</a>
+                </li>  
+                {{/if}}       
             </ul>
         </nav>
 
+        <a href="/">
         <h1 class="page-title">{{pageTitle}}</h1>
+        </a>
         <!-- Goal Social | etc -->
 
     </header>
