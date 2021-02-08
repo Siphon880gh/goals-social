@@ -198,8 +198,24 @@
   function delete_post($here, datasetName) {
   if(!confirm("Are you sure you want to delete this post / goal?" ))
     return;
+
     var postId = getClosestDataAttribute($here, datasetName);
-    hasher.setHash(`delete-api/posts/${postId}`);
+
+    $.ajax({
+      headers : {
+          'Accept' : 'application/json',
+          'Content-Type' : 'application/json'
+      },
+      url: `/api/posts/${postId}`,
+      type: "DELETE",
+      success: function(data){
+        console.log(data);
+        window.location.pathname = "/profile";
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
   } // delete_post
 
   function update_post($here, datasetName) {
@@ -265,10 +281,8 @@ function create_post($here, datasetName) {
         return {milestoneId, milestoneName, milestoneDetail, done }
     }).toArray();
     goalPostData.milestones = milestoneData;
-    // debugger;
-
-    // No need to get response other than error handling, just going to redirect to profile 
-    // hasher.setHash(`post-api/posts/`);
+    // debugger
+    
     // Send ajax request to update post
     $.ajax({
       headers : {

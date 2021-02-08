@@ -141,6 +141,15 @@ router.delete('/milestones/:milestoneId', async(req, res) => {
     res.status(200).json({ success: "Deleted milestone" });
 });
 
+/** Delete goal post */
+router.delete('/posts/:postId', async(req, res) => {
+    postId = parseInt(req.params.postId);
+    var statusRemovePost = Posts.destroy({ where: { id: postId } });
+
+    // Redirection is handled by ajax
+    res.status(200).json({ success: "Deleted goal post" });
+});
+
 /**
  * Update post and its milestones from goal planner
  */
@@ -198,7 +207,7 @@ router.patch('/posts/:postId', async(req, res) => {
 
     // Redirection is handled by ajax
     res.status(200).json({ success: "Updated goal post and its milestones" });
-});
+}); // PATCH /posts/:postId
 
 
 /**
@@ -250,6 +259,6 @@ router.post('/posts', async(req, res) => {
 
     // Redirection is handled by ajax
     res.status(200).json({ success: "Created goal post and any of its milestones" });
-});
+}); // POST /posts
 
 module.exports = router;
