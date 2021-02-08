@@ -15,15 +15,11 @@
 
     <!-- CSS from my app -->
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/rapid-prototype.css">
 
-    <!-- JS vendors: Handlebars JS for frontend templating -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
-
-    <!-- JS vendors: Crossroads JS for frontend routes. Dependency: Signal, Hasher -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-signals/1.0.0/js-signals.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hasher/1.2.0/hasher.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crossroads/0.12.2/crossroads.min.js"></script>
-
+    <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    
     <!-- JS vendors: Moment JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
@@ -36,29 +32,30 @@
     <header class="site-header">
         <nav>
             <ul>
-            {{#if username}}
                 <li>
-                    <a class="d-none-off" href="/chatroom">Chatroom
+                    <a class="d-none-off" href="/" onclick="prototypeHooksLink(event);">World</a>
                 </li>
                 <li>
-                    <a class="d-none-off" href="/logout">Logout
-                    (<i>{{username}}</i>)</a>
+                    <a class="d-none-off" href="chatroom" onclick="prototypeHooksLink(event);">Chatroom</a>
                 </li>
-            {{else}}
                 <li>
-                    <a class="d-none-off" href="/login">Login</a>
+                    <a class="d-none-off" href="dashboard/" onclick="prototypeHooksLink(event);">Dashboard</a>
                 </li>
-            {{/if}}
+                <li>
+                    <a class="d-none-off" href="login/" onclick="prototypeHooksLink(event);">Login</a>
+                </li>
+                <li>
+                    <a class="d-none-off" href="api/logout/" onclick="prototypeHooksLink(event);">Logout</a>
+                </a>
+                </li>            
             </ul>
         </nav>
-        
-        <a href='/'>
-        <h1 class="page-title">{{pageTitle}}</h1>
-        </a>
+
+        <h1 class="page-title"></h1>
         <!-- Goal Social | etc -->
 
     </header>
-    <main class="container" data-main>
+    <main class="container mt-3" data-main>
         {{{body}}}
     </main>
     <!-- container -->
@@ -67,14 +64,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW " crossorigin="anonymous ">
     </script>
 
-    <!-- JS Vendors: Jquery UI -->
+    <!-- JS Vendors: Jquery UI. -->
+    <!-- For autocompletion needed for the recommendation engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js "></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css "></link>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js "></script>
+    <script src="assets/js/vendors/autocomplete-html.js "></script>
 
-    <!-- JS from my app -->
-    <script src="assets/js/app.js "></script>
-
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
 
 </body>
 
