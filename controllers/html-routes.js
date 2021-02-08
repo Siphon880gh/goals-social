@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User } = require('../models');
+const {
+    User,
+    Posts,
+    Comments,
+    Milestones,
+    UserInfos
+} = require('../models');
 
 // Set your website's name
 global.CONSTANT_SITE_TITLE = "Goals Social";
@@ -77,6 +83,101 @@ router.get('/login', (req, res) => {
 
     res.render("login", dataStraightThrough);
 });
+
+
+/** View any profile */
+router.get('/profile/:userId', async(req, res) => {
+    var userId = req.params.userId;
+    userId = parseInt(userId);
+    // console.assert((userId + "").length, userId);
+    // console.assert(userId === 1, userId);
+
+    // Prepare profile wrapper which will have user info and personal posts
+    var profileWrapper = {
+        viewingOwnProfile: false,
+        userInfo: {},
+        posts: []
+    }
+
+    // Allow to edit own profile?
+    var viewingOwnProfile = req.session && req.session.user && userId === req.session.user.userId
+    profileWrapper.viewingOwnProfile = viewingOwnProfile;
+
+    // Set userInfo or falsy
+    var userInfo = await UserInfos.findOne({ where: { uid: userId } })
+        .then(row => row.get({ plain: true }))
+        .catch(err => {
+            console.error(err);
+            return;
+        });
+    profileWrapper.userInfo = userInfo;
+    // console.log(userInfo);
+    // process.exit(0);
+
+    // console.table({ Posts.findAll });
+    // process.exit(0);
+
+    // Set posts with all its joined comments, milestones, usernames, avatars (of owner and commenters)
+    var docs = await Posts.findAll({
+        where: {
+            user_id: userId
+        },
+        include: [{
+            model: User,
+            attributes: ["id", "username", "avatar"]
+        }, {
+            model: Comments,
+            attributes: [
+                ["id", "comment_id"], "comment", ["user_id", "assoc_user_id"], "created_at", "updated_at"
+            ],
+            include: {
+                model: User,
+                attributes: [
+                    ["id", "assoc_user_id"], "username", "avatar", "created_at", "updated_at"
+                ],
+            }
+        }, {
+            model: Milestones
+        }, ],
+    }).then(rows => {
+        rows = rows.map(row => { // for every single post
+            var row = row.get({ plain: true });
+
+            // Post level
+            var { id, username, avatar } = row.user;
+            delete row.user;
+            row.user_id = id;
+            row.post_username = username;
+            row.avatar = avatar;
+
+            // Post -> Comments[] -> Comment object level
+            row.comments = row.comments.map(comment => {
+                var { username, avatar, assoc_user_id } = comment.user;
+                delete comment.user;
+                comment.username = username;
+                comment.avatar = avatar;
+                comment.assoc_user_id = assoc_user_id;
+                return comment;
+            });
+
+            row.canComment = Boolean(req.session.loggedIn);
+            return row;
+        });
+        return rows;
+    }).catch(err => {
+        console.error(err);
+        return;
+    });
+    // console.log(JSON.stringify(docs));
+    // process.exit(0);
+
+    profileWrapper.posts = docs;
+    profileWrapper.canComment = Boolean(req.session.loggedIn)
+
+    profileWrapper.pageTitle = "Your Details";
+    res.render("profile", profileWrapper);
+
+}); // profile
 
 /** View own profile */
 router.get('/profile', async(req, res) => {

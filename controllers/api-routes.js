@@ -1,8 +1,14 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User } = require('../models');
-const Chatroom = require('../models/Chatroom');
-const chatroomRoutes = require('./api/chatroom-routes.js')
+const {
+    User,
+    Posts,
+    Comments,
+    Milestones,
+    UserInfos
+} = require('../models');
+// const Chatroom = require('../models/Chatroom');
+// const chatroomRoutes = require('./api/chatroom-routes.js')
 
 router.post('/login', async(req, res) => {
     // User logging in
@@ -16,6 +22,9 @@ router.post('/login', async(req, res) => {
         }
     }).then(async(row) => {
         if (row) row = row.get({ plain: true });
+
+        // console.log(row)
+        // process.exit(0);
 
         const plainPassword = password;
         const hash = row.password;
