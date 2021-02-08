@@ -108,7 +108,7 @@ input[type=radio] {
       <form>
       {{#each avatars}}
         <article class="carousel-item {{#if @first}}active{{/if}}">
-          <img src="/assets/img/users-default-avatars/{{avatar}}.png"></img>
+          <img src="assets/img/users-default-avatars/{{avatar}}.png"></img>
           <div><label for="">Choose</label> <input type="radio" class="avatar-choice" name="avatar" value="{{avatar}}"> </div>
         </article> <!-- .carousel-item.active -->
       {{/each}}

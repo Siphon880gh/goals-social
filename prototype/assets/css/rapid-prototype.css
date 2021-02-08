@@ -3,21 +3,16 @@
  * This scss allows for nesting blocks, so is faster to experiment with styles.
  *
  */
-
-
 /* Reset CSS */
-
 :root {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
 /* Themes */
-
 :root {
-    /** 
+  /** 
   green: #68d934; rgba(104, 217, 52, 1);
   orange: #e67b1e; rgba(230, 123, 30, 1);
   bluegreen: #2ed9a9; rgba(46, 217, 169, 1);
@@ -27,150 +22,154 @@
   gray: #666666;
   lightgray: #a7a7a7;
   **/
-    --crunchier: #13bb96;
-    --crunch: #77CBB9;
-    --thememed: #6a86b8;
-    --themelight: rgba(1, 49, 131, 0.5);
-    --soften: #47a4bb;
-    --bgcgradient: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-    --narrowText: Arial Narrow, sans-serif;
+  --crunchier: #13bb96;
+  --crunch: #77CBB9;
+  --thememed: #6a86b8;
+  --themelight: rgba(1, 49, 131, 0.5);
+  --soften: #47a4bb;
+  --bgcgradient: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+  --narrowText: Arial Narrow, sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
-
 
 /* Mobile-first approach */
-
 @media (min-width: 992px) {
-    main {
-        width: 70% !important;
-        margin-top: 20px;
-    }
+  main {
+    width: 70% !important;
+    margin-top: 20px;
+  }
 }
-
 @media (min-width: 1200px) {
-    main {
-        width: 60% !important;
-        margin-top: 40px;
-    }
+  main {
+    width: 60% !important;
+    margin-top: 40px;
+  }
 }
-
-
 /* Styling classes */
-
 .bordered {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .bordered-alt {
-    border: 1px solid gray;
+  border: 1px solid gray;
 }
 
 .text-xs {
-    font-size: .5rem;
+  font-size: .5rem;
 }
 
 .text-right {
-    text-align: right;
+  text-align: right;
 }
 
-
 /* Layout */
-
 body {
-    font-family: Arial Narrow, sans-serif;
-    font-weight: 100;
-    background: #9bf8f3;
-    background: linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-    background: -moz-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-    background: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+  font-family: Arial Narrow, sans-serif;
+  font-weight: 100;
+  background: #9bf8f3;
+  background: linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+  background: -moz-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+  background: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
 }
 
 .container-fluid {
-    padding-left: 15px;
-    padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 button.standout {
-    width: 100%;
-    margin: 10px 0;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: var(--thememed);
-    color: white;
-    transition: background-color 500ms;
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--thememed);
+  color: white;
+  transition: background-color 500ms;
 }
 
 button.standout:hover {
-    background-color: var(--themelight);
+  background-color: var(--themelight);
 }
-
 
 /** Header **/
-
 .site-header {
-    margin: 0;
-    margin-top: -15px;
-    padding: 0;
-    padding-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: var(--crunchier);
+  margin: 0;
+  margin-top: -15px;
+  padding: 0;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: var(--crunchier);
 }
-
 .site-header nav ul {
-    float: right;
-    padding: 0;
-    margin: 10px 0;
+  float: right;
+  padding: 0;
+  margin: 10px 0;
 }
-
 .site-header nav ul li:first-child {
-    color: red;
+  color: red;
 }
-
 .site-header nav ul li {
-    display: inline-block;
-    margin-left: 60px;
-    text-align: center;
-    list-style-type: none;
+  display: inline-block;
+  margin-left: 60px;
+  text-align: center;
+  list-style-type: none;
 }
-
 .site-header nav ul li a,
 .site-header nav ul li a:visited {
-    color: var(--thememed);
-    text-decoration: none;
-    transition: color 500ms;
+  color: var(--thememed);
+  text-decoration: none;
+  transition: color 500ms;
 }
-
 .site-header nav ul li a:active,
 .site-header nav ul li a:hover {
-    color: black;
+  color: black;
 }
-
 .site-header .page-title {
-    display: inline-block;
-    padding: 5px;
-    margin: 20px 0 20px 0;
-    border-radius: 10px;
-    color: var(--crunch);
-    background-color: var(--themelight);
-    font-weight: 800;
-    box-shadow: 5px 5px var(--soften);
+  display: inline-block;
+  padding: 5px;
+  margin: 20px 0 20px 0;
+  border-radius: 10px;
+  color: var(--crunch);
+  background-color: var(--themelight);
+  font-weight: 800;
+  box-shadow: 5px 5px var(--soften);
 }
 
+/** Login/Signup Form **/
+.form-wrapper {
+  margin-top: 20px;
+}
+.form-wrapper .form-header {
+  padding: 5px 10px;
+  color: var(--soften);
+  background-color: var(--crunch);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.form-wrapper .form-body {
+  border: 2px solid var(--crunch);
+  padding: 5px 10px 20px 10px;
+}
+.form-wrapper .form-body input {
+  width: 100%;
+}
+.form-wrapper .input-group {
+  margin: 10px 0;
+}
 
 /** Prototyping **/
-
 .prototype-php-engine {
-    display: block;
-    padding: 5px;
-    position: fixed;
-    right: 5px;
-    bottom: 5px;
-    background-color: rgba(255, 224, 51, 0.5);
-    z-index: 9999;
-    border: 1px solid rgba(230, 123, 30, 0.25);
-    border-radius: 10px;
+  display: block;
+  padding: 5px;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  background-color: rgba(255, 224, 51, 0.5);
+  z-index: 9999;
+  border: 1px solid rgba(230, 123, 30, 0.25);
+  border-radius: 10px;
 }
