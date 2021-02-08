@@ -4,7 +4,7 @@ goals-social
 
 Description
 ---
-By Aiden Meyer, Angela Kao, Weng Fei Fung. A social network based around people’s goals. Find inspiration and help others complete similar goals. Look into their milestones, leave helpful comments, and chat with like-minded driven users.
+By Aidan Meyer, Angela Kao, Weng Fei Fung. A social network based around people’s goals. Find inspiration and help others complete similar goals. Look into their milestones, leave helpful comments, and chat with like-minded driven users.
 
 Demo
 ---
