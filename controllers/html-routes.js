@@ -91,7 +91,7 @@ router.get('/', async(req, res) => {
     // Retrofit for template
     var postsWrapper = {};
     postsWrapper.posts = posts ? posts : [];
-    postsWrapper.pageTitle = "Edit Profile";
+    postsWrapper.pageTitle = "Goals Social";
 
     res.render("world", postsWrapper);
 }); // world view "/"
