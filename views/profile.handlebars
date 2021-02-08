@@ -207,27 +207,6 @@
     </div> <!-- view-own-profile-page -->
 
 <script>
-function updateUserInfo() {
-
-  var $context = $(".edit-profile");
-  var userInfoData = {
-    name: $context.find(".full-name").val(),
-    abbr: $context.find(".abb-name").val(),
-    email: $context.find(".email").val(),
-    location: $context.find(".location").val(),
-    occupation: $context.find(".occupation").val(),
-    bio: $context.find(".bio").val(),
-    linkFacebook: $context.find(".link-facebook").val(),
-    linkInstagram: $context.find(".link-instagram").val(),
-    linkLinkedin: $context.find(".link-linkedin").val()
-  }
-
-  window.req.body = userInfoData;
-  hasher.setHash("patch-api/users")
-}
-</script>
-
-<script>
 
 function addComment($here, datasetName) {
     var $context = $here.closest(`[data-${datasetName}]`);
