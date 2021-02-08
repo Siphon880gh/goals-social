@@ -10,6 +10,34 @@ const {
 // const Chatroom = require('../models/Chatroom');
 // const chatroomRoutes = require('./api/chatroom-routes.js')
 
+
+// Update user extra info
+router.put('/users', async(req, res) => {
+    // Only logged in users
+    if (!req.session.loggedIn)
+        res.redirect('/login');
+
+    userId = parseInt(req.session.user.userId);
+    // console.assert(userId === 1, userId);
+
+    // Retrofit for Db
+    req.body.uid = userId;
+
+    // console.log(JSON.stringify({ a: userId }));
+    // process.exit(0);
+    // Upsert userInfos. userInfos table does not identify with _id column but by _uid column
+    var userInfoDbStatus = await UserInfos.upsert(req.body, { where: { uid: userId } });
+
+    // If user is also changing avatar:
+    if (req.body.chosenAvatarName) {
+        User.update({ avatar: req.body.chosenAvatarName }, { where: { id: userId } });
+    }
+
+    res.status(200).json({ success: "Updated profile bio and avatar" });
+    // Redirection is handled by ajax
+    // res.redirect("/profile");
+});
+
 router.post('/login', async(req, res) => {
     // User logging in
     // TODO: User logging in

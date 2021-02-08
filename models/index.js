@@ -190,15 +190,10 @@ Milestones.init({
 
 class UserInfos extends Model {}
 UserInfos.init({
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-    },
     uid: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
         unique: true
     },
     name: {
