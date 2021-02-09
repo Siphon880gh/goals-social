@@ -5,10 +5,10 @@
 }
 .form-wrapper .form-header {
   padding: 5px 10px;
-  color: var(--soften);
   background-color: var(--crunch);
   font-size: 1.25rem;
   font-weight: 600;
+  color: white;
 }
 .form-wrapper .form-body {
   border: 2px solid var(--crunch);
@@ -19,6 +19,26 @@
 }
 .form-wrapper .input-group {
   margin: 10px 0;
+}
+
+.input-group {
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.form-login .standout {
+    background-color: #77CBB9;
+}
+
+.form-login .standout:hover {
+    background-color: #506C64;
+}
+ #sign-up {
+    color: white;
+}
+#sign-up:hover {
+    text-decoration: underline;
 }
 </style>
 
@@ -38,7 +58,7 @@
             </div>
             <div>
                 <button class="standout" type="submit" data-route="/login">Login</button>
-                <a href="/signup">Sign up instead</a>
+                <a href="/signup" id="sign-up">Sign up instead</a>
             </div>
             </form>
     </div> <!-- form-body -->
