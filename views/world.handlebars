@@ -13,6 +13,12 @@
     height: 80px;
     border-radius:50%; /* Round avatar */
 }
+
+.goal {
+    font-size: 30px;
+}
+
+
 .comment-wrapper .avatar {
     width: 60px;
     height: 60px;
@@ -22,7 +28,7 @@
 }
 .post {
     padding: 10px;
-    border: 3px solid #CDD3D5;
+    border: 3px solid #77CBB9;
     margin-bottom: 20px;
     border-radius: 10px;
     background-color: white;
@@ -30,29 +36,39 @@
 .post_user_info {
     float: right;
 }
-.goal {
 
-}
 .detail {
     font-weight: 200;
+    border-bottom: 2px black;
+    padding-top: 10px;
+}
+
+.dates {
+    color: #220C10;
+    font-weight: 200;
+    padding-bottom: 5px;
 }
 .dates::before {
     content: "Duration:\00a0"
 }
 
-
 .post-owner {
     text-align: center;
 }
 .milestone-wrapper {
-    width: 75%;
+    width: 100%;
     border-radius: 5px;
     margin: 0 auto;
-    border: 2px solid #CDD3D5;
-    border-radius: 10px;
+    border: 2px solid #77CBB9;
+
+    font-weight: 500;
+    color: #506C64;
 }
 .milestone-wrapper.done {
-    color:#CDD3D5;
+    color: #CDD3D5;
+    font-size: 20px;
+    font-weight: 100;
+
 }
 .milestone-wrapper:not(.done) .fa.fa-check {
     display: none;
@@ -64,16 +80,18 @@
     width: 75%;
     border-radius: 5px;
     margin: 0 auto;
-    border: 1px solid #CDD3D5;
+    border: 10px solid #77CBB9;
 }
 .clear-fix {
     clear: both;
 }
 .comment-add-body {
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid #77CBB9;
+    border-radius: 5px;
     width: 75%;
     margin: 0 auto;
+    
 }
 .comment-add-wrapper {
     padding: 5px !important;
@@ -87,6 +105,8 @@
     width: 100%;
     display: block;
     resize: none;
+    border: solid 1px black;
+    
 }
 </style>
 
