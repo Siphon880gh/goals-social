@@ -1,4 +1,4 @@
-goals-social
+Goals Social
 ====
 ![Last Commit](https://img.shields.io/github/last-commit/Siphon880gh/goals-social/master)
 
