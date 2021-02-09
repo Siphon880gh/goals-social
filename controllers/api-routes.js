@@ -282,4 +282,34 @@ router.post('/posts', async(req, res) => {
     res.status(200).json({ success: "Created goal post and any of its milestones" });
 }); // POST /posts
 
+
+/**
+ * Get autocomplete recommendations for milestones
+ * In a future version, recommendations will be more accurate as more members join
+ * the social media and provide their goals, milestones, timeframes, and successes.
+ * An artificial intelligence would sort out successful goals and milestones and
+ * populate the autocomplete recommendation dropdown sorted from most recommended 
+ * to least recommended.
+ */
+router.get('/milestones/recommendations/:goal/:queryMilestone', async(req, res) => {
+    var { goal, queryMilestone } = req.params;
+
+    var recommendations = await Milestones.findAll()
+        .then(rows => {
+            rows = rows.map(row => {
+                row = row.get({ plain: true });
+                var milestone = row.milestone;
+                return milestone;
+            }); // map
+            return rows;
+        }).catch(err => {
+            console.error(err);
+            return;
+        });
+
+    if (recommendations) res.json(recommendations);
+    else res.json([]);
+
+}); // GET /milestones/recommendations/:goal/:queryMilestone
+
 module.exports = router;
