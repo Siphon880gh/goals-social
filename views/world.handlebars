@@ -204,6 +204,8 @@ function addComment($here, datasetName) {
       comment: $context.find(".add-comment-input").val()
     }
 
+    window.$context = $context;
+
     $.ajax({
         headers : {
             'Accept' : 'application/json',
@@ -213,14 +215,36 @@ function addComment($here, datasetName) {
             type: "POST",
             data: JSON.stringify(commentData),
         success: function(data){
-            console.log(data);
-            window.location.pathname = "/";
+            var {commentId, postId, userId, avatar, username, comment} = data.domContent;
+
+            // Dynamically add comment without refreshing page or losing scroll position
+            // Use square brackets in case of collision with handlebars
+            var newPost = `<div class="comment-wrapper mt-2 mb-2 p-1" data-comment-id="[[commentId]]" data-post-id="[[postId]]" data-user-id="[[userId]]">
+                    <figure class="post_user_info p-2">
+                        <img class="avatar" src="/assets/img/users-default-avatars/[[avatar]].png">
+                        <figcaption class="post-owner"><a href="profile/[[userId]]" onclick="prototypeHooksLink(event);">[[username]]</a></figcaption>
+                    </figure>
+                    <label>Comment: </label><span>[[comment]]</span>
+                    <div class="clear-fix"></div>
+                </div>`;
+                
+            newPost = newPost.replace("[[commentId]]", commentId).replace("[[postId]]", postId).replace("[[userId]]", userId).replace("[[comment]]", comment).replace("[[avatar]]", avatar).replace("[[username]]", username);
+
+            var $newDom = $("<div></div>");
+            $newDom.append(newPost);
+            var $hereCommentArea = $context.find(".comment-add-wrapper");
+            $newDom.insertBefore($hereCommentArea);
+
+            // Clear comment textbox
+            $hereCommentArea.find("textarea").val("");
         },
         error: function(error){
             console.log(error);
         }
-    });
+    }); // ajax
 } // addComment
+
+
 $(()=>{
     /**
      * Switching post tabs

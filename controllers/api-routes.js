@@ -51,10 +51,27 @@ router.post('/posts/:postId/comments', async(req, res) => {
     // console.log(JSON.stringify(req.body));
     // process.exit(0);
 
-    Comments.create(req.body);
+    Comments.create(req.body)
+        .then(async function(comment) {
+            var commentId = comment.id;
+            var { comment } = comment;
+            var whoAmI = await User.findOne({ where: { id: userId } })
+                .then(row => row.get({ plain: true }))
+                .catch(err => {
+                    console.error(err);
+                    return;
+                });
+            var { avatar, username } = whoAmI;
 
-    // Redirection is handled by ajax
-    res.status(200).json({ success: "Created comment" });
+            // Redirection is handled by ajax
+            res.status(200).json({
+                success: "Created comment",
+                domContent: { comment, username, userId, avatar, postId, commentId }
+            });
+
+        });
+
+    return;
 });
 
 // Login information
