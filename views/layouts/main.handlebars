@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Goals Social</title>
     <meta charset="utf-8">
@@ -7,163 +8,173 @@
     <meta http-equiv="expires" content="0">
 
     <!-- CSS vendors -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Font Awesome 5 -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    
+
     <!-- JS vendors: Moment JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <!-- JS Vendors: jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
     <style>
-    /* Reset CSS */
+        /* Reset CSS */
 
-    :root {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-
-    /* Themes */
-
-    :root {
-        --crunchier: #13bb96;
-        --crunch: #77CBB9;
-        --thememed: #6a86b8;
-        --themelight: rgba(1, 49, 131, 0.5);
-        --soften: #47a4bb;
-        --bgcgradient: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-        --narrowText: Arial Narrow, sans-serif;
-    }
-
-    a {
-        text-decoration: none;
-    }
-
-
-    /* Mobile-first approach */
-
-    @media (min-width: 992px) {
-        main {
-            width: 70% !important;
-            margin-top: 20px;
+        :root {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
 
-    @media (min-width: 1200px) {
-        main {
-            width: 60% !important;
-            margin-top: 40px;
+
+        /* Themes */
+
+        :root {
+            --crunchier: #13bb96;
+            --crunch: #77CBB9;
+            --thememed: #6a86b8;
+            --themelight: rgba(1, 49, 131, 0.5);
+            --soften: #47a4bb;
+            --bgcgradient: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+            --narrowText: Arial Narrow, sans-serif;
         }
-    }
+
+        a {
+            text-decoration: none;
+        }
 
 
-    /* Styling classes */
-
-    .bordered {
-        border: 1px solid black;
-    }
-
-    .bordered-alt {
-        border: 1px solid gray;
-    }
-
-    .text-xs {
-        font-size: .5rem;
-    }
-
-    .text-right {
-        text-align: right;
-    }
 
 
-    /* Layout */
+            /* Mobile-first approach */
 
-    body {
-        font-family: Arial Narrow, sans-serif;
-        font-weight: 100;
-        background: #9bf8f3;
-        background: linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-        background: -moz-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-        background: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-        min-height: 110vh;
-    }
+            @media (min-width: 992px) {
+                main {
+                    width: 70% !important;
+                    margin-top: 20px;
+                }
+            }
 
-    .container-fluid {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    button.standout {
-        width: 100%;
-        margin: 10px 0;
-        padding: 5px;
-        border-radius: 5px;
-        background-color: var(--thememed);
-        color: white;
-        transition: background-color 500ms;
-    }
-
-    button.standout:hover {
-        background-color: var(--themelight);
-    }
+            @media (min-width: 1200px) {
+                main {
+                    width: 60% !important;
+                    margin-top: 40px;
+                }
+            }
 
 
-    /** Header **/
+            /* Styling classes */
 
-    .site-header {
-        margin: 0;
-        margin-top: -15px;
-        padding: 0;
-        padding-top: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
-        background-color: var(--crunchier);
-    }
+            .bordered {
+                border: 1px solid black;
+            }
 
-    .site-header nav ul {
-        float: right;
-        padding: 0;
-        margin: 10px 0;
-    }
+            .bordered-alt {
+                border: 1px solid gray;
+            }
 
-    .site-header nav ul li:first-child {
-        color: red;
-    }
+            .text-xs {
+                font-size: .5rem;
+            }
 
-    .site-header nav ul li {
-        display: inline-block;
-        margin-left: 60px;
-        text-align: center;
-        list-style-type: none;
-    }
+            .text-right {
+                text-align: right;
+            }
 
-    .site-header nav ul li a,
-    .site-header nav ul li a:visited {
-        color: var(--thememed);
-        text-decoration: none;
-        transition: color 500ms;
-    }
 
-    .site-header nav ul li a:active,
-    .site-header nav ul li a:hover {
-        color: black;
-    }
+            /* Layout */
 
-    .site-header .page-title {
-        display: inline-block;
-        padding: 5px;
-        margin: 20px 0 20px 0;
-        border-radius: 10px;
-        color: var(--crunch);
-        background-color: var(--themelight);
-        font-weight: 800;
-        box-shadow: 5px 5px var(--soften);
-    }
+            body {
+                font-family: Arial Narrow, sans-serif;
+                font-weight: 100;
+                background: #9bf8f3;
+                background: linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+                background: -moz-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+                background: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+                min-height: 110vh;
+            }
+
+            .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+    
+
+            button.standout {
+                width: 100%;
+                margin: 10px 0;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: var(--thememed);
+                color: white;
+                transition: background-color 500ms;
+            }
+
+            button.standout:hover {
+                background-color: var(--themelight);
+            }
+
+
+            /** Header **/
+
+            .site-header {
+                margin: 0;
+                margin-top: -15px;
+                padding: 0;
+                padding-top: 10px;
+                padding-left: 15px;
+                padding-right: 15px;
+                background-color: #77CBB9;
+                
+            }
+
+            .site-header nav ul {
+                float: right;
+                padding: 0;
+                margin: 30px 0;
+            }
+
+            .site-header nav ul li:first-child {
+                color: red;
+            }
+
+            .site-header nav ul li {
+                display: inline-block;
+                margin-left: 60px;
+                text-align: center;
+                list-style-type: none;
+            }
+
+            .site-header nav ul li a,
+            .site-header nav ul li a:visited {
+                color: white;
+                text-decoration: none;
+                transition: color 500ms;
+                letter-spacing: 1px;;
+            }
+
+            .site-header nav ul li a:active,
+            .site-header nav ul li a:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+            .site-header .page-title {
+                display: inline-block;
+                padding: 5px;
+                margin: 20px 0 20px 0;
+                border-radius: 5px;
+                color: white;
+                background-color: #75B8C8;
+                font-weight: 800;
+                box-shadow: 5px 5px var(--soften);
+                border-radius: 15px;
+            }
     </style>
 
 </head>
@@ -186,8 +197,8 @@
                 </li>
                 <li>
                     <a class="d-none-off" href="/api/logout">Logout</a>
-                </a>
-                </li>            
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -201,14 +212,17 @@
     <!-- container -->
 
     <!-- JS vendor: Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW " crossorigin="anonymous ">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW " crossorigin="anonymous ">
+        </script>
 
     <!-- JS Vendors: Jquery UI. -->
     <!-- For autocompletion needed for the recommendation engine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js "></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css "></link>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js "></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css ">
+    </link>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js "></script>
     <script src="/assets/js/vendors/autocomplete-html.js "></script>
 
     <!-- App JS -->

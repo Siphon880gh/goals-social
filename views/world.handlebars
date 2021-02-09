@@ -1,4 +1,13 @@
 <style>
+
+.mb-3 {
+    color: #220C10;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: arial 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
 .avatar {
     width: 80px;
     height: 80px;
@@ -13,8 +22,10 @@
 }
 .post {
     padding: 10px;
-    border: 5px solid black;
+    border: 3px solid #CDD3D5;
     margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: white;
 }
 .post_user_info {
     float: right;
@@ -28,6 +39,8 @@
 .dates::before {
     content: "Duration:\00a0"
 }
+
+
 .post-owner {
     text-align: center;
 }
@@ -35,10 +48,11 @@
     width: 75%;
     border-radius: 5px;
     margin: 0 auto;
-    border: 1px solid gray;
+    border: 2px solid #CDD3D5;
+    border-radius: 10px;
 }
 .milestone-wrapper.done {
-    color: gray;
+    color:#CDD3D5;
 }
 .milestone-wrapper:not(.done) .fa.fa-check {
     display: none;
@@ -50,7 +64,7 @@
     width: 75%;
     border-radius: 5px;
     margin: 0 auto;
-    border: 1px solid gray;
+    border: 1px solid #CDD3D5;
 }
 .clear-fix {
     clear: both;
@@ -90,8 +104,8 @@
             <img class="avatar" src="/assets/img/users-default-avatars/{{avatar}}.png"></img>
             <figcaption class="post-owner"><a href="profile/{{assoc_user_id}}" onclick="prototypeHooksLink(event);">{{post_username}}</a></figcaption>
         </figure>
-        <div class="goal"><label>Goal: </label><span>{{goal}}</span></div>
-        <div class="detail"><label>Detail: </label><span>{{detail}}</span></div>
+        <div class="goal"><label>Goal: </label><span> {{goal}}</span></div>
+        <div class="detail"><label>Detail: </label><span> {{detail}}</span></div>
 
         <div class="dates mt-3">
             <span class="start">{{date start}}</span> - <span class="end">{{date end}}</span>
