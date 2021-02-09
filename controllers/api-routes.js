@@ -94,7 +94,7 @@ router.post('/login', async(req, res) => {
             username: dbUserData.username
         };
 
-        res.json({ loggedIn: 1 });
+        res.json({ loggedIn: 1, username: req.session.user.username });
     } else {
         res.json({ loggedIn: 0 });
     }
@@ -133,7 +133,7 @@ router.post('/signup', async(req, res) => {
             username: userCreated.username
         };
 
-        res.status(200).json({ loggedIn: 1, userCreated });
+        res.status(200).json({ loggedIn: 1, userCreated, username: req.session.user.username });
     } else {
         res.json({ loggedIn: 0, error: "General catch-all error: Most likely this username is taken already." });
     }
