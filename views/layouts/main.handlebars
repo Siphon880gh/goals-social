@@ -185,22 +185,22 @@
         <nav>
             <ul>
                 <li>
-                    <a class="d-none-off" href="/">World</a>
+                    <a href="/">World</a>
                 </li>
                 <li>
-                    <a class="d-none-off" href="/chatroom">Chatroom</a>
+                    <a href="/chatroom">Chatroom</a>
                 </li>
                 <li>
-                    <a class="d-none-off" href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Dashboard</a>
                 </li>
                 {{#if username}}
                 <li>
-                    <a class="d-none-off" href="/api/logout">Logout ({{username}})</a>
+                    <a href="/logout">Logout ({{username}})</a>
                 </a>
                 </li>
                 {{else}}
                 <li>
-                    <a class="d-none-off" href="/login">Login</a>
+                    <a href="/login">Login</a>
                 </li>  
                 {{/if}}       
             </ul>
@@ -233,6 +233,11 @@
 
     <!-- App JS -->
     <script src="/assets/js/app.js"></script>
+
+    <!-- Idle: Warn user of inactivity after 1 min, log them out after 2 mins -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery.idle@1.3.0/vanilla.idle.min.js"></script>
+    <script src="/assets/js/idle.js"></script>
+
 
 </body>
 
