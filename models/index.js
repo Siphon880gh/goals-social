@@ -14,8 +14,6 @@ const Posts = require("./Posts");
 const Comments = require("./Comments")
 const Milestones = require("./Milestones")
 const UserInfos = require("./UserInfos")
-// TODO: create associations
-// create fields/columns for User model
 
 // Deleting User sets NULL on a field in Post -> User has Post, Post belongs to User
 // One user, many posts 
