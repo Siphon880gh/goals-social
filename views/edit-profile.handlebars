@@ -6,7 +6,7 @@
   color: #220C10;
   border: 2px solid #77CBB9;
   border-radius: 5px;
-
+  font-size: 165%;
 }
 .edit-profile {
   width: 400px;
@@ -18,13 +18,13 @@
   
 }
 .edit-profile h1 {
-  background: #77CBB9;
   padding: 20px 0;
-  font-size: 140%;
-  font-weight: 300;
   text-align: center;
   color: #fff;
-  border-radius: 5px;
+  text-decoration: underline;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 120%;
 }
 div .edit-profile .container {
   background: transparent;
@@ -68,6 +68,7 @@ div.edit-profile input[type="submit"]:hover {
 }
 .inputs-wrapper {
   text-align:center;
+  margin-top: 30px !important;
 }
 .bio {
   resize: none;
@@ -80,9 +81,11 @@ div.edit-profile input[type="submit"]:hover {
 
 #myCarousel {
   color: white;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
-
+.choose-input-group {
+  margin-top: 10px;
+}
 .btb:hover {
   background-color: #506C64;
   border: none;
@@ -99,10 +102,12 @@ div.edit-profile input[type="submit"]:hover {
 input[type=radio] {
   transform: scale(1.5);
 }
-
- 
 </style>
-
+<style>
+.edit-profile .carousel-indicators li {
+  background-color: white;
+}
+</style>
 
     <div class="edit-profile-page">
         <div class="edit-profile">
@@ -124,7 +129,7 @@ input[type=radio] {
       {{#each avatars}}
         <article class="carousel-item {{#if @first}}active{{/if}}">
           <img src="/assets/img/users-default-avatars/{{avatar}}.png"></img>
-          <div><label for="">Choose</label> <input type="radio" class="avatar-choice" name="avatar" value="{{avatar}}"> </div>
+          <div class="choose-input-group"><label for="">Choose</label> <input type="radio" class="avatar-choice" name="avatar" value="{{avatar}}"> </div>
         </article> <!-- .carousel-item.active -->
       {{/each}}
       </form>
