@@ -274,6 +274,32 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
     height: 35px;
     width: 1px;
   }
+  .ui-menu {
+    max-width: 70vw !important;
+    padding-left: 0 !important;
+    border: 1px solid #75B8C8;
+    border-radius: 5px;
+  }
+  .ui-menu-item {
+    padding-left: 10px !important;
+  }
+  .ui-menu-item:hover {
+    background-color: #75B8C8;
+  }
+  .ui-menu-item a {
+    cursor: pointer;
+  }
+  .recommendation-html {
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 1.25rem;
+    font-weight: 100;
+
+  }
+  .recommendation-html.stats {
+    float: right;
+    margin-right:30px;
+  }
 </style>
 <script>
 // Sets recommendations for milestone autocompletion
@@ -573,7 +599,7 @@ function addMilestone($here) {
   $milestones.append(`
   <div class="milestone-wrapper">
     <input class="milestone" type="text" data-milestone-id=""/>
-    <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
+    <button class="milestone-done btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
     <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
   </div>
   `);
@@ -622,7 +648,7 @@ function setRecommendationsToMilestoneInputs() {
   // On load, add autocomplete recommendations to milestone inputs
   // Try HTML format on recommendation dropdown
  setTimeout(()=>{
-  window.recommendations.push("<span>Get an accountability partner</span><span style='margin-left:100px'><i class='fa fa-thumbs-up'></i> Improved chances</span>");
+  window.recommendations.push("<span class='recommendation-html'>Get an accountability partner</span><span class='recommendation-html stats'><i class='fa fa-thumbs-up'></i> Improved chances</span>");
   window.recommendations = [...new Set(window.recommendations)];
   setRecommendationsToMilestoneInputs();
 }, 2000);
