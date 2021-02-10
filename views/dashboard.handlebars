@@ -1,10 +1,49 @@
-<div>Hi {{username}}! This page will show all your posts, goals, milestones, and comments.</div>
+<style>
 
-<div class="mt-3">What do you want to do?</div>
+.dashboard {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+
+.dashboard ul li {
+   list-style-type: none;
+   margin: 10px 0 10px -30px;
+
+}
+
+.d-none-off {
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #77CBB9;
+    background-color: #77CBB9;
+    padding: 5px;
+}
+
+.d-none-off:hover {
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #506C64;
+    background-color: #506C64;
+    padding: 5px;
+}
+
+
+</style>
+
+
+
+<div class="dashboard">
+<div class="welcome"><img src="./assets/img/123.png" width="80px" height="60px">{{username}}! 
+This page will show all your posts, goals, milestones, and comments.</div>
+
+<div class="mt-3">What would you like to do?</div>
 <ul>
-    <li><a class="d-none-off" href="goal-planner/" onclick="prototypeHooksLink(event);">Setup your goal planner</a></li>
-    <li><a class="d-none-off" href="profile/" onclick="prototypeHooksLink(event);">See profile</a></li>
+    <li><img src="./assets/img/arrow.png" width="35px" height="20px"><a class="d-none-off" href="goal-planner/" onclick="prototypeHooksLink(event);">Setup your goal planner</a></li>
+    <li><img src="./assets/img/arrow.png" width="35px" height="20px"><a class="d-none-off" href="profile/" onclick="prototypeHooksLink(event);">See profile</a></li>
 </ul>
+</div>
 </div>
 <!-- Remove line when refactored into production code: -->
 <script>$(".page-title").text("{{pageTitle}}");</script>
