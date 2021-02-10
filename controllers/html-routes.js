@@ -92,6 +92,7 @@ router.get('/', async(req, res) => {
     var postsWrapper = {};
     postsWrapper.posts = posts ? posts : [];
     postsWrapper.pageTitle = "Goals Social";
+    postsWrapper.username = req.session && req.session.user ? req.session.user.username : "";
 
     res.render("world", postsWrapper);
 }); // world view "/"
@@ -106,7 +107,7 @@ router.get('/login', (req, res) => {
 
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
-    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : "";
 
     res.render("login", dataStraightThrough);
 });
@@ -116,7 +117,7 @@ router.get('/login', (req, res) => {
 router.get('/chatroom', (req, res) => {
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
-    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : "";
     if (dataStraightThrough.username) {
         res.render('chatroom', dataStraightThrough);
     } else {
@@ -133,7 +134,7 @@ router.get('/dashboard', (req, res) => {
 
     var genericData = {
         pageTitle: "Your Details",
-        username: req.body.username
+        username: req.session && req.session.user ? req.session.user.username : ""
     }
     res.render("dashboard", genericData);
 });
@@ -173,8 +174,8 @@ router.get('/goal-planner', async(req, res) => {
     pdocs.push({}); // there's always a blank goal at the end to add
 
     var postsWrapper = {
-        pageTitle: "Goal Planner",
-        username: req.body.username,
+        pageTitle: global.CONSTANT_SITE_TITLE,
+        username: req.session && req.session.user ? req.session.user.username : "",
         posts: pdocs
     }
 
@@ -330,6 +331,7 @@ router.get('/profile/:userId', async(req, res) => {
     profileWrapper.canComment = Boolean(req.session.loggedIn)
 
     profileWrapper.pageTitle = "Your Details";
+    profileWrapper.username = req.session && req.session.user ? req.session.user.username : "";
     res.render("profile", profileWrapper);
 
 }); // profile
@@ -344,13 +346,14 @@ router.get('/profile', async(req, res) => {
 
     // debugger;
     var userId = req.session.user.userId;
+    var username = req.session.user.username;
     res.redirect(`/profile/${userId}`);
 });
 
 router.get('/signup', (req, res) => {
     let dataStraightThrough = {};
     dataStraightThrough.pageTitle = global.CONSTANT_SITE_TITLE;
-    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : null;
+    dataStraightThrough.username = req.session && req.session.user ? req.session.user.username : "";
 
     res.render("signup", dataStraightThrough);
 });

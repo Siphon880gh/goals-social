@@ -73,6 +73,7 @@ $(".form-login").on("submit", async(event)=>{
 
     if (username && password) {
         $.post("/api/login", {username, password}).then(data=>{
+            console.dir({data});
 
             // If login successful, redirect to homepage or the activity the user was logging in for
             // The activity user was logging in for is stored as a URL query ?callback=/path/to/prev/resource

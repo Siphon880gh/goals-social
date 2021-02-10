@@ -1,11 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
+const Sequelize = require("sequelize");
 const sequelizeConnection = require('../config/connection');
 
-// create our User model
+// create fields/columns for User model
 class User extends Model {}
 
-// create fields/columns for User model
 User.init({
     id: {
         type: DataTypes.INTEGER,
@@ -26,7 +26,15 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "default"
-    }
+    },
+    createdAt: {
+        field: 'created_at',
+        type: Sequelize.DATE,
+    },
+    updatedAt: {
+        field: 'updated_at',
+        type: Sequelize.DATE,
+    },
 }, {
     hooks: {
         // set up beforeCreate lifecycle "hook" functionality
@@ -42,7 +50,7 @@ User.init({
         }
     },
     sequelize: sequelizeConnection,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'user'

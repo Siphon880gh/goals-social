@@ -51,10 +51,27 @@ router.post('/posts/:postId/comments', async(req, res) => {
     // console.log(JSON.stringify(req.body));
     // process.exit(0);
 
-    Comments.create(req.body);
+    Comments.create(req.body)
+        .then(async function(comment) {
+            var commentId = comment.id;
+            var { comment } = comment;
+            var whoAmI = await User.findOne({ where: { id: userId } })
+                .then(row => row.get({ plain: true }))
+                .catch(err => {
+                    console.error(err);
+                    return;
+                });
+            var { avatar, username } = whoAmI;
 
-    // Redirection is handled by ajax
-    res.status(200).json({ success: "Created comment" });
+            // Redirection is handled by ajax
+            res.status(200).json({
+                success: "Created comment",
+                domContent: { comment, username, userId, avatar, postId, commentId }
+            });
+
+        });
+
+    return;
 });
 
 // Login information
@@ -94,7 +111,7 @@ router.post('/login', async(req, res) => {
             username: dbUserData.username
         };
 
-        res.json({ loggedIn: 1 });
+        res.json({ loggedIn: 1, username: req.session.user.username });
     } else {
         res.json({ loggedIn: 0 });
     }
@@ -133,7 +150,7 @@ router.post('/signup', async(req, res) => {
             username: userCreated.username
         };
 
-        res.status(200).json({ loggedIn: 1, userCreated });
+        res.status(200).json({ loggedIn: 1, userCreated, username: req.session.user.username });
     } else {
         res.json({ loggedIn: 0, error: "General catch-all error: Most likely this username is taken already." });
     }
@@ -281,5 +298,35 @@ router.post('/posts', async(req, res) => {
     // Redirection is handled by ajax
     res.status(200).json({ success: "Created goal post and any of its milestones" });
 }); // POST /posts
+
+
+/**
+ * Get autocomplete recommendations for milestones
+ * In a future version, recommendations will be more accurate as more members join
+ * the social media and provide their goals, milestones, timeframes, and successes.
+ * An artificial intelligence would sort out successful goals and milestones and
+ * populate the autocomplete recommendation dropdown sorted from most recommended 
+ * to least recommended.
+ */
+router.get('/milestones/recommendations/:goal/:queryMilestone', async(req, res) => {
+    var { goal, queryMilestone } = req.params;
+
+    var recommendations = await Milestones.findAll()
+        .then(rows => {
+            rows = rows.map(row => {
+                row = row.get({ plain: true });
+                var milestone = row.milestone;
+                return milestone;
+            }); // map
+            return rows;
+        }).catch(err => {
+            console.error(err);
+            return;
+        });
+
+    if (recommendations) res.json(recommendations);
+    else res.json([]);
+
+}); // GET /milestones/recommendations/:goal/:queryMilestone
 
 module.exports = router;

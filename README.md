@@ -1,4 +1,4 @@
-goals-social
+Goals Social
 ====
 ![Last Commit](https://img.shields.io/github/last-commit/Siphon880gh/goals-social/master)
 
@@ -35,7 +35,7 @@ Installation
 1. Run `npm install` to install the node module dependencies.
 2. Make sure you have mysql cli installed. Run `mysql -u <USERNAME> -p` and enter password to access the mysql on your localhost or server.
 3. Create the database with `source db/schema.sql`. You `quit` now.
-4. Optionally, you can run `npm run seed` if you want to have some generic posts and users to demo the app. The sample accounts can be logged in with the username the same as password. So testUser/testUser is a login.
+4. Optionally, you can run `npm run seed` if you want to have some generic posts and users to demo the app, but first you had to have ran `npm run start` or `node ./models` to create the tables in the database. The sample accounts can be logged in with the username the same as password. So testUser/testUser is a login.
 
 Usage
 ---
