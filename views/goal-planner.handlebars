@@ -1,119 +1,95 @@
+<script>
+// Sets recommendations for milestone autocompletion
+$.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(milestones=>{window.recommendations = milestones; });
+</script>
+
 <style>
-.grid-wrapper { 
-  border: 2px solid var(--crunch);
-  border-radius: 5px; 
-}
-/** Placeholder on empty */
-.goal-planner-page [contenteditable]:empty:before {
+  /** Placeholder on empty */
+  .goal-planner-page [contenteditable]:empty:before {
     content: attr(data-placeholder);
-}
-.goal-planner-page [contenteditable]:empty {
+  }
+  .goal-planner-page [contenteditable]:empty {
     opacity: .5;
-}
-/* Date visual */
-.goal-planner-page .date {
-  margin-left: -20px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Milestone inputs and buttons */
-.goal-planner-page .milestone-wrapper {
-  display: flex;
-}
-.goal-planner-page .milestone-wrapper, .milestone-detail {
-  margin-bottom: 5px;
-  height: 30px;
-}
-.goal-planner-page .milestone-wrapper input {
-  width: 100%;
-}
-.goal-planner-page .milestone-wrapper button {
-  width: 40px;
-  height: 30px;
-  margin-right: 5px;
-}
-.goal-planner-page .milestone-wrapper button:nth-child(2) {
-  margin-left: 5px;
-}
-.goal-planner-page .milestone-add {
-  display: block;
-  margin: 10px auto 5px 0;
-}
-
-/* Milestone details */
-.goal-planner-page .milestone-detail {
-  width: 90%;
-}
-
-.goal-planner-page .main-buttons-wrapper {
-  margin: 20px auto;
-}
-.goal-planner-page .main-buttons-wrapper a {
-  margin-top: 10px;
-  margin-right: 10px;
-  width: 68px;
-  display: inline-block;
-}
-.btn-delete-post, .milestone-delete {
-  background-color: var(--warning) !important;
-}
-.goal-planner-page .inserting {
-  color: #75B8C8;
-}
-.goal-planner-page button {
-  border: 0;
-  background-color: var(--crunch);
-}
-.goal-planner-page button:hover {
-  border: 0;
-  background-color: var(--crunchier);
-}
-.txf-50pc-right {
-  transform: translateX(50%);
-}
-.goal-planner-page .carousel-indicators {
-  transform: translateY(10px);
-}
-.goal-planner-page .carousel-indicators li {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: rgba(125,125,125,.5);
-  margin-right: 10px;
-}
-.goal-planner-page .carousel-indicators li:last-child {
-  background-color: #75B8C8;
-  margin-right: 0;
-}
-.goal-planner-page .inserting::before {
-  content: "NEW\00a0";
-}
-/** Fix bug where carousel arrow blocks top menu items from working */
-.carousel-control-next, .carousel-control-prev {
-  margin-top:50px;
-}
-
-/** Autocomplete dropdown styling to remove bullet style */
-.ui-autocomplete {
+  }
+  /* Date visual */
+  .goal-planner-page .date {
+    margin-left: -20px;
+    width: 100%;
+    text-align: center;
+  }
+  /* Milestone inputs and buttons */
+  .goal-planner-page .milestone-wrapper {
+    display: flex;
+  }
+  .goal-planner-page .milestone-wrapper,
+  .milestone-detail {
+    margin-bottom: 5px;
+    height: 30px;
+  }
+  .goal-planner-page .milestone-wrapper input {
+    width: 100%;
+  }
+  .goal-planner-page .milestone-wrapper button {
+    width: 40px;
+    height: 30px;
+    margin-right: 5px;
+  }
+  .goal-planner-page .milestone-wrapper button:nth-child(2) {
+    margin-left: 5px;
+  }
+  .goal-planner-page .milestone-add {
+    display: block;
+    margin: 10px auto 5px 0;
+  }
+  /* Milestone details */
+  .goal-planner-page .milestone-detail {
+    width: 90%;
+  }
+  .goal-planner-page .main-buttons-wrapper {
+    margin: 20px auto;
+  }
+  .goal-planner-page .main-buttons-wrapper a {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 68px;
+    display: inline-block;
+  }
+  .txf-50pc-right {
+    transform: translateX(50%);
+  }
+  .goal-planner-page .carousel-indicators li:last-child {
+    background-color: red;
+  }
+  .goal-planner-page .inserting::before {
+    content: "NEW\00a0";
+  }
+  .goal-planner-page .inserting {
+    color: red;
+  }
+  /** Fix bug where carousel arrow blocks top menu items from working */
+  .carousel-control-next,
+  .carousel-control-prev {
+    margin-top: 50px;
+  }
+  /** Autocomplete dropdown styling to remove bullet style */
+  .ui-autocomplete {
     z-index: 99999;
-    background-color:white;
+    background-color: white;
     border-left: 1px solid gray;
-   margin-left: 0;
-   padding-left: 5px;
-   font-size: 1.25rem;
-   font-style: Arial;
- }
- .ui-autocomplete li {
-   list-style: none;
-   margin-left: 0;
-   padding-left: 0;
- }
- .ui-helper-hidden-accessible {
-   display: none;
- }
+    margin-left: 0;
+    padding-left: 5px;
+    font-size: 1.25rem;
+    font-style: Arial;
+  }
+  .ui-autocomplete li {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .ui-helper-hidden-accessible {
+    display: none;
+  }
 </style>
-
 <style>
   .goal-planner-page .goal-planner-page {
     font-family: Arial Narrow, sans-serif;
@@ -121,84 +97,83 @@
     color: #220C10;
     padding: 0 10px 0 10px;
     background: hsla(177, 87%, 79%, 1);
-    background: linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
-    background: -moz-linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
-    background: -webkit-linear-gradient( 90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#9BF8F4", endColorstr="#6F7BF7", GradientType=1);
-}
-
-.goal-planner-page .grid {
+    background: linear-gradient(90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(177, 87%, 79%, 1) 0%, hsla(235, 89%, 70%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#9BF8F4", endColorstr="#6F7BF7", GradientType=1);
+  }
+  .goal-planner-page .grid {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
     border-style: solid;
     margin: 50px;
     background-color: white;
     padding: 0 15px 0 15px;
-}
-
-.goal-planner-page .grid2 {
+    align-items: center;
+    overflow: auto;
+  }
+  .goal-planner-page .grid2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-template-rows: 1fr;
     border-bottom: solid black 5px;
-}
-
-.goal-planner-page .grid3 {
+    overflow: auto;
+    float: left;
+  }
+  .goal-planner-page .grid3 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-template-rows: 1fr;
-}
-
-.goal-planner-page .grid4 {
+    overflow: auto;
+  }
+  .goal-planner-page .grid4 {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     text-align: center;
     background-color: #75B8C8;
-    margin: 10px;
-}
-
-.goal-planner-page .item {
+    margin: 20px;
+    overflow: auto;
+  }
+  .goal-planner-page .item {
     padding-left: 20px;
-}
-
-.goal-planner-page .item1 {
+  }
+  .goal-planner-page .item1 {
     font-size: 50px;
     text-transform: uppercase;
     letter-spacing: 5px;
-}
-
-.goal-planner-page .item2 {
+    padding: 30px 30px 0 30px;
+  }
+  .goal-planner-page .item2 {
     background-color: #77CBB9;
     border-top: solid black 5px;
     margin-bottom: 10px;
-}
-
-.goal-planner-page .item3 {
-    background-color: #CDD3D5;
+    height: 100%;
+    padding: 15px;
+  }
+  .goal-planner-page .item3 {
     margin-bottom: 10px;
-}
-
-.goal-planner-page .help {
+  }
+  .goal-planner-page .item4 {
+    margin-bottom: 10px;
+    background-color: #CDD3D5;
+    padding: 15px;
+  }
+  .goal-planner-page .help {
     font-family: Caveat, cursive;
-    font-size: 20px;
-}
-
-span {
+    font-size: 15px;
+  }
+  span {
     letter-spacing: 2px;
     font-size: 25px;
     text-transform: uppercase;
     font-weight: bold;
-}
-
-.goal-planner-page .date {
+  }
+  .goal-planner-page .date {
     border: none;
     font-size: 15px;
     background-color: #75B8C8;
-}
-
-.goal-planner-page .text {
+  }
+  .goal-planner-page .text {
     top: 65px;
     left: 55px;
     bottom: 10px;
@@ -207,111 +182,156 @@ span {
     overflow: hidden;
     outline: none;
     font-size: 18px;
-}
+  }
+  @media (min-width: 320px) {
+    .grid2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .goal-planner-page .grid {
+      display: grid;
+      border-style: solid;
+      margin: 2px;
+      background-color: white;
+      padding: 0 15px 0 15px;
+      align-items: center;
+      overflow: auto;
+    }
+  }
+  @media (min-width: 360px) {
+    .grid2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .goal-planner-page .grid {
+      display: grid;
+      border-style: solid;
+      margin: 15px;
+      background-color: white;
+      padding: 0 15px 0 15px;
+      align-items: center;
+      overflow: auto;
+    }
+  }
+  @media (min-width: 600px) {
+    .grid2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .goal-planner-page .grid {
+      display: grid;
+      border-style: solid;
+      margin: 15px;
+      background-color: white;
+      padding: 15px;
+      align-items: center;
+      overflow: auto;
+    }
+  }
+  @media (min-width: 900px) {
+    .grid2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>
-
 <script>
 // Sets recommendations for milestone autocompletion
 $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(milestones=>{window.recommendations = milestones; });
-
 </script>
 <div class="goal-planner-page">
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-
-  <ol class="carousel-indicators">
-  {{#each posts}}
-    <li data-bs-target="#myCarousel" data-bs-slide-to="{{@index}}" 
-    class="{{#if @first}}{{/if}}"
-    ></li>
-  {{/each}}
-  </ol>
-  
-  <div class="carousel-inner">
-
-  {{#each posts}}
-    <article class="goal-planner carousel-item {{#if @first}}active{{/if}}">
-
-      <div class="grid grid-wrapper" data-post-id="{{id}}">
-        <div class="item item1">
-          <p class="{{#if @last}}inserting{{/if}}"><strong>Goal</strong> Setting</p>
-        </div>
-
-        <div class="item item2">
-          <p><span><i class="fa fa-star"></i> Goal:</span></p>
-          <p class="text html-goal" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter a goal.">{{goal}}</p>
-        </div>
-        <div class="grid2">
-          <div class="item item4">
-            <p><span><i class="fa fa-star"></i> Milestones:</span></p>
-            <p class="help">(what you need to do)</p>
-            <!-- <p class="text" data-placeholder="You can edit this! Enter specific subgoals"></p> -->
-            <div class="milestones">
-              {{#each milestones}}
-              <div class="milestone-wrapper">
-                <input class="milestone" type="text" value="{{milestone}}" data-milestone-id={{milestone_id}} placeholder="Enter a milestone" />
-                <button class="milestone-done btn btn-success float-end" onclick="doneMilestone($(event.target))"><i class="fa fa-check"></i></button>
-                <button class="milestone-delete btn btn-danger float-end" onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      {{#each posts}}
+      <li data-bs-target="#myCarousel" data-bs-slide-to="{{@index}}" class="{{#if @first}}{{/if}}"></li>
+      {{/each}}
+    </ol>
+    <div class="carousel-inner">
+      {{#each posts}}
+      <article class="goal-planner carousel-item {{#if @first}}active{{/if}}">
+        <div class="grid grid-wrapper" data-post-id="{{id}}">
+          <div class="item item1">
+            <p class="{{#if @last}}inserting{{/if}}"><strong>Goal</strong> Setting</p>
+          </div>
+          <div class="item item2">
+            <p><span><i class="fa fa-star"></i> Goal:</span></p>
+            <p class="text html-goal" contenteditable spellcheck="false"
+              data-placeholder="You can edit this! Enter a goal.">{{goal}}</p>
+          </div>
+          <div class="grid2">
+            <div class="item item4">
+              <p><span><i class="fa fa-star"></i> Milestones:</span></p>
+              <p class="help">(what you need to do)</p>
+              <!-- <p class="text" data-placeholder="You can edit this! Enter specific subgoals"></p> -->
+              <div class="milestones">
+                {{#each milestones}}
+                <div class="milestone-wrapper">
+                  <input class="milestone" type="text" value="{{milestone}}" data-milestone-id={{milestone_id}}
+                    placeholder="Enter a milestone" />
+                  <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i
+                      class="fa fa-check"></i></button>
+                  <button class="milestone-delete btn btn-danger float-end"
+                    onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
+                </div>
+                {{/each}}
               </div>
-              {{/each}}
+              <button class="milestone-add btn btn-primary" onclick="addMilestone($(event.target));"><i
+                  class="fa fa-plus"></i> Add new milestone! </button>
             </div>
-            <button class="milestone-add btn btn-primary" onclick="addMilestone($(event.target));"><i class="fa fa-plus"></i> Add new milestone! </button>
-            
+            <div class="item item3">
+              <p><span>Strategy:</span></p>
+              <p class="help">(how you do it)</p>
+              <div class="milestone-details">
+                {{#each milestones}}
+                <input class="milestone-detail" data-milestone-id={{milestone_id}} type="text" value="{{detail}}" />
+                {{/each}}
+                <!-- <p class="text milestone-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter more details"></p> -->
+              </div>
+            </div>
           </div>
-          <div class="item item3">
-            <p><span>Strategy:</span></p>
-            <p class="help">(how you do it)</p>
-            <div class="milestone-details">
-              {{#each milestones}}
-                <input class="milestone-detail" data-milestone-id={{milestone_id}} type="text" value="{{detail}}"/>
-              {{/each}}
-              <!-- <p class="text milestone-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter more details"></p> -->
+          <div class="grid3">
+            <div class="item item5">
+              <p><span>Motivation:</span></p>
+              <p class="help">(why do you want to achieve this goal)</p>
+              <p class="text html-detail" contenteditable spellcheck="false"
+                data-placeholder="You can edit this! Enter reasons why you want to achieve this goal">{{detail}}</p>
             </div>
+            <div class="grid4">
+              <div class="item item6 pt-3">
+                <p class="date"><span><i class="fa fa-star"></i> Start Date</span></p>
+                <p><input type="date" class="date-start" value="{{datepickerFormat start}}" /></p>
+              </div>
+              <div class="item item7">
+                <p class="date"><span><i class="fa fa-star"></i> Target Date</span></p>
+                <p><input type="date" class="date-end" value="{{datepickerFormat end}}" /></p>
+              </div>
+            </div> <!-- second before lsat -->
           </div>
-        </div>
-        <div class="grid3">
-          <div class="item item5">
-            <p><span>Motivation:</span></p>
-            <p class="help">(why do you want to achieve this goal)</p>
-            <p class="text html-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter reasons why you want to achieve this goal">{{detail}}</p>
-          </div>
-          <div class="grid4">
-            <div class="item item6 pt-3">
-              <p class="date"><span><i class="fa fa-star"></i> Start Date</span></p>
-              <p><input type="date" class="date-start" value="{{datepickerFormat start}}" /></p>
-            </div>
-            <div class="item item7">
-              <p class="date"><span><i class="fa fa-star"></i> Target Date</span></p>
-              <p><input type="date" class="date-end" value="{{datepickerFormat end}}"/></p>
-            </div>
-          </div> <!-- second before lsat -->
-        </div>
-        <div class="grid3 main-buttons-wrapper">
-
+          <div class="grid3 main-buttons-wrapper">
             {{#if @last}}
-              <a class="txf-50pc-right" href="#" onclick="event.preventDefault(); create_post($(event.target), 'post-id');"><button class="btn btn-danger"><i class="fa fa-plus"></i> Add</button></a>
+            <a class="txf-50pc-right" href="#"
+              onclick="event.preventDefault(); create_post($(event.target), 'post-id');"><button
+                class="btn btn-danger"><i class="fa fa-plus"></i> Add</button></a>
             {{else}}
-              <a href="#" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button class="btn btn-primary"><i class="fa fa-save"></i> Update</button></a>
-              <a href="#" onclick="event.preventDefault(); delete_post($(event.target), 'post-id');"><button class="btn btn-secondary btn-delete-post"><i class="fa fa-trash"></i> Delete</button></a>
+            <a href="#" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button
+                class="btn btn-primary"><i class="fa fa-save"></i> Update</button></a>
+            <a href="#" onclick="event.preventDefault(); delete_post($(event.target), 'post-id');"><button
+                class="btn btn-secondary"><i class="fa fa-trash"></i> Delete</button></a>
             {{/if}}
-
-        </div>
-      </div> <!-- grid-wrapper -->
-  </article> <!-- .carousel-item.active -->
-  {{/each}}
-
-      </div> <!-- .carousel-inner -->
-    </div> <!-- .carousel.slide data-bs-ride="carousel" -->
-
-<!-- #carouselExampleControls -->
-<a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev" onclick="event.preventDefault();">
+          </div>
+        </div> <!-- grid-wrapper -->
+      </article> <!-- .carousel-item.active -->
+      {{/each}}
+    </div> <!-- .carousel-inner -->
+  </div> <!-- .carousel.slide data-bs-ride="carousel" -->
+  <!-- #carouselExampleControls -->
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev"
+    onclick="event.preventDefault();">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next" onclick="event.preventDefault();">
+  <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next"
+    onclick="event.preventDefault();">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </a>
-  </div> <!-- goal-planner-page -->
+</div> <!-- goal-planner-page -->
 
 <script>
   function delete_post($here, datasetName) {
