@@ -108,6 +108,16 @@
     border: solid 1px black;
     
 }
+
+#submit-button {
+    background-color: #77CBB9;
+    border: none;
+}
+
+#submit-button:hover {
+    background-color: #506C64;
+    border: none;
+}
 </style>
 
 <div class="mb-3 posts">
@@ -177,7 +187,7 @@
                                 <textarea class="add-comment-input editing"></textarea>
                             </div>
     
-                            <a href="#" onclick="event.preventDefault(); addComment($(event.target), 'post-id');"><button class="add-comment standout">Submit</button></a>
+                            <a href="#" onclick="event.preventDefault(); addComment($(event.target), 'post-id');"><button class="add-comment standout" id="submit-button">Submit</button></a>
                         </div>
                     </form>
                 </div>
