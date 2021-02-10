@@ -220,6 +220,9 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
     outline: none;
     font-size: 18px;
   }
+  .pt-15px {
+    padding-top: 15px;
+  }
   @media (min-width: 320px) {
     .grid2 {
       grid-template-columns: repeat(2, 1fr);
@@ -312,7 +315,7 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
                   class="fa fa-plus"></i> Add new milestone! </button>
             </div>
             <div class="item item3">
-              <p><span>Strategy:</span></p>
+              <p class="pt-15px"><span>Strategy:</span></p>
               <p class="help">(how you do it)</p>
               <div class="milestone-details">
                 {{#each milestones}}
