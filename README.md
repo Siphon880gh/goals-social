@@ -71,7 +71,29 @@ We also mocked Sequelize on the frontend by using a completely front-end tool: Z
 
 After developing a rapid Prototype, we refactored the PHP-include files, frontend Handlebar templates, the dynamic routes, and ZangoDB into a full stack app. Because of how similar they are to the backend technology, we refactored them into Express-Handlebar templates, Express Routes, and Sequelize with relative ease.
 
-The testing and prototyping are in the folders __test__, __test2__, and prototype/ folders, and therefore you can ignore those folders when it concerns how the app actually works. But if you want to add more features, you can use the same methodology with these testing and prototyping folders.
+The testing and prototyping are in the folders __test__, __test2__, and prototype/ folders, and therefore you can ignore those folders when it concerns how the app actually works. But if you want to add more features, you can use the same methodology with these testing and prototyping folders. The following is how you can work with the prototype version before refactoring your features into production code.
+
+### Contributing with the Prototype version
+
+The Prototype is a functional version of the app that we made before dividing the code into Express. It is mostly unstyled and uses no backend (except PHP, but it's used to divide frontend handlebar js into PHP templating files). You can choose to contribute features by working with the prototype first.
+
+1. The Prototype uses extra js libraries compared to production in order to mimic handlebar templates, database modeling, and routes. Some of these libraries were installed with bower, so to run prototype, you have to install the bower libraries: 
+```
+bower install
+```
+
+If you do not have bower, you will have to install it on your system. On macs, you run `brew install bower`. More information on [bower](https://bower.io/).
+
+Running `npm install` is not necessary but you can if you want to use hotloading via livereload and sass via compass. However, these are developer only tools and not necessary with Prototype to run. Remember that the whole point of rapidly prototyping the app is so we can have all the working parts before we move them over to Express or involve any node in production. If you choose to use these node developer tools, you will develop the prototype even faster. If you choose, then running `npm run watch` at /prototype will refresh the webpage via the Chrome extension livereload whenever you make code changes. It will also automatically use compass to transpile sass code from /prototype/assets/css/scss into css code at /prototype/assets/css, allowing you to use the faster to code SASS over CSS. So the watch script runs both livereload and compass concurrently. For compass to work, you will have to install ruby and compass. For livereload, you have to install the Chrome extension. Visit their websites for installation instructions.
+
+2. Next, you run the prototype on a PHP server. There are many ways. An easy way is to open `/prototype/index.php` in Visual Code with the extension PHP server, then right click the code and click 
+"PHP Server: Serve project". The PHP page will open in your web browser. Clicking different links and buttons will open different URLs as if there's an Express serving HTML routes, but the webpage layout is actually dynamically changed without refreshing the page when the URL changes. 
+
+Frontend version Handlebars is used to incorporate templating to the Prototype. The data is modeled with ZangoDB which is similar to MongoDB that allowed us to try different tables without redoing schemas like in Sequelize, and the database is stored locally on your webbrowser's IndexedDB. This will allow future developers to try new database ideas more easily. However, joining tables is much more difficult and you can find that we implemented our own way of joining tables.
+
+3. You can code using the .php files much like you would with .handlebars files and link them to js files. PHP knowledge is not necessary. The controllers are in `/fake-controllers/` which follow a similar syntax to Express JS but is really using a combination of Crossroads JS, Hasher, and Signals libraries and mocked window.req and window.res utilities. Databases are modeled easily and seeded in `fake-seeds/autoseeds.js` and they save to your web browser's IndexedDB; however, we have the database reset everytime we refresh the webpage so we can test features with consistent data. You can decide to reimplement this so there's no forced syncing. 
+
+Once you are satisfied with the features you contribute, you can start refactoring your prototype code into production code at `/models`, `/views`, `/controllers`, `server.js`, and `/public`, which are the actual production code. Notice these folder sare not preceded with the word "fake".
 
 Tests
 ---
