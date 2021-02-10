@@ -4,7 +4,7 @@ idle({
     onIdle: function() {
         let isLoggedInBasedOnDom = $("a[href='/logout']").length;
         if (isLoggedInBasedOnDom)
-            alert("You will be logged out for inactivity after 1 minute.");
+            alert("You will be logged out for inactivity after 2 minutes.");
     }
 }).start();
 
