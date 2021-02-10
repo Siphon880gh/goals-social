@@ -4,6 +4,10 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
 </script>
 
 <style>
+  .grid-wrapper { 
+  border: 2px solid var(--crunch);
+  border-radius: 5px; 
+}
   /** Placeholder on empty */
   .goal-planner-page [contenteditable]:empty:before {
     content: attr(data-placeholder);
@@ -54,23 +58,53 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
     width: 68px;
     display: inline-block;
   }
-  .txf-50pc-right {
-    transform: translateX(50%);
+  .btn-delete-post, .milestone-delete {
+    background-color: var(--warning) !important;
   }
-  .goal-planner-page .carousel-indicators li:last-child {
-    background-color: red;
+  .goal-planner-page .inserting {
+    color: #75B8C8;
   }
   .goal-planner-page .inserting::before {
     content: "NEW\00a0";
   }
-  .goal-planner-page .inserting {
-    color: red;
+  .goal-planner-page button {
+    border: 0;
+    background-color: var(--crunch);
   }
+  .goal-planner-page button:hover {
+    border: 0;
+    background-color: var(--crunchier);
+  }
+  .txf-50pc-right {
+    transform: translateX(50%);
+  } /** ??? */
   /** Fix bug where carousel arrow blocks top menu items from working */
   .carousel-control-next,
   .carousel-control-prev {
     margin-top: 50px;
   }
+.goal-planner-page .carousel-indicators {
+  transform: translateY(45px);
+}
+.goal-planner-page .carousel-indicators li {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: rgba(125,125,125,.5);
+  margin-right: 10px;
+}
+.goal-planner-page .carousel-indicators li:last-child {
+  background-color: #75B8C8;
+  margin-right: 0;
+}
+.goal-planner-page .inserting::before {
+  content: "NEW\00a0";
+}
+/** Fix bug where carousel arrow blocks top menu items from working */
+.carousel-control-next, .carousel-control-prev {
+  margin-top:50px;
+}
+
   /** Autocomplete dropdown styling to remove bullet style */
   .ui-autocomplete {
     z-index: 99999;
@@ -124,6 +158,9 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-template-rows: 1fr;
     overflow: auto;
+  }
+  .grid3.grid-horizontal { 
+    grid-template-columns: 1fr 1fr !important; 
   }
   .goal-planner-page .grid4 {
     display: grid;
@@ -264,7 +301,7 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
                 <div class="milestone-wrapper">
                   <input class="milestone" type="text" value="{{milestone}}" data-milestone-id={{milestone_id}}
                     placeholder="Enter a milestone" />
-                  <button class="milestone-delete btn btn-success float-end" onclick="doneMilestone($(event.target))"><i
+                  <button class="milestone-done btn btn-success float-end" onclick="doneMilestone($(event.target))"><i
                       class="fa fa-check"></i></button>
                   <button class="milestone-delete btn btn-danger float-end"
                     onclick="deleteMilestone($(event.target))"><i class="fa fa-times"></i></button>
@@ -303,7 +340,7 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
               </div>
             </div> <!-- second before lsat -->
           </div>
-          <div class="grid3 main-buttons-wrapper">
+          <div class="grid3 grid-horizontal main-buttons-wrapper">
             {{#if @last}}
             <a class="txf-50pc-right" href="#"
               onclick="event.preventDefault(); create_post($(event.target), 'post-id');"><button
@@ -312,7 +349,7 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
             <a href="#" onclick="event.preventDefault(); update_post($(event.target), 'post-id');"><button
                 class="btn btn-primary"><i class="fa fa-save"></i> Update</button></a>
             <a href="#" onclick="event.preventDefault(); delete_post($(event.target), 'post-id');"><button
-                class="btn btn-secondary"><i class="fa fa-trash"></i> Delete</button></a>
+                class="btn btn-secondary btn-delete-post"><i class="fa fa-trash"></i> Delete</button></a>
             {{/if}}
           </div>
         </div> <!-- grid-wrapper -->
