@@ -328,7 +328,6 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
             <div class="item item4">
               <p><span><i class="fa fa-star"></i> Milestones:</span></p>
               <p class="help">(what you need to do)</p>
-              <!-- <p class="text" data-placeholder="You can edit this! Enter specific subgoals"></p> -->
               <div class="milestones">
                 {{#each milestones}}
                 <div class="milestone-wrapper">
@@ -351,7 +350,6 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
                 {{#each milestones}}
                 <input class="milestone-detail" data-milestone-id={{milestone_id}} type="text" value="{{detail}}" />
                 {{/each}}
-                <!-- <p class="text milestone-detail" contenteditable spellcheck="false" data-placeholder="You can edit this! Enter more details"></p> -->
               </div>
             </div>
           </div>
@@ -544,11 +542,14 @@ $(()=>{
 });
 
 function doneMilestone($here) {
+  // Get DOMs
   var $context = $here.closest(".goal-planner");
   var $milestoneWrapper = $here.closest(".milestone-wrapper");
   var whichIndex = $milestoneWrapper.index();
   var $milestone = $milestoneWrapper.find("input");
   var $milestoneDetails = $context.find(".milestone-detail");
+
+  // Toggle done state
   var wasDisabled = $milestone.attr("disabled")?true:false;
   if(!wasDisabled) {
     $milestone.attr("disabled", true).addClass("bg-secondary text-white border-success");
@@ -562,13 +563,21 @@ function doneMilestone($here) {
 function deleteMilestone($here) {
   if(!confirm("Are you sure you want to delete? Chosen: " + $here.closest(".milestone-wrapper").find("input").val() ))
     return;
-    
-  var $context = $here.closest(".milestone-wrapper");
-  var $milestone = $context;
-  var milestoneName = $context.find("input").val();
-  var milestoneId = $context.find("input").data("milestone-id");
+  
+  // Get DOMs
+  var $context = $here.closest(".goal-planner");
+  var $milestoneWrapper = $here.closest(".milestone-wrapper");
+  var whichIndex = $milestoneWrapper.index();
+  var $milestone = $milestoneWrapper.find("input");
+  var $milestoneDetails = $context.find(".milestone-detail");
+
+  // Remove DOM
+  $milestoneWrapper.remove();
+  $milestoneDetails.eq(whichIndex).remove();
 
   // Remove from DB:
+  var milestoneName = $milestone.val();
+  var milestoneId = $milestone.data("milestone-id");
   if (milestoneId) {
     $.ajax({
       headers : {
@@ -577,7 +586,7 @@ function deleteMilestone($here) {
       },
       url: `/api/milestones/${milestoneId}`,
       type: "DELETE",
-      success: function(data){
+      always: function(data){
         console.log(data);
         window.location.pathname = "/profile";
       },
