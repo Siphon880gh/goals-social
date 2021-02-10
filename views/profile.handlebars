@@ -76,13 +76,11 @@
 }
 </style>
 <style>
-.own-profile-options {
-    border: 2px solid gray;
-    padding: 10px;
-}
 .profile-page .infos {
-    background-color: rgba(125,125,125,.5);
     padding: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--crunch);
+    background-color: white;
 }
 .profile-page .info {
     height: 1.5rem;
@@ -94,6 +92,172 @@
 }
     
 </style>
+<style>
+
+.mb-3 {
+    color: #220C10;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: arial 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius:50%; /* Round avatar */
+}
+
+.goal {
+    font-size: 30px;
+}
+
+
+.comment-wrapper .avatar {
+    width: 60px;
+    height: 60px;
+}
+.post:first-child {
+    margin-top:20px;
+}
+.post {
+    padding: 10px;
+    border: 3px solid #77CBB9;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: white;
+}
+.post_user_info {
+    float: right;
+}
+
+.detail {
+    font-weight: 200;
+    border-bottom: 2px black;
+    padding-top: 10px;
+}
+
+.dates {
+    color: #220C10;
+    font-weight: 200;
+    padding-bottom: 5px;
+}
+.dates::before {
+    content: "Duration:\00a0"
+}
+
+.post-owner {
+    text-align: center;
+}
+.milestone-wrapper {
+    width: 100%;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 2px solid #77CBB9;
+
+    font-weight: 500;
+    color: #506C64;
+}
+.milestone-wrapper.done {
+    color: #CDD3D5;
+    font-size: 20px;
+    font-weight: 100;
+
+}
+.milestone-wrapper:not(.done) .fa.fa-check {
+    display: none;
+}
+.milestone-wrapper.done .fa.fa-check {
+    margin-right: 5px;
+}
+.comment-wrapper {
+    width: 75%;
+    border-radius: 5px;
+    margin: 0 auto;
+    border: 2px solid #77CBB9;
+}
+.clear-fix {
+    clear: both;
+}
+.comment-add-body {
+    padding: 10px;
+    border: 2px solid #77CBB9;
+    border-radius: 5px;
+    width: 75%;
+    margin: 0 auto;
+    
+}
+.comment-add-body button {
+    background-color: var(--crunch);
+    border: 0;
+}
+.comment-add-body button:hover {
+    background-color: var(--crunchier);
+    border: 0;
+}
+.comment-add-wrapper {
+    padding: 5px !important;
+    margin-top: 15px;
+}
+.comment-sign-in {
+    width: 75%;
+    margin: 0 auto;
+}
+.add-comment-input {
+    width: 100%;
+    display: block;
+    resize: none;
+    border: solid 1px black;
+    
+}
+
+#submit-button {
+    background-color: #77CBB9;
+    border: none;
+}
+
+#submit-button:hover {
+    background-color: #506C64;
+    border: none;
+}
+</style>
+<style>
+.own-profile-options {
+    border: 0;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+.own-profile-options ul li {
+   list-style-type: none;
+   margin: 10px 0 20px -30px;
+}
+.own-profile-options ul li {
+   list-style-type: none;
+   margin: 10px 0 20px -30px;
+}
+
+.own-profile-options ul li a {
+    padding-left: 10px; 
+    padding-right: 10px;
+    margin-left: 15px;
+}
+.own-profile-options .btn-style {
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #77CBB9;
+    background-color: #77CBB9;
+    padding: 5px;
+}
+
+.own-profile-options .btn-style:hover {
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #506C64;
+    background-color: #506C64;
+    padding: 5px;
+}
+</style>
 
     {{#if viewingOwnProfile}}
     <div class="own-profile-options mb-4">
@@ -101,7 +265,7 @@
 
         <div class="mt-3">What do you want to do?</div>
             <ul>
-                <li><a class="d-none-off" href="/profile/edit" onclick="prototypeHooksLink(event);">Edit Profile</a></li>
+                <li><img src="/assets/img/arrow.png" width="35px" height="20px"><a class="btn-style" href="/profile/edit" onclick="prototypeHooksLink(event);">Edit Profile</a></li>
             </ul>
         </div>
     </div>
