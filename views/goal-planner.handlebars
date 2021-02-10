@@ -270,6 +270,10 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  .spacer-vertical-35px {
+    height: 35px;
+    width: 1px;
+  }
 </style>
 <script>
 // Sets recommendations for milestone autocompletion
@@ -372,6 +376,7 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
     <span class="visually-hidden">Next</span>
   </a>
 </div> <!-- goal-planner-page -->
+<div class="spacer-vertical-35px"></div>
 
 <script>
   function delete_post($here, datasetName) {
