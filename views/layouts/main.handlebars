@@ -180,10 +180,13 @@
     </style>
 
 </head>
- <main class="container mt-3" data-main>
-        {{{body}}}
-</main>
+
+
 <body>
+<a href="/">
+<h1 class="page-title">{{pageTitle}}</h1>
+</a>
+<!-- Goal Social | etc -->
     <header class="site-header">
         <nav>
             <ul>
@@ -209,13 +212,12 @@
             </ul>
         </nav>
 
-        <a href="/">
-        <h1 class="page-title">{{pageTitle}}</h1>
-        </a>
-        <!-- Goal Social | etc -->
+    
 
     </header>
-   
+    <main class="container mt-3" data-main>
+        {{{body}}}
+    </main>
     <!-- container -->
 
     <!-- JS vendor: Bootstrap -->
