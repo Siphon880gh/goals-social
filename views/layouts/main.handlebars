@@ -130,8 +130,13 @@
             padding-left: 15px;
             padding-right: 15px;
             background-color: #77CBB9;
-            width: 100%;
+            display: block;
 
+        }
+
+        .site-header nav {
+            width: 100%;
+            display: inline-block;
         }
 
         .site-header nav ul {
@@ -165,7 +170,7 @@
             text-decoration: underline;
         }
 
-        .site-header .page-title {
+        .site-header h1{
             display: inline-block;
             padding: 5px;
             margin: 20px 0 20px 0;
@@ -184,11 +189,12 @@
 <body>
 
     <header class="site-header">
+        
+            <!-- Goal Social | etc -->
         <nav>
             <a href="/">
                 <h1 class="page-title">{{pageTitle}}</h1>
             </a>
-            <!-- Goal Social | etc -->
             <ul>
                 <li>
                     <a href="/">World</a>
@@ -211,6 +217,7 @@
                 {{/if}}
             </ul>
         </nav>
+        
 
     </header>
 
