@@ -123,6 +123,14 @@ $.get("/api/milestones/recommendations/noop-goal/noop-query-milestone").then(mil
   .ui-helper-hidden-accessible {
     display: none;
   }
+
+  /* Fix carousel left arrow and right arrow icons being pushed into the contents on smaller screens */
+  @media (max-width:768px) {
+    .carousel-control-next, .carousel-control-prev {
+      width: 5% !important;
+    }
+  }
+
 </style>
 <style>
   .goal-planner-page .goal-planner-page {
