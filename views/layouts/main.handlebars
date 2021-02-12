@@ -23,13 +23,16 @@
 
     <style>
         /* Reset CSS */
+
         :root {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+
         /* Themes */
+
         :root {
             --warning: rgba(255, 165, 0, 0.7);
             --crunchier: #13bb96;
@@ -46,141 +49,141 @@
         }
 
 
-        /* Mobile-first approach */
-        @media (min-width: 992px) {
-            main {
-                width: 0% !important;
-                margin-top: 20px;
-            }
-        }
 
-        @media (min-width: 1200px) {
-            main {
-                width: 60% !important;
-                margin-top: 40px;
+
+            /* Mobile-first approach */
+
+            @media (min-width: 992px) {
+                main {
+                    width: 70% !important;
+                    margin-top: 20px;
+                }
             }
 
-        }
+            @media (min-width: 1200px) {
+                main {
+                    width: 60% !important;
+                    margin-top: 40px;
+                }
+            }
 
-        /* Styling classes */
-        .bordered {
-            border: 1px solid black;
-        }
 
-        .bordered-alt {
-            border: 1px solid gray;
-        }
+            /* Styling classes */
 
-        .text-xs {
-            font-size: .5rem;
-        }
+            .bordered {
+                border: 1px solid black;
+            }
 
-        .text-right {
-            text-align: right;
-        }
+            .bordered-alt {
+                border: 1px solid gray;
+            }
 
-        /* Layout */
-        body {
-            font-family: Arial Narrow, sans-serif;
-            font-weight: 100;
-            background: #9bf8f3;
-            background: linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-            background: -moz-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-            background: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
-            min-height: 125vh;
-        }
+            .text-xs {
+                font-size: .5rem;
+            }
 
-        .container-fluid {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
+            .text-right {
+                text-align: right;
+            }
 
-        button.standout {
-            width: 100%;
-            margin: 10px 0;
-            padding: 5px;
-            border-radius: 5px;
-            background-color: var(--thememed);
-            color: white;
-            transition: background-color 500ms;
-        }
 
-        button.standout:hover {
-            background-color: var(--themelight);
-        }
+            /* Layout */
 
-        /** Header **/
-        .site-header {
-            margin: 0;
-            margin-top: -15px;
-            padding: 0;
-            padding-top: 10px;
-            padding-left: 15px;
-            padding-right: 15px;
-            background-color: #77CBB9;
-            width: 100%;
+            body {
+                font-family: Arial Narrow, sans-serif;
+                font-weight: 100;
+                background: #9bf8f3;
+                background: linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+                background: -moz-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+                background: -webkit-linear-gradient(90deg, #9bf8f3 0%, #6e7af7 100%);
+                min-height: 125vh;
+            }
 
-        }
+            .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
 
-        .site-header nav {
-            width: 100%;
-            display: inline-block;
-        }
+    
 
-        .site-header nav ul {
-            float: right;
-            padding: 0;
-            margin: 40px 0;
-            font-size: 18px;
+            button.standout {
+                width: 100%;
+                margin: 10px 0;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: var(--thememed);
+                color: white;
+                transition: background-color 500ms;
+            }
 
-        }
+            button.standout:hover {
+                background-color: var(--themelight);
+            }
 
-        .site-header nav ul li {
-            display: inline;
-            margin-left: 60px;
-            text-align: center;
-            list-style-type: none;
-        }
 
-        .site-header nav ul li a,
-        .site-header nav ul li a:visited {
-            color: white;
-            text-decoration: none;
-            transition: color 500ms;
-            letter-spacing: 1px;
-            ;
-        }
+            /** Header **/
 
-        .site-header nav ul li a:active,
-        .site-header nav ul li a:hover {
-            color: white;
-            text-decoration: underline;
-        }
+            .site-header {
+                margin: 0;
+                margin-top: -15px;
+                padding: 0;
+                padding-top: 10px;
+                padding-left: 15px;
+                padding-right: 15px;
+                background-color: #77CBB9;
+                
+            }
 
-        .site-header .page-title {
-            display: inline-block;
-            padding: 5px;
-            margin: 20px 0 20px 0;
-            border-radius: 5px;
-            color: white;
-            background-color: #75B8C8;
-            font-weight: 800;
-            box-shadow: 5px 5px var(--soften);
-            border-radius: 15px;
-        }
+            .site-header nav ul {
+                float: right;
+                padding: 0;
+                margin: 40px 0;
+                font-size: 18px;
+            }
+
+            .site-header nav ul li:first-child {
+                color: red;
+            }
+
+            .site-header nav ul li {
+                display: inline-block;
+                margin-left: 60px;
+                text-align: center;
+                list-style-type: none;
+            }
+
+            .site-header nav ul li a,
+            .site-header nav ul li a:visited {
+                color: white;
+                text-decoration: none;
+                transition: color 500ms;
+                letter-spacing: 1px;;
+            }
+
+            .site-header nav ul li a:active,
+            .site-header nav ul li a:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+            .site-header .page-title {
+                display: inline-block;
+                padding: 5px;
+                margin: 20px 0 20px 0;
+                border-radius: 5px;
+                color: white;
+                background-color: #75B8C8;
+                font-weight: 800;
+                box-shadow: 5px 5px var(--soften);
+                border-radius: 15px;
+            }
     </style>
 
 </head>
 
-
 <body>
-
     <header class="site-header">
         <nav>
-            <a href="/">
-                <h1 class="page-title">{{pageTitle}}</h1>
-            </a>
-            <!-- Goal Social | etc -->
             <ul>
                 <li>
                     <a href="/">World</a>
@@ -194,18 +197,25 @@
                 {{#if username}}
                 <li>
                     <a href="/logout">Logout ({{username}})</a>
-                    </a>
+                </a>
                 </li>
                 {{else}}
                 <li>
                     <a href="/login">Login</a>
-                </li>
-                {{/if}}
+                </li>  
+                {{/if}}       
             </ul>
         </nav>
 
-    </header>
+        <a href="/">
+        <h1 class="page-title">{{pageTitle}}</h1>
+        </a>
+        <!-- Goal Social | etc -->
 
+    </header>
+    <main class="container mt-3" data-main>
+        {{{body}}}
+    </main>
     <!-- container -->
 
     <!-- JS vendor: Bootstrap -->
