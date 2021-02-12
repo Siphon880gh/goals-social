@@ -63,7 +63,7 @@ router.get('/', async(req, res) => {
             // Post level
             var { id, username, avatar } = row.user;
             delete row.user;
-            row.user_id = id;
+            row.assoc_user_id = id;
             row.post_username = username;
             row.avatar = avatar;
 
@@ -259,17 +259,68 @@ router.get('/profile/:userId', async(req, res) => {
     profileWrapper.viewingOwnProfile = viewingOwnProfile;
 
     // Set userInfo or falsy
-    var userInfo = await UserInfos.findOne({ where: { uid: userId } })
+    var userInfo = await UserInfos.findOne({
+            where: { uid: userId },
+            attributes: [
+                "name",
+                "abbr",
+                "email",
+                "location",
+                "occupation",
+                "bio",
+                "linkFacebook",
+                "linkInstagram",
+                "linkLinkedin"
+            ]
+        })
         .then(row => row.get({ plain: true }))
         .catch(err => {
             console.error(err);
             return;
         });
-    if (userInfo)
-        profileWrapper.userInfo = userInfo;
-    else
+
+    // Problem: Heroku still renders the bio container when there is no bio information saved
+    // for that profile, whereas localhost correctly does not render the bio container
+
+    // Diagnosis: Heroku returns an object userInfo with all fields set to blank string except
+    //            we have fields with values at createdAt, updatedAt, and uid.
+    //            This causes the bio container to still render because the handlebars if-condition
+    //            runs true. We expect userInfo to return false if no bio is ever set.
+    //            On localhost, this is not a problem because a profile without a bio saved
+    //            returns undefined for userInfo.
+
+    // Solution: Concatenate all the relevant fields that show up on Heroku and see if the concatenated
+    //           is a blank string. If it is, then it's meant to be falsy, so handlebars is not meant to 
+    //           render.
+
+    function testIfMeantToBeFalsyOnHeroku(userInfo) {
+        var {
+            name,
+            abbr,
+            email,
+            location,
+            occupation,
+            bio,
+            linkFacebook,
+            linkInstagram,
+            linkLinkedin
+        } = userInfo;
+
+        var concatenated = name + abbr + email + location + occupation + bio + linkFacebook + linkInstagram + linkLinkedin;
+        var isFalsy = isBlank = concatenated.length === 0;
+
+        return isFalsy;
+    } // testIfMeantToBeFalsyOnHeroku
+
+    if (Boolean(userInfo) === false) {
         profileWrapper.userInfo = false;
-    // console.log(userInfo);
+    } else if (testIfMeantToBeFalsyOnHeroku(userInfo)) {
+        profileWrapper.userInfo = false;
+    } else {
+        profileWrapper.userInfo = userInfo;
+    }
+
+    // console.log({ userInfo });
     // process.exit(0);
 
     // Get posts with all its joined comments, milestones, usernames, avatars (of owner and commenters)
@@ -305,7 +356,7 @@ router.get('/profile/:userId', async(req, res) => {
             // Post level
             var { id, username, avatar } = row.user;
             delete row.user;
-            row.user_id = id;
+            row.assoc_user_id = id;
             row.post_username = username;
             row.avatar = avatar;
 
