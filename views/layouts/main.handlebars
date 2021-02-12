@@ -50,7 +50,6 @@
 
 
 
-
             /* Mobile-first approach */
 
             @media (min-width: 992px) {
@@ -104,8 +103,6 @@
                 padding-right: 15px;
             }
 
-    
-
             button.standout {
                 width: 100%;
                 margin: 10px 0;
@@ -124,48 +121,13 @@
             /** Header **/
 
             .site-header {
-                margin: 0;
-                margin-top: -15px;
-                padding: 0;
-                padding-top: 10px;
-                padding-left: 15px;
-                padding-right: 15px;
+                margin: -15px 0 0 0;
+                padding: 10px 10px 0 10px;
                 background-color: #77CBB9;
                 
             }
-
-            .site-header nav ul {
-                float: right;
-                padding: 0;
-                margin: 40px 0;
-                font-size: 18px;
-            }
-
-            .site-header nav ul li:first-child {
-                color: red;
-            }
-
-            .site-header nav ul li {
-                display: inline-block;
-                margin-left: 60px;
-                text-align: center;
-                list-style-type: none;
-            }
-
-            .site-header nav ul li a,
-            .site-header nav ul li a:visited {
-                color: white;
-                text-decoration: none;
-                transition: color 500ms;
-                letter-spacing: 1px;;
-            }
-
-            .site-header nav ul li a:active,
-            .site-header nav ul li a:hover {
-                color: white;
-                text-decoration: underline;
-            }
-
+            
+            /** Header title **/
             .site-header .page-title {
                 display: inline-block;
                 padding: 5px;
@@ -177,13 +139,104 @@
                 box-shadow: 5px 5px var(--soften);
                 border-radius: 15px;
             }
+            /* General menu styling */
+            .site-nav li a,
+            .site-nav li a:visited {
+                color: white;
+                text-decoration: none;
+                transition: color 500ms;
+                letter-spacing: 1px;;
+            }
+
+            .site-nav li a:active,
+            .site-nav li a:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+
+            /** Mobile First Menu **/
+                .site-nav ul {
+                    padding: 60px 0 0 0;
+                }
+                .site-nav ul li {
+                    padding: 10px 0;
+                    width: 100%;
+                    list-style-type: none;
+                    text-align:center;
+                    display: block;
+                    border-top: 1px solid gray;
+                    margin: 0 auto;
+                    text-align: center;
+                    vertical-align: middle;
+                    font-size: 18px;
+                }
+                .site-nav ul li:hover {
+                    background-color:var(--crunchier);
+                }
+                .site-nav-mobile-btn {
+                    display: inline-block;
+                    float: right;
+                    margin-top: 15px;
+                    cursor: pointer;
+                    border: 2px solid black;
+                    padding: 5px;
+                }
+                .site-nav-mobile-btn:hover {
+                    color: rgb(96,110,243);
+                    border: 2px solid rgb(96,110,243);
+                }
+
+                .site-nav-mobile-btn.active {
+                    color: rgb(125, 125, 125);
+                    border: 2px solid rgb(125, 125, 125);
+                }
+                
+                .site-nav-mobile-btn.active:hover {
+                    color: rgb(57, 75, 241);
+                    border: 2px solid rgb(57, 75, 241);
+                }
+                .site-nav-mobile-btn:not(.active)+ul {
+                    display: none;
+                }
+                .site-nav-mobile-btn.active+ul {
+                    display: block;
+                }
+             @media (min-width: 768px) {
+                .site-nav-mobile-btn {
+                    display: none;
+                }
+                .site-nav-mobile-btn.active+ul, .site-nav-mobile-btn:not(.active)+ul {
+                    display: block;
+                }
+
+                .site-nav ul {
+                    float: right;
+                    padding: 0;
+                    margin: 40px 0;
+                    font-size: 18px;
+                }
+
+                .site-nav ul li {
+                    display: inline-block;
+                    margin-left: 60px;
+                    text-align: center;
+                    list-style-type: none;
+                    width: auto;
+                    border-top: none;
+                }
+                .site-nav ul li:hover {
+                    background-color: transparent;
+                }
+             }
     </style>
 
 </head>
 
 <body>
     <header class="site-header">
-        <nav>
+        <nav class="site-nav">
+            <span class="fa fa-grip-lines site-nav-mobile-btn" onclick="this.classList.toggle('active');"></span>
             <ul>
                 <li>
                     <a href="/">World</a>
