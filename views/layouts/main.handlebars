@@ -22,18 +22,14 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
     <style>
-
         /* Reset CSS */
-
         :root {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-
         /* Themes */
-
         :root {
             --warning: rgba(255, 165, 0, 0.7);
             --crunchier: #13bb96;
@@ -50,9 +46,7 @@
         }
 
 
-
         /* Mobile-first approach */
-
         @media (min-width: 992px) {
             main {
                 width: 0% !important;
@@ -69,7 +63,6 @@
         }
 
         /* Styling classes */
-
         .bordered {
             border: 1px solid black;
         }
@@ -86,9 +79,7 @@
             text-align: right;
         }
 
-
         /* Layout */
-
         body {
             font-family: Arial Narrow, sans-serif;
             font-weight: 100;
@@ -104,8 +95,6 @@
             padding-right: 15px;
         }
 
-
-
         button.standout {
             width: 100%;
             margin: 10px 0;
@@ -120,9 +109,7 @@
             background-color: var(--themelight);
         }
 
-
         /** Header **/
-
         .site-header {
             margin: 0;
             margin-top: -15px;
@@ -131,25 +118,25 @@
             padding-left: 15px;
             padding-right: 15px;
             background-color: #77CBB9;
+            width: 100%;
 
         }
 
         .site-header nav {
             width: 100%;
-            display: inline;
-            
+            display: inline-block;
         }
 
         .site-header nav ul {
+            float: right;
             padding: 0;
             margin: 40px 0;
             font-size: 18px;
 
         }
 
-
         .site-header nav ul li {
-        
+            display: inline;
             margin-left: 60px;
             text-align: center;
             list-style-type: none;
@@ -170,7 +157,7 @@
             text-decoration: underline;
         }
 
-        .site-header h1 {
+        .site-header .page-title {
             display: inline-block;
             padding: 5px;
             margin: 20px 0 20px 0;
@@ -180,7 +167,6 @@
             font-weight: 800;
             box-shadow: 5px 5px var(--soften);
             border-radius: 15px;
-           
         }
     </style>
 
@@ -188,42 +174,35 @@
 
 
 <body>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
     <header class="site-header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <!-- Goal Social | etc -->
-            <a class="navbar-brand" href="/">
+        <nav>
+            <a href="/">
                 <h1 class="page-title">{{pageTitle}}</h1>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav flex-row-reverse mr-auto mt-2 mt-md-0">
-                    <li class="nav-item">
-                        <a href="/">World</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/chatroom">Chatroom</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/dashboard">Dashboard</a>
-                    </li>
-                    {{#if username}}
-                    <li class="nav-item">
-                        <a href="/logout">Logout ({{username}})</a>
-                        </a>
-                    </li>
-                    {{else}}
-                    <li class="nav-item">
-                        <a href="/login">Login</a>
-                    </li>
-                    {{/if}}
-                </ul>
+            <!-- Goal Social | etc -->
+            <ul>
+                <li>
+                    <a href="/">World</a>
+                </li>
+                <li>
+                    <a href="/chatroom">Chatroom</a>
+                </li>
+                <li>
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                {{#if username}}
+                <li>
+                    <a href="/logout">Logout ({{username}})</a>
+                    </a>
+                </li>
+                {{else}}
+                <li>
+                    <a href="/login">Login</a>
+                </li>
+                {{/if}}
+            </ul>
         </nav>
-
 
     </header>
 
