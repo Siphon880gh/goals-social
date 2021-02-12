@@ -63,7 +63,7 @@ router.get('/', async(req, res) => {
             // Post level
             var { id, username, avatar } = row.user;
             delete row.user;
-            row.user_id = id;
+            row.assoc_user_id = id;
             row.post_username = username;
             row.avatar = avatar;
 
@@ -356,7 +356,7 @@ router.get('/profile/:userId', async(req, res) => {
             // Post level
             var { id, username, avatar } = row.user;
             delete row.user;
-            row.user_id = id;
+            row.assoc_user_id = id;
             row.post_username = username;
             row.avatar = avatar;
 
