@@ -265,7 +265,10 @@ router.get('/profile/:userId', async(req, res) => {
             console.error(err);
             return;
         });
-    profileWrapper.userInfo = userInfo;
+    if (userInfo)
+        profileWrapper.userInfo = userInfo;
+    else
+        profileWrapper.userInfo = false;
     // console.log(userInfo);
     // process.exit(0);
 
